@@ -162,19 +162,19 @@ expression:
 assoc_expression:
 	LB expression RB
 	| assoc_expression LS assoc_expression RS
-	| <assoc = right> (SUB | NOT) assoc_expression
-	| <assoc = left> assoc_expression (MUL | DIV | MOD) assoc_expression
 	| <assoc = left> assoc_expression (ADD | SUB) assoc_expression
+	| <assoc = left> assoc_expression (MUL | DIV | MOD) assoc_expression
+	| <assoc = right> (SUB | NOT) assoc_expression
 	| operands;
 
 expression_SB:
 	LB expression RB
 	| expression_SB LS expression_SB RS
-	| <assoc = right> (SUB | NOT) expression_SB
-	| <assoc = left> expression_SB (MUL | DIV | MOD) expression_SB
-	| <assoc = left> expression_SB (ADD | SUB) expression_SB
 	| relational_expression (LT | LEQ | GT | GEQ) relational_expression
 	| equality_expression (EQ | NOTEQ) equality_expression
+	| <assoc = left> expression_SB (ADD | SUB) expression_SB
+	| <assoc = left> expression_SB (MUL | DIV | MOD) expression_SB
+	| <assoc = right> (SUB | NOT) expression_SB
 	| <assoc = left> expression_SB AND expression_SB
 	| <assoc = left> expression_SB OR expression_SB
 	| <assoc = right> expression_SB ASSIGN expression_SB
@@ -183,17 +183,17 @@ expression_SB:
 relational_expression:
 	LB expression RB
 	| relational_expression LS relational_expression RS
-	| <assoc = right> (SUB | NOT) relational_expression
-	| <assoc = left> relational_expression (MUL | DIV | MOD) relational_expression
 	| <assoc = left> relational_expression (ADD | SUB) relational_expression
+	| <assoc = left> relational_expression (MUL | DIV | MOD) relational_expression
+	| <assoc = right> (SUB | NOT) relational_expression
 	| operands;
 
 equality_expression:
 	LB expression RB
 	| equality_expression LS equality_expression RS
 	| <assoc = right> (SUB | NOT) equality_expression
-	| <assoc = left> equality_expression (MUL | DIV | MOD) equality_expression
 	| <assoc = left> equality_expression (ADD | SUB) equality_expression
+	| <assoc = left> equality_expression (MUL | DIV | MOD) equality_expression
 	| relational_expression (LT | LEQ | GT | GEQ) relational_expression
 	| operands;
 
@@ -240,10 +240,10 @@ primitive_type: INTTYPE | FLOATTYPE | BOOLTYPE | STRINGTYPE;
 
 //----------------------------------------------------------------------------
 
-ERROR_CHAR: .;
+ERROR_CHAR: ~["];
 // UNCLOSE_STRING: '"' ('\r'? '\n' | ~[\r\n"])*;
 
 UNCLOSE_STRING:
-	'"' (('\\' [btnfr"'\\] | ~[\b\t\f\r\n\\"]) | '\n')*;
+	'"' (('\\' [btnfr'\\] | ~[\b\t\f\r\n\\"]) | '\n')*;
 ILLEGAL_ESCAPE: 
 	'"' ('\\' [btnfr"'\\] | ~[\b\t\f\r\n\\"])* '\\' ~[btnfr"'\\]?;

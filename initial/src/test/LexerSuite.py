@@ -95,9 +95,6 @@ class LexerSuite(unittest.TestCase):
         """Test float with fraction part"""
         self.assertTrue(TestLexer.checkLexeme(".5E10", ".5E10,<EOF>", 183))
 
-    def test_floating_simple_cap(self):
-        self.assertTrue(TestLexer.checkLexeme("12E5", "12E5,<EOF>", 184))
-
     def test_wrong_float_cap(self):
         self.assertTrue(TestLexer.checkLexeme(
             "1.55E34E45", "1.55E34,E45,<EOF>", 185))
@@ -105,10 +102,6 @@ class LexerSuite(unittest.TestCase):
     def test_negative_float_cap(self):
         self.assertTrue(TestLexer.checkLexeme(
             "-45.6E45", "-,45.6E45,<EOF>", 186))
-
-    def test_wrong_expo_cap(self):
-        self.assertTrue(TestLexer.checkLexeme(
-            "45.1E45.1", "45.1E45,.1,<EOF>", 187))
 
     def test_e_id(self):
         self.assertTrue(TestLexer.checkLexeme("e-", "e,-,<EOF>", 188))
@@ -206,9 +199,15 @@ class LexerSuite(unittest.TestCase):
         self.assertTrue(TestLexer.checkLexeme(
             """var,foo(" \rstring") """, """var,,,foo,(,Unclosed String: " """, 180))
 
-    def test_1_doublequote(self):
+    def test_odd_doublequote(self):
         self.assertTrue(TestLexer.checkLexeme(
-            """ \" """, """Unclosed String: " """, 177))
+            '''"test " abc "''', '''"test ",abc,Unclosed String: "''', 177))
+
+    def test_esc_quote(self):
+        self.assertTrue(TestLexer.checkLexeme('''"test \\" abc "''', '''"test \\",abc,Unclosed String: "''', 187))
+
+    def test_esc_single(self):
+        self.assertTrue(TestLexer.checkLexeme('''"test \" abc "''', '''"test ",abc,Unclosed String: "''', 184))
 
 # ----------------------------------------------------------------------------------------------
     """ TEST KEYWORDS """
