@@ -123,13 +123,6 @@ fragment Escapesequence:
 StringLIT: '"' ([\b\t\f\\] | ~[\r\n"] | '\'')* '"';
 // StringLIT: '"' ('\\u0027' | [\b\t\f\\] | ~[\b\t\f\r\n\\"'] | ~ '\\' [a-zA-Z0-9])* '"';
 
-// StringLIT:
-// 	'"' ('\\' [btnfr"'\\] | ~[\b\t\f\r\n\\"])* '"' { 
-// 	str = getText() 
-// 	str = str[:-1]
-// 	setText(str) 
-// };
-
 LITs: IntLIT | BooleanLIT | FloatLIT | StringLIT;
 
 // --------------------------------------- STATEMENTS -------------------------------------------
@@ -247,10 +240,10 @@ primitive_type: INTTYPE | FLOATTYPE | BOOLTYPE | STRINGTYPE;
 
 //----------------------------------------------------------------------------
 
-ERROR_CHAR: . | FloatLIT '.';
+ERROR_CHAR: .;
 // UNCLOSE_STRING: '"' ('\r'? '\n' | ~[\r\n"])*;
 
 UNCLOSE_STRING:
 	'"' (('\\' [btnfr"'\\] | ~[\b\t\f\r\n\\"]) | '\n')*;
-ILLEGAL_ESCAPE:
-	'"' ('\\' [btnfr"'\\] | ~[\b\t\f\r\n\\"])* '\\' ~[btnfr"'\\] '"';
+ILLEGAL_ESCAPE: 
+	'"' ('\\' [btnfr"'\\] | ~[\b\t\f\r\n\\"])* '\\' ~[btnfr"'\\]?;

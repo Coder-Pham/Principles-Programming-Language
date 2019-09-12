@@ -82,7 +82,7 @@ class LexerSuite(unittest.TestCase):
 
     def test_wrong_expo(self):
         self.assertTrue(TestLexer.checkLexeme(
-            "45.1e45.1", "Error Token 45.1e45.", 120))
+            "45.1e45.1", "45.1e45,.1,<EOF>", 120))
 
     def test_cap_floating(self):
         self.assertTrue(TestLexer.checkLexeme(
@@ -108,7 +108,7 @@ class LexerSuite(unittest.TestCase):
 
     def test_wrong_expo_cap(self):
         self.assertTrue(TestLexer.checkLexeme(
-            "45.1E45.1", "Error Token 45.1E45.", 187))
+            "45.1E45.1", "45.1E45,.1,<EOF>", 187))
 
     def test_e_id(self):
         self.assertTrue(TestLexer.checkLexeme("e-", "e,-,<EOF>", 188))
@@ -167,7 +167,6 @@ class LexerSuite(unittest.TestCase):
         self.assertTrue(TestLexer.checkLexeme(
             """"Formfeed: \f this is" """, """"Formfeed: \f this is",<EOF>""", 130))
 
-    # TODO: Need to confirm for OS-base
     def test_carriage(self):
         self.assertTrue(TestLexer.checkLexeme(
             """"Carriage:\rsym" """, """Unclosed String: "Carriage:""", 171))
@@ -189,15 +188,27 @@ class LexerSuite(unittest.TestCase):
         self.assertTrue(TestLexer.checkLexeme(
             """ "This \0 is \0" """, """"This \0 is \0",<EOF>""", 175))
 
-    # TODO: Illegal Escape
+    # TODO: Illegal Escape fix 176 178 179 200
     def test_illegal_esc(self):
         self.assertTrue(TestLexer.checkLexeme("""" abc \d " """, "", 176))
 
-    def test_1_doublequote(self):
-        self.assertTrue(TestLexer.checkLexeme(""" \" """, """Unclosed String: " """, 177))
-
     def test_esc_forward(self):
         self.assertTrue(TestLexer.checkLexeme(""""Forward \/" """, "", 178))
+
+    def test_esc_bracket(self):
+        self.assertTrue(TestLexer.checkLexeme(
+            """"Bracket this: \(" """, "", 179))
+
+    def test_illegal_confuse(self):
+        self.assertTrue(TestLexer.checkLexeme(""" "abc\abc" """, "", 200))
+
+    def test_esc_mix(self):
+        self.assertTrue(TestLexer.checkLexeme(
+            """var,foo(" \rstring") """, """var,,,foo,(,Unclosed String: " """, 180))
+
+    def test_1_doublequote(self):
+        self.assertTrue(TestLexer.checkLexeme(
+            """ \" """, """Unclosed String: " """, 177))
 
 # ----------------------------------------------------------------------------------------------
     """ TEST KEYWORDS """
@@ -378,3 +389,16 @@ class LexerSuite(unittest.TestCase):
     def test_not_true(self):
         self.assertTrue(TestLexer.checkLexeme(
             "!true==false", "!,true,==,false,<EOF>", 195))
+
+    def test_bitwise_mix(self):
+        self.assertTrue(TestLexer.checkLexeme(
+            """s("\t string")|d+2""", """s,(,"\t string",),Error Token |""", 196))
+
+    def test_short_if(self):
+        self.assertTrue(TestLexer.checkLexeme("""a+b==c?print(a):print(b)""", """a,+,b,==,c,Error Token ?""", 197))
+
+    def test_private_var(self):
+        self.assertTrue(TestLexer.checkLexeme("""__init__+_gt_""", """__init__,+,_gt_,<EOF>""", 198))
+
+    def test_another_case200(self):
+        self.assertTrue(TestLexer.checkLexeme("""abc\abc""","""abc,Error Token \a""", 199))
