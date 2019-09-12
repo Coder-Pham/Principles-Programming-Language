@@ -177,9 +177,7 @@ class LexerSuite(unittest.TestCase):
             """"Backslash: \\ slash" """, """"Backslash: \\ slash",<EOF>""", 172))
 
     def test_newline(self):
-        expect = """Unclosed String: "Newline: 
-
- end lines"""
+        expect = """Unclosed String: "Newline: """
         self.assertTrue(TestLexer.checkLexeme(
             """"Newline: \n end lines" """, expect, 173))
 
@@ -191,9 +189,15 @@ class LexerSuite(unittest.TestCase):
         self.assertTrue(TestLexer.checkLexeme(
             """ "This \0 is \0" """, """"This \0 is \0",<EOF>""", 175))
 
-    # TODO:
-    # def test_illegal_esc(self):
-    #     self.assertTrue(TestLexer.checkLexeme(""" " Illegal:\m" """, "", 176))
+    # TODO: Illegal Escape
+    def test_illegal_esc(self):
+        self.assertTrue(TestLexer.checkLexeme("""" abc \d " """, "", 176))
+
+    def test_1_doublequote(self):
+        self.assertTrue(TestLexer.checkLexeme(""" \" """, """Unclosed String: " """, 177))
+
+    def test_esc_forward(self):
+        self.assertTrue(TestLexer.checkLexeme(""""Forward \/" """, "", 178))
 
 # ----------------------------------------------------------------------------------------------
     """ TEST KEYWORDS """

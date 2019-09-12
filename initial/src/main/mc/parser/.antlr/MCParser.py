@@ -1,4 +1,4 @@
-# Generated from d:\BK\HK191\PPL\Assignment1\initial\src\main\mc\parser\MC.g4 by ANTLR 4.7.1
+# Generated from d:\BK\HK191\PPL\Assignment1\Principles-Programming-Language\initial\src\main\mc\parser\MC.g4 by ANTLR 4.7.1
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO

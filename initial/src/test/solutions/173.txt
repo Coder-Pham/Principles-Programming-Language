@@ -1,2 +1,1 @@
-Unclosed String: "Newline: 
- end lines
+Unclosed String: "Newline: 
