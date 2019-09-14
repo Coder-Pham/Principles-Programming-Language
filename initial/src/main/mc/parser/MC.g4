@@ -82,7 +82,7 @@ fragment LETTER: [a-zA-Z_];
 
 fragment DIGIT: [0-9];
 
-ID: LETTER (LETTER | '0' ..'9')*;
+ID: LETTER (LETTER | DIGIT)*;
 
 IntLIT: DIGIT+;
 
@@ -115,7 +115,8 @@ fragment Escapesequence:
 	| '\\f'
 	| '\\n'
 	| '\\r'
-	| '\\t';
+	| '\\t'
+	| '\'';
 
 // fragment Schar: ~ [\\\r\n] | Escapesequence; fragment Encodingprefix: 'u8' | 'u' | 'U' | 'L';
 // StringLIT: Encodingprefix? '"' Schar* '"';
@@ -245,5 +246,5 @@ ERROR_CHAR: ~["];
 
 UNCLOSE_STRING:
 	'"' (('\\' [btnfr'\\] | ~[\b\t\f\r\n\\"]) | '\n')*;
-ILLEGAL_ESCAPE: 
+ILLEGAL_ESCAPE:
 	'"' ('\\' [btnfr"'\\] | ~[\b\t\f\r\n\\"])* '\\' ~[btnfr"'\\]?;
