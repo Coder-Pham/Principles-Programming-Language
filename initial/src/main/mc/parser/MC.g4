@@ -30,13 +30,6 @@ program: declaration* EOF;
 
 declaration: func_declare | var_declare;
 //-----------------------------------------------------------------------------------------------------
-// mctype: INTTYPE | VOIDTYPE;
-
-// body: funcall SEMI;
-
-// exp: funcall | IntLIT;
-
-// funcall: ID LB exp? RB;
 
 //--------------------------------- KEYWORDS --------------------------------------
 /* keywords */
@@ -210,7 +203,9 @@ list_expression: (expression (COMMA expression)*)?;
 
 function_call: ID LB list_expression RB;
 
-operands: LITs | function_call | element_of_array | ID;
+// ! Dont know why LITS & BooleanLIT dont work as expect
+// operands: LITs | function_call | element_of_array | ID;
+operands: IntLIT | FALSE | TRUE | FloatLIT | StringLIT | ID | function_call | element_of_array;
 //---------------------------------------------------------------------------------
 declare: var_declare*;
 
@@ -246,5 +241,6 @@ primitive_type: INTTYPE | FLOATTYPE | BOOLTYPE | STRINGTYPE;
 
 //----------------------------------------------------------------------------
 
-// UNCLOSE_STRING: '"' (('\\' [btnfr'\\] | ~[\b\t\f\r\n\\"]) | '\n')*; ILLEGAL_ESCAPE: '"' ('\\'
+// UNCLOSE_STRING: '"' (('\\' [btnfr'\\] | ~[\b\t\f\r\n\\"]) | '\n')*; 
+// ILLEGAL_ESCAPE: '"' ('\\'
 // [btnfr"'\\] | ~[\b\t\f\r\n\\"])* '\\' ~[btnfr"'\\]?;
