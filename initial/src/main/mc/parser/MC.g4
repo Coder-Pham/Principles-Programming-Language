@@ -118,13 +118,18 @@ fragment Escapesequence:
 	| '\\t'
 	| '\'';
 
-// fragment Schar: ~ [\\\r\n] | Escapesequence; fragment Encodingprefix: 'u8' | 'u' | 'U' | 'L';
-// StringLIT: Encodingprefix? '"' Schar* '"';
-
-StringLIT: '"' ([\b\t\f\\] | ~[\r\n"] | '\'')* '"';
-// StringLIT: '"' ('\\u0027' | [\b\t\f\\] | ~[\b\t\f\r\n\\"'] | ~ '\\' [a-zA-Z0-9])* '"';
+// StringLIT: '"' ([\b\t\f\\] | ~[\r\n"] | '\'')* '"';
+StringLIT: '"' ( ~[\\\r\n"] | ( '\\' [btf'\\]))* '"';
 
 LITs: IntLIT | BooleanLIT | FloatLIT | StringLIT;
+
+// --------------------------------------------------------------------------------------------
+
+ERROR_CHAR: ~["];
+UNCLOSE_STRING:
+	'"' (('\\' [btnfr'\\] | ~[\b\t\f\r\n\\"]) | '\n')*;
+// UNCLOSE_STRING: '"' ~[\\"]* ( [\r\n] | '\0');
+ILLEGAL_ESCAPE: '"' ( ~[\\]* ( '\\' ~[btf"'\\]));
 
 // --------------------------------------- STATEMENTS -------------------------------------------
 
@@ -241,10 +246,5 @@ primitive_type: INTTYPE | FLOATTYPE | BOOLTYPE | STRINGTYPE;
 
 //----------------------------------------------------------------------------
 
-ERROR_CHAR: ~["];
-// UNCLOSE_STRING: '"' ('\r'? '\n' | ~[\r\n"])*;
-
-UNCLOSE_STRING:
-	'"' (('\\' [btnfr'\\] | ~[\b\t\f\r\n\\"]) | '\n')*;
-ILLEGAL_ESCAPE:
-	'"' ('\\' [btnfr"'\\] | ~[\b\t\f\r\n\\"])* '\\' ~[btnfr"'\\]?;
+// UNCLOSE_STRING: '"' (('\\' [btnfr'\\] | ~[\b\t\f\r\n\\"]) | '\n')*; ILLEGAL_ESCAPE: '"' ('\\'
+// [btnfr"'\\] | ~[\b\t\f\r\n\\"])* '\\' ~[btnfr"'\\]?;

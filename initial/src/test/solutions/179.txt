@@ -1,1 +1,1 @@
-"Bracket this: \(",<EOF>
+Illegal Escape In String: "Bracket this: \(
