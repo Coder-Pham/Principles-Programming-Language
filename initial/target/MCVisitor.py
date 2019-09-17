@@ -79,16 +79,6 @@ class MCVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by MCParser#expression_SB.
-    def visitExpression_SB(self, ctx:MCParser.Expression_SBContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by MCParser#relational_expression.
-    def visitRelational_expression(self, ctx:MCParser.Relational_expressionContext):
-        return self.visitChildren(ctx)
-
-
     # Visit a parse tree produced by MCParser#equality_expression.
     def visitEquality_expression(self, ctx:MCParser.Equality_expressionContext):
         return self.visitChildren(ctx)

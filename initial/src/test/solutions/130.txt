@@ -1,1 +1,1 @@
-"Formfeed:  this is",<EOF>
+Formfeed:  this is,<EOF>

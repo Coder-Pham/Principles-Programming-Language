@@ -112,7 +112,10 @@ fragment Escapesequence:
 	| '\'';
 
 // StringLIT: '"' ([\b\t\f\\] | ~[\r\n"] | '\'')* '"';
-StringLIT: '"' ( ~[\\\r\n"] | ( '\\' [btf'\\]))* '"';
+StringLIT:
+	'"' (~[\\\r\n"] | ( '\\' [btf'\\]))* '"' {
+	self.text = self.text[1:-1]
+};
 
 LITs: IntLIT | BooleanLIT | FloatLIT | StringLIT;
 
@@ -120,7 +123,9 @@ LITs: IntLIT | BooleanLIT | FloatLIT | StringLIT;
 
 ERROR_CHAR: ~["];
 UNCLOSE_STRING:
-	'"' (('\\' [btnfr'\\] | ~[\b\t\f\r\n\\"]) | '\n')*;
+	'"' (('\\' [btnfr'\\] | ~[\b\t\f\r\n\\"]) | '\n')* { 
+		self.text = self.text[1:] 
+};
 // UNCLOSE_STRING: '"' ~[\\"]* ( [\r\n] | '\0');
 ILLEGAL_ESCAPE: '"' ( ~[\\]* ( '\\' ~[btf"'\\]));
 
@@ -149,15 +154,16 @@ multi_para: para_declare (COMMA para_declare)*;
 expression:
 	LB expression RB
 	| expression LS expression RS
-	| expression_SB (LS | RS)
+	// | expression_SB (LS | RS)
 	| assoc_expression
-	| relational_expression (LT | LEQ | GT | GEQ) relational_expression
+	| assoc_expression (LT | LEQ | GT | GEQ) assoc_expression
 	| equality_expression (EQ | NOTEQ) equality_expression
 	| <assoc = left> expression AND expression
 	| <assoc = left> expression OR expression
 	| <assoc = right> expression ASSIGN expression
 	| operands;
 
+// == relational_expression
 assoc_expression:
 	LB expression RB
 	| assoc_expression LS assoc_expression RS
@@ -166,26 +172,17 @@ assoc_expression:
 	| <assoc = right> (SUB | NOT) assoc_expression
 	| operands;
 
-expression_SB:
-	LB expression RB
-	| expression_SB LS expression_SB RS
-	| relational_expression (LT | LEQ | GT | GEQ) relational_expression
-	| equality_expression (EQ | NOTEQ) equality_expression
-	| <assoc = left> expression_SB (ADD | SUB) expression_SB
-	| <assoc = left> expression_SB (MUL | DIV | MOD) expression_SB
-	| <assoc = right> (SUB | NOT) expression_SB
-	| <assoc = left> expression_SB AND expression_SB
-	| <assoc = left> expression_SB OR expression_SB
-	| <assoc = right> expression_SB ASSIGN expression_SB
-	| operands;
+// expression_SB: LB expression RB | expression_SB LS expression_SB RS | relational_expression (LT |
+// LEQ | GT | GEQ) relational_expression | equality_expression (EQ | NOTEQ) equality_expression |
+// <assoc = left> expression_SB (ADD | SUB) expression_SB | <assoc = left> expression_SB (MUL | DIV
+// | MOD) expression_SB | <assoc = right> (SUB | NOT) expression_SB | <assoc = left> expression_SB
+// AND expression_SB | <assoc = left> expression_SB OR expression_SB | <assoc = right> expression_SB
+// ASSIGN expression_SB | operands;
 
-relational_expression:
-	LB expression RB
-	| relational_expression LS relational_expression RS
-	| <assoc = left> relational_expression (ADD | SUB) relational_expression
-	| <assoc = left> relational_expression (MUL | DIV | MOD) relational_expression
-	| <assoc = right> (SUB | NOT) relational_expression
-	| operands;
+// relational_expression: LB expression RB | relational_expression LS relational_expression RS |
+// <assoc = left> relational_expression (ADD | SUB) relational_expression | <assoc = left>
+// relational_expression (MUL | DIV | MOD) relational_expression | <assoc = right> (SUB | NOT)
+// relational_expression | operands;
 
 equality_expression:
 	LB expression RB
@@ -193,7 +190,7 @@ equality_expression:
 	| <assoc = right> (SUB | NOT) equality_expression
 	| <assoc = left> equality_expression (ADD | SUB) equality_expression
 	| <assoc = left> equality_expression (MUL | DIV | MOD) equality_expression
-	| relational_expression (LT | LEQ | GT | GEQ) relational_expression
+	| assoc_expression (LT | LEQ | GT | GEQ) assoc_expression
 	| operands;
 
 index_expression: expression LS expression RS;
@@ -203,9 +200,17 @@ list_expression: (expression (COMMA expression)*)?;
 
 function_call: ID LB list_expression RB;
 
-// ! Dont know why LITS & BooleanLIT dont work as expect
-// operands: LITs | function_call | element_of_array | ID;
-operands: IntLIT | FALSE | TRUE | FloatLIT | StringLIT | ID | function_call | element_of_array;
+// ! Dont know why LITS & BooleanLIT dont work as expect operands: LITs | function_call |
+// element_of_array | ID;
+operands:
+	IntLIT
+	| FALSE
+	| TRUE
+	| FloatLIT
+	| StringLIT
+	| ID
+	| function_call
+	| element_of_array;
 //---------------------------------------------------------------------------------
 declare: var_declare*;
 
@@ -232,8 +237,6 @@ stmt:
 
 statement: stmt*;
 
-// block_statement: LP declare statement RP;
-
 func_declare: (primitive_type | VOIDTYPE | output_parameter) ID LB multi_para? RB block_stmt;
 //-----------------------------------------------------------------------------------------------------
 
@@ -241,6 +244,5 @@ primitive_type: INTTYPE | FLOATTYPE | BOOLTYPE | STRINGTYPE;
 
 //----------------------------------------------------------------------------
 
-// UNCLOSE_STRING: '"' (('\\' [btnfr'\\] | ~[\b\t\f\r\n\\"]) | '\n')*; 
-// ILLEGAL_ESCAPE: '"' ('\\'
+// UNCLOSE_STRING: '"' (('\\' [btnfr'\\] | ~[\b\t\f\r\n\\"]) | '\n')*; ILLEGAL_ESCAPE: '"' ('\\'
 // [btnfr"'\\] | ~[\b\t\f\r\n\\"])* '\\' ~[btnfr"'\\]?;

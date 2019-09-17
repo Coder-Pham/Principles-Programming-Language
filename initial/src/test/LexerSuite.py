@@ -139,47 +139,47 @@ class LexerSuite(unittest.TestCase):
 
     def test_unclosed(self):
         self.assertTrue(TestLexer.checkLexeme(
-            "\" Unclosed String", "Unclosed String: \" Unclosed String", 126))
+            "\" Unclosed String", "Unclosed String:  Unclosed String", 126))
 
     def test_string(self):
         quote = """"This is a string" """
         self.assertTrue(TestLexer.checkLexeme(
-            quote, """"This is a string",<EOF>""", 127))
+            quote, """This is a string,<EOF>""", 127))
 
     def test_tab(self):
         quote = """"Tab: \t1" """
         self.assertTrue(TestLexer.checkLexeme(
-            quote, """"Tab: \t1",<EOF>""", 128))
+            quote, """Tab: 	1,<EOF>""", 128))
 
     def test_back(self):
         quote = """"Carriage sym:\b bol" """
         self.assertTrue(TestLexer.checkLexeme(
-            quote, """"Carriage sym:\b bol",<EOF>""", 129))
+            quote, """Carriage sym:\b bol,<EOF>""", 129))
 
     def test_formfeed(self):
         self.assertTrue(TestLexer.checkLexeme(
-            """"Formfeed: \f this is" """, """"Formfeed: \f this is",<EOF>""", 130))
+            """"Formfeed: \f this is" """, """Formfeed: \f this is,<EOF>""", 130))
 
     def test_carriage(self):
         self.assertTrue(TestLexer.checkLexeme(
-            """"Carriage:\rsym" """, """Unclosed String: "Carriage:""", 171))
+            """"Carriage:\rsym" """, """Unclosed String: Carriage:""", 171))
 
     def test_backslash(self):
         self.assertTrue(TestLexer.checkLexeme(
             """"Backslash: \\ slash" """, """Illegal Escape In String: "Backslash: \ """, 172))
 
     def test_newline(self):
-        expect = """Unclosed String: "Newline: """
+        expect = """Unclosed String: Newline: """
         self.assertTrue(TestLexer.checkLexeme(
             """"Newline: \n end lines" """, expect, 173))
 
     def test_carriage_line(self):
         self.assertTrue(TestLexer.checkLexeme(
-            """"New carriage: \r\n here" """, """Unclosed String: "New carriage: """, 174))
+            """"New carriage: \r\n here" """, """Unclosed String: New carriage: """, 174))
 
     def test_esc_0(self):
         self.assertTrue(TestLexer.checkLexeme(
-            """ "This \0 is \0" """, """"This \0 is \0",<EOF>""", 175))
+            """ "This \0 is \0" """, """This \0 is \0,<EOF>""", 175))
 
     # TODO: Illegal Escape fix 176 178 179 200
     def test_illegal_esc(self):
@@ -197,17 +197,17 @@ class LexerSuite(unittest.TestCase):
 
     def test_esc_mix(self):
         self.assertTrue(TestLexer.checkLexeme(
-            """var,foo(" \rstring") """, """var,,,foo,(,Unclosed String: " """, 180))
+            """var,foo(" \rstring") """, """var,,,foo,(,Unclosed String:  """, 180))
 
     def test_odd_doublequote(self):
         self.assertTrue(TestLexer.checkLexeme(
-            '''"test " abc "''', '''"test ",abc,Unclosed String: "''', 177))
+            '''"test " abc "''', '''test ,abc,Unclosed String: ''', 177))
 
     def test_esc_quote(self):
-        self.assertTrue(TestLexer.checkLexeme('''"test " abc "''', '''"test ",abc,Unclosed String: "''', 187))
+        self.assertTrue(TestLexer.checkLexeme('''"test " abc "''', '''test ,abc,Unclosed String: ''', 187))
 
     def test_esc_single(self):
-        self.assertTrue(TestLexer.checkLexeme('''"test \" abc "''', '''"test ",abc,Unclosed String: "''', 184))
+        self.assertTrue(TestLexer.checkLexeme('''"test \" abc "''', '''test ,abc,Unclosed String: ''', 184))
 
 # ----------------------------------------------------------------------------------------------
     """ TEST KEYWORDS """
@@ -391,7 +391,7 @@ class LexerSuite(unittest.TestCase):
 
     def test_bitwise_mix(self):
         self.assertTrue(TestLexer.checkLexeme(
-            """s("\t string")|d+2""", """s,(,"\t string",),Error Token |""", 196))
+            """s("\t string")|d+2""", """s,(,\t string,),Error Token |""", 196))
 
     def test_short_if(self):
         self.assertTrue(TestLexer.checkLexeme("""a+b==c?print(a):print(b)""", """a,+,b,==,c,Error Token ?""", 197))

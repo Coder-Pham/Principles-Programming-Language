@@ -1,1 +1,1 @@
-"Carriage sym: bol",<EOF>
+Carriage sym: bol,<EOF>
