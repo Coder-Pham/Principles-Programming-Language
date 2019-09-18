@@ -141,12 +141,12 @@ multi_var: variable (COMMA variable)*;
 
 var_declare: primitive_type multi_var SEMI;
 
-input_parameter: primitive_type ID LB RB;
-output_parameter: primitive_type LB RB;
+input_parameter: primitive_type ID LS RS;
+output_parameter: primitive_type LS RS;
 
 array_point: input_parameter | output_parameter;
 
-para_declare: primitive_type ID (LB RB)?;
+para_declare: primitive_type ID (LS RS)?;
 multi_para: para_declare (COMMA para_declare)*;
 
 //---------------------------------------------------------------------------------
@@ -220,7 +220,7 @@ return_stmt: Return expression? SEMI;
 expression_stmt: expression SEMI;
 for_stmt:
 	For LB expression SEMI expression SEMI expression RB stmt;
-block_stmt: LP declare statement RP;
+block_stmt: LP declare stmt* RP;
 dowhile_stmt: Do statement While expression SEMI;
 if_stmt: If LB expression RB stmt ( Else stmt)?;
 
@@ -235,7 +235,7 @@ stmt:
 	| block_stmt
 	| index_expression SEMI;
 
-statement: stmt*;
+statement: stmt+;
 
 func_declare: (primitive_type | VOIDTYPE | output_parameter) ID LB multi_para? RB block_stmt;
 //-----------------------------------------------------------------------------------------------------
