@@ -166,12 +166,12 @@ class LexerSuite(unittest.TestCase):
 
     def test_backslash(self):
         self.assertTrue(TestLexer.checkLexeme(
-            """"Backslash: \\ slash" """, """Illegal Escape In String: "Backslash: \ """, 172))
+            """"Backslash: \\slash """, """Illegal Escape In String: "Backslash: \s""", 172))
 
     def test_newline(self):
-        expect = """Unclosed String: Newline: """
+        expect = """Unclosed String: Newline: \\r"""
         self.assertTrue(TestLexer.checkLexeme(
-            """"Newline: \n end lines" """, expect, 173))
+            """ "Newline: \\r\r end lines" """, expect, 173))
 
     def test_carriage_line(self):
         self.assertTrue(TestLexer.checkLexeme(
@@ -179,7 +179,7 @@ class LexerSuite(unittest.TestCase):
 
     def test_esc_0(self):
         self.assertTrue(TestLexer.checkLexeme(
-            """ "This \0 is \0" """, """This \0 is \0,<EOF>""", 175))
+            """ "This \\0 is \\0" """, """Illegal Escape In String: "This \\0""", 175))
 
     # TODO: Illegal Escape fix 176 178 179 200
     def test_illegal_esc(self):

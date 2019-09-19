@@ -1,1 +1,1 @@
-Illegal Escape In String: "Backslash: \ 
+Illegal Escape In String: "Backslash: \s

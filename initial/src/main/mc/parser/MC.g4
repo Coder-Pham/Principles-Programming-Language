@@ -113,7 +113,7 @@ fragment Escapesequence:
 
 // StringLIT: '"' ([\b\t\f\\] | ~[\r\n"] | '\'')* '"';
 StringLIT:
-	'"' (~[\\\r\n"] | ( '\\' [btf'\\]))* '"' {
+	'"' (~[\\\r\n"] | ( '\\' [btfrn'\\]))* '"' {
 	self.text = self.text[1:-1]
 };
 
