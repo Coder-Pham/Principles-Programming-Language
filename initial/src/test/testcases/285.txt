@@ -1,0 +1,3 @@
+int main() {
+            stmt1 / stmt2 || false;
+        }

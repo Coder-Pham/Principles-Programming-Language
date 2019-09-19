@@ -1,0 +1,3 @@
+int main() {
+            return (ok > fail) ? 1 : 0;
+        }

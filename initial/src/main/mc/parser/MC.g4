@@ -167,9 +167,9 @@ expression:
 assoc_expression:
 	LB expression RB
 	| assoc_expression LS assoc_expression RS
-	| <assoc = left> assoc_expression (ADD | SUB) assoc_expression
-	| <assoc = left> assoc_expression (MUL | DIV | MOD) assoc_expression
 	| <assoc = right> (SUB | NOT) assoc_expression
+	| <assoc = left> assoc_expression (MUL | DIV | MOD) assoc_expression
+	| <assoc = left> assoc_expression (ADD | SUB) assoc_expression
 	| operands;
 
 // expression_SB: LB expression RB | expression_SB LS expression_SB RS | relational_expression (LT |

@@ -1,0 +1,4 @@
+int main() {
+            if (ok && now && it && done)
+                return true;
+        }

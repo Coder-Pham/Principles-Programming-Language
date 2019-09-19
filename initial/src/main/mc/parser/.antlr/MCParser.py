@@ -43,7 +43,7 @@ def serializedATN():
         buf.write(" \u014c\3!\3!\3!\5!\u0152\n!\3!\3!\3!\5!\u0157\n!\3!\3")
         buf.write("!\3!\3\"\3\"\3\"\2\5\32\34\36#\2\4\6\b\n\f\16\20\22\24")
         buf.write("\26\30\32\34\36 \"$&(*,.\60\62\64\668:<>@B\2\t\3\2$%\3")
-        buf.write("\2\30\33\3\2\26\27\4\2\17\17\24\24\3\2\16\17\3\2\20\22")
+        buf.write("\2\30\33\3\2\26\27\4\2\17\17\24\24\3\2\20\22\3\2\16\17")
         buf.write("\4\2\35\36 !\2\u016f\2G\3\2\2\2\4N\3\2\2\2\6P\3\2\2\2")
         buf.write("\bU\3\2\2\2\n_\3\2\2\2\fa\3\2\2\2\16i\3\2\2\2\20m\3\2")
         buf.write("\2\2\22r\3\2\2\2\24x\3\2\2\2\26z\3\2\2\2\30\u0080\3\2")
@@ -87,11 +87,11 @@ def serializedATN():
         buf.write("\2\2\2\u00a9\u00aa\3\2\2\2\u00aa\33\3\2\2\2\u00ab\u00a9")
         buf.write("\3\2\2\2\u00ac\u00ad\b\17\1\2\u00ad\u00ae\7&\2\2\u00ae")
         buf.write("\u00af\5\32\16\2\u00af\u00b0\7\'\2\2\u00b0\u00b5\3\2\2")
-        buf.write("\2\u00b1\u00b2\t\5\2\2\u00b2\u00b5\5\34\17\4\u00b3\u00b5")
+        buf.write("\2\u00b1\u00b2\t\5\2\2\u00b2\u00b5\5\34\17\6\u00b3\u00b5")
         buf.write("\5(\25\2\u00b4\u00ac\3\2\2\2\u00b4\u00b1\3\2\2\2\u00b4")
-        buf.write("\u00b3\3\2\2\2\u00b5\u00c3\3\2\2\2\u00b6\u00b7\f\6\2\2")
-        buf.write("\u00b7\u00b8\t\6\2\2\u00b8\u00c2\5\34\17\7\u00b9\u00ba")
-        buf.write("\f\5\2\2\u00ba\u00bb\t\7\2\2\u00bb\u00c2\5\34\17\6\u00bc")
+        buf.write("\u00b3\3\2\2\2\u00b5\u00c3\3\2\2\2\u00b6\u00b7\f\5\2\2")
+        buf.write("\u00b7\u00b8\t\6\2\2\u00b8\u00c2\5\34\17\6\u00b9\u00ba")
+        buf.write("\f\4\2\2\u00ba\u00bb\t\7\2\2\u00bb\u00c2\5\34\17\5\u00bc")
         buf.write("\u00bd\f\7\2\2\u00bd\u00be\7-\2\2\u00be\u00bf\5\34\17")
         buf.write("\2\u00bf\u00c0\7.\2\2\u00c0\u00c2\3\2\2\2\u00c1\u00b6")
         buf.write("\3\2\2\2\u00c1\u00b9\3\2\2\2\u00c1\u00bc\3\2\2\2\u00c2")
@@ -103,8 +103,8 @@ def serializedATN():
         buf.write("\2\2\u00cf\u00d0\5\34\17\2\u00d0\u00d3\3\2\2\2\u00d1\u00d3")
         buf.write("\5(\25\2\u00d2\u00c6\3\2\2\2\u00d2\u00cb\3\2\2\2\u00d2")
         buf.write("\u00cd\3\2\2\2\u00d2\u00d1\3\2\2\2\u00d3\u00e1\3\2\2\2")
-        buf.write("\u00d4\u00d5\f\6\2\2\u00d5\u00d6\t\6\2\2\u00d6\u00e0\5")
-        buf.write("\36\20\7\u00d7\u00d8\f\5\2\2\u00d8\u00d9\t\7\2\2\u00d9")
+        buf.write("\u00d4\u00d5\f\6\2\2\u00d5\u00d6\t\7\2\2\u00d6\u00e0\5")
+        buf.write("\36\20\7\u00d7\u00d8\f\5\2\2\u00d8\u00d9\t\6\2\2\u00d9")
         buf.write("\u00e0\5\36\20\6\u00da\u00db\f\b\2\2\u00db\u00dc\7-\2")
         buf.write("\2\u00dc\u00dd\5\36\20\2\u00dd\u00de\7.\2\2\u00de\u00e0")
         buf.write("\3\2\2\2\u00df\u00d4\3\2\2\2\u00df\u00d7\3\2\2\2\u00df")
@@ -1151,9 +1151,6 @@ class MCParser ( Parser ):
             return self.getTypedRuleContext(MCParser.OperandsContext,0)
 
 
-        def ADD(self):
-            return self.getToken(MCParser.ADD, 0)
-
         def MUL(self):
             return self.getToken(MCParser.MUL, 0)
 
@@ -1162,6 +1159,9 @@ class MCParser ( Parser ):
 
         def MOD(self):
             return self.getToken(MCParser.MOD, 0)
+
+        def ADD(self):
+            return self.getToken(MCParser.ADD, 0)
 
         def LS(self):
             return self.getToken(MCParser.LS, 0)
@@ -1204,7 +1204,7 @@ class MCParser ( Parser ):
                     self._errHandler.reportMatch(self)
                     self.consume()
                 self.state = 176
-                self.assoc_expression(2)
+                self.assoc_expression(4)
                 pass
             elif token in [MCParser.TRUE, MCParser.FALSE, MCParser.ID, MCParser.IntLIT, MCParser.FloatLIT, MCParser.StringLIT]:
                 self.state = 177
@@ -1229,36 +1229,36 @@ class MCParser ( Parser ):
                         localctx = MCParser.Assoc_expressionContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_assoc_expression)
                         self.state = 180
-                        if not self.precpred(self._ctx, 4):
-                            from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 4)")
-                        self.state = 181
-                        _la = self._input.LA(1)
-                        if not(_la==MCParser.ADD or _la==MCParser.SUB):
-                            self._errHandler.recoverInline(self)
-                        else:
-                            self._errHandler.reportMatch(self)
-                            self.consume()
-                        self.state = 182
-                        self.assoc_expression(5)
-                        pass
-
-                    elif la_ == 2:
-                        localctx = MCParser.Assoc_expressionContext(self, _parentctx, _parentState)
-                        self.pushNewRecursionContext(localctx, _startState, self.RULE_assoc_expression)
-                        self.state = 183
                         if not self.precpred(self._ctx, 3):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 3)")
-                        self.state = 184
+                        self.state = 181
                         _la = self._input.LA(1)
                         if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << MCParser.DIV) | (1 << MCParser.MUL) | (1 << MCParser.MOD))) != 0)):
                             self._errHandler.recoverInline(self)
                         else:
                             self._errHandler.reportMatch(self)
                             self.consume()
-                        self.state = 185
+                        self.state = 182
                         self.assoc_expression(4)
+                        pass
+
+                    elif la_ == 2:
+                        localctx = MCParser.Assoc_expressionContext(self, _parentctx, _parentState)
+                        self.pushNewRecursionContext(localctx, _startState, self.RULE_assoc_expression)
+                        self.state = 183
+                        if not self.precpred(self._ctx, 2):
+                            from antlr4.error.Errors import FailedPredicateException
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 2)")
+                        self.state = 184
+                        _la = self._input.LA(1)
+                        if not(_la==MCParser.ADD or _la==MCParser.SUB):
+                            self._errHandler.recoverInline(self)
+                        else:
+                            self._errHandler.reportMatch(self)
+                            self.consume()
+                        self.state = 185
+                        self.assoc_expression(3)
                         pass
 
                     elif la_ == 3:
@@ -2576,11 +2576,11 @@ class MCParser ( Parser ):
 
     def assoc_expression_sempred(self, localctx:Assoc_expressionContext, predIndex:int):
             if predIndex == 4:
-                return self.precpred(self._ctx, 4)
+                return self.precpred(self._ctx, 3)
          
 
             if predIndex == 5:
-                return self.precpred(self._ctx, 3)
+                return self.precpred(self._ctx, 2)
          
 
             if predIndex == 6:

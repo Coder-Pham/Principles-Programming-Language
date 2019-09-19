@@ -1,0 +1,4 @@
+int main() {
+            do print("2");
+            while (false);
+        }
