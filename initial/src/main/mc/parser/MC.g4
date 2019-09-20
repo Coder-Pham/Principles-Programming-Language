@@ -127,7 +127,9 @@ UNCLOSE_STRING:
 		self.text = self.text[1:] 
 };
 // UNCLOSE_STRING: '"' ~[\\"]* ( [\r\n] | '\0');
-ILLEGAL_ESCAPE: '"' ( ~[\\]* ( '\\' ~[btf"'\\]));
+ILLEGAL_ESCAPE: '"' ( ~[\\]* ( '\\' ~[btf"'\\])) {
+	self.text = self.text[1:]
+};
 
 // --------------------------------------- STATEMENTS -------------------------------------------
 

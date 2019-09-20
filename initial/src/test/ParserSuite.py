@@ -516,7 +516,7 @@ class ParserSuite(unittest.TestCase):
             string s;
             s = "abc\\mabc";
         }'''
-        self.assertTrue(TestParser.checkParser(input, '"abc\m', 289))
+        self.assertTrue(TestParser.checkParser(input, 'abc\m', 289))
 
     def test_float(self):
         input = '''int main() {
