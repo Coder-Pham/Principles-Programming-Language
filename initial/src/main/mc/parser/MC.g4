@@ -127,7 +127,8 @@ UNCLOSE_STRING:
 		self.text = self.text[1:] 
 };
 // UNCLOSE_STRING: '"' ~[\\"]* ( [\r\n] | '\0');
-ILLEGAL_ESCAPE: '"' ( ~[\\]* ( '\\' ~[btf"'\\])) {
+ILLEGAL_ESCAPE:
+	'"' (~[\\]* ( '\\' ~[btf"'\\])) {
 	self.text = self.text[1:]
 };
 
@@ -222,7 +223,7 @@ return_stmt: Return expression? SEMI;
 expression_stmt: expression SEMI;
 for_stmt:
 	For LB expression SEMI expression SEMI expression RB stmt;
-block_stmt: LP declare stmt* RP;
+block_stmt: LP body_block RP;
 dowhile_stmt: Do statement While expression SEMI;
 if_stmt: If LB expression RB stmt ( Else stmt)?;
 
@@ -238,6 +239,8 @@ stmt:
 	| index_expression SEMI;
 
 statement: stmt+;
+
+body_block: (var_declare | stmt)*;
 
 func_declare: (primitive_type | VOIDTYPE | output_parameter) ID LB multi_para? RB block_stmt;
 //-----------------------------------------------------------------------------------------------------
