@@ -1,21 +1,20 @@
-from lexererr import *
-from MCParser import MCParser
-from MCLexer import MCLexer
-import sys
-import os
+import sys,os
 from antlr4 import *
-from antlr4.error.ErrorListener import ConsoleErrorListener, ErrorListener
-if not './main/mc/parser/' in sys.path:
-    sys.path.append('./main/mc/parser/')
-if os.path.isdir('../target/main/mc/parser') and not '../target/main/mc/parser/' in sys.path:
-    sys.path.append('../target/main/mc/parser/')
-
+from antlr4.error.ErrorListener import ConsoleErrorListener,ErrorListener
+#if not './main/mc/parser/' in sys.path:
+#    sys.path.append('./main/mc/parser/')
+#if os.path.isdir('../target/main/mc/parser') and not '../target/main/mc/parser/' in sys.path:
+#    sys.path.append('../target/main/mc/parser/')
+from MCLexer import MCLexer
+from MCParser import MCParser
+from lexererr import *
+from ASTGeneration import ASTGeneration
 
 class TestUtil:
     @staticmethod
-    def makeSource(inputStr, num):
+    def makeSource(inputStr,num):
         filename = "./test/testcases/" + str(num) + ".txt"
-        file = open(filename, "w")
+        file = open(filename,"w")
         file.write(inputStr)
         file.close()
         return FileStream(filename)
@@ -23,56 +22,47 @@ class TestUtil:
 
 class TestLexer:
     @staticmethod
-    def checkLexeme(input, expect, num):
-        inputfile = TestUtil.makeSource(input, num)
-        dest = open("./test/solutions/" + str(num) + ".txt", "w")
+    def checkLexeme(input,expect,num):
+        inputfile = TestUtil.makeSource(input,num)
+        dest = open("./test/solutions/" + str(num) + ".txt","w")
         lexer = MCLexer(inputfile)
         try:
-            TestLexer.printLexeme(dest, lexer)
-        except (ErrorToken, UncloseString, IllegalEscape) as err:
+            TestLexer.printLexeme(dest,lexer)
+        except (ErrorToken,UncloseString,IllegalEscape) as err:
             dest.write(err.message)
         finally:
-            dest.close()
-        dest = open("./test/solutions/" + str(num) + ".txt", "r")
+            dest.close() 
+        dest = open("./test/solutions/" + str(num) + ".txt","r")
         line = dest.read()
         return line == expect
 
-    @staticmethod
-    def printLexeme(dest, lexer):
+    @staticmethod    
+    def printLexeme(dest,lexer):
         tok = lexer.nextToken()
         if tok.type != Token.EOF:
-            # dest.write("{} {},".format(tok.type, tok.text))
             dest.write(tok.text+",")
-            TestLexer.printLexeme(dest, lexer)
+            TestLexer.printLexeme(dest,lexer)
         else:
             dest.write("<EOF>")
-
-
 class NewErrorListener(ConsoleErrorListener):
     INSTANCE = None
-
     def syntaxError(self, recognizer, offendingSymbol, line, column, msg, e):
-        raise SyntaxException("Error on line " + str(line) +
-                              " col " + str(column) + ": " + offendingSymbol.text)
-
-
+        raise SyntaxException("Error on line "+ str(line) + " col " + str(column)+ ": " + offendingSymbol.text)
 NewErrorListener.INSTANCE = NewErrorListener()
 
-
 class SyntaxException(Exception):
-    def __init__(self, msg):
+    def __init__(self,msg):
         self.message = msg
-
 
 class TestParser:
     @staticmethod
     def createErrorListener():
-        return NewErrorListener.INSTANCE
+         return NewErrorListener.INSTANCE
 
     @staticmethod
-    def checkParser(input, expect, num):
-        inputfile = TestUtil.makeSource(input, num)
-        dest = open("./test/solutions/" + str(num) + ".txt", "w")
+    def checkParser(input,expect,num):
+        inputfile = TestUtil.makeSource(input,num)
+        dest = open("./test/solutions/" + str(num) + ".txt","w")
         lexer = MCLexer(inputfile)
         listener = TestParser.createErrorListener()
 
@@ -90,6 +80,23 @@ class TestParser:
             dest.write(str(e))
         finally:
             dest.close()
-        dest = open("./test/solutions/" + str(num) + ".txt", "r")
+        dest = open("./test/solutions/" + str(num) + ".txt","r")
         line = dest.read()
         return line == expect
+
+class TestAST:
+    @staticmethod
+    def checkASTGen(input,expect,num):
+        inputfile = TestUtil.makeSource(input,num)
+        dest = open("./test/solutions/" + str(num) + ".txt","w")
+        lexer = MCLexer(inputfile)
+        tokens = CommonTokenStream(lexer)
+        parser = MCParser(tokens)
+        tree = parser.program()
+        asttree = ASTGeneration().visit(tree)
+        dest.write(str(asttree))
+        dest.close()
+        dest = open("./test/solutions/" + str(num) + ".txt","r")
+        line = dest.read()
+        return line == expect
+        

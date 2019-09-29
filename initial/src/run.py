@@ -1,4 +1,4 @@
-import sys,os, platform
+import sys,os
 sys.path.append('./test/')
 import subprocess
 import unittest
@@ -6,9 +6,13 @@ from antlr4 import *
 
 #Make sure that ANTLR_JAR is set to antlr-4.7.2-complete.jar
 ANTLR_JAR = os.environ.get('ANTLR_JAR')
-
+TARGET = '../target/main/mc/parser' if os.name == 'posix' else os.path.normpath('../target/')
+locpath = ['./main/mc/parser/','./main/mc/astgen/','./main/mc/utils/']
+for p in locpath:
+    if not p in sys.path:
+        sys.path.append(p)
 def main(argv):
-    global ANTLR_JAR 
+    global ANTLR_JAR, TARGET
     if len(argv) < 1:
         printUsage()
     elif argv[0] == 'gen':
@@ -16,14 +20,8 @@ def main(argv):
     elif argv[0] == 'clean':
         subprocess.run(["rm","-rf","../target/main"])
     elif argv[0] == 'test':
-        if not './main/mc/parser/' in sys.path:
-            sys.path.append('./main/mc/parser/')
-        if platform.system() == 'Windows':
-            if not '..\\target\\' in sys.path:
-                sys.path.append('..\\target\\')
-        else:
-            if os.path.isdir('../target/main/mc/parser') and not '../target/main/mc/parser/' in sys.path:
-                sys.path.append('../target/main/mc/parser/')
+        if os.path.isdir(TARGET) and not TARGET in sys.path:
+            sys.path.append(TARGET)
         if len(argv) < 2:
             printUsage()
         elif argv[1] == 'LexerSuite':
@@ -33,6 +31,10 @@ def main(argv):
         elif argv[1] == 'ParserSuite':
             from ParserSuite import ParserSuite
             suite = unittest.makeSuite(ParserSuite)
+            test(suite)
+        elif argv[1] == 'ASTGenSuite':
+            from ASTGenSuite import ASTGenSuite
+            suite = unittest.makeSuite(ASTGenSuite)
             test(suite)
         else:
             printUsage()
