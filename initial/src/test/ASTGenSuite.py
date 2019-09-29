@@ -7,7 +7,7 @@ class ASTGenSuite(unittest.TestCase):
         """Simple program: int main() {} """
         input = """int main() {}"""
         expect = str(Program([FuncDecl(Id("main"),[],IntType,Block([]))]))
-        self.assertTrue(TestAST.checkASTGen(input,expect,300))
+        self.assertTrue(TestAST.checkASTGen(input,expect,301))
 
     def test_more_complex_program(self):
         """More complex program"""
@@ -15,7 +15,7 @@ class ASTGenSuite(unittest.TestCase):
             putIntLn(4);
         }"""
         expect = str(Program([FuncDecl(Id("main"),[],IntType,Block([CallExpr(Id("putIntLn"),[IntLiteral(4)])]))]))
-        self.assertTrue(TestAST.checkASTGen(input,expect,301))
+        self.assertTrue(TestAST.checkASTGen(input,expect,302))
     
     def test_call_without_parameter(self):
         """More complex program"""
@@ -23,5 +23,5 @@ class ASTGenSuite(unittest.TestCase):
             getIntLn();
         }"""
         expect = str(Program([FuncDecl(Id("main"),[],IntType,Block([CallExpr(Id("getIntLn"),[])]))]))
-        self.assertTrue(TestAST.checkASTGen(input,expect,301))
+        self.assertTrue(TestAST.checkASTGen(input,expect,303))
    
