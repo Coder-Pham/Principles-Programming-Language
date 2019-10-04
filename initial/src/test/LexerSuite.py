@@ -166,7 +166,7 @@ class LexerSuite(unittest.TestCase):
 
     def test_backslash(self):
         self.assertTrue(TestLexer.checkLexeme(
-            """"Backslash: \\slash """, """Illegal Escape In String: "Backslash: \s""", 172))
+            """"Backslash: \\slash """, """Illegal Escape In String: Backslash: \s""", 172))
 
     def test_newline(self):
         expect = """Unclosed String: Newline: \\r"""
@@ -179,21 +179,21 @@ class LexerSuite(unittest.TestCase):
 
     def test_esc_0(self):
         self.assertTrue(TestLexer.checkLexeme(
-            """ "This \\0 is \\0" """, """Illegal Escape In String: "This \\0""", 175))
+            """ "This \\0 is \\0" """, """Illegal Escape In String: This \\0""", 175))
 
     # TODO: Illegal Escape fix 176 178 179 200
     def test_illegal_esc(self):
-        self.assertTrue(TestLexer.checkLexeme("""" abc \d " """, """Illegal Escape In String: " abc \d""", 176))
+        self.assertTrue(TestLexer.checkLexeme("""" abc \d " """, """Illegal Escape In String:  abc \d""", 176))
 
     def test_esc_forward(self):
-        self.assertTrue(TestLexer.checkLexeme(""""Forward \/" """, """Illegal Escape In String: "Forward \/""", 178))
+        self.assertTrue(TestLexer.checkLexeme(""""Forward \/" """, """Illegal Escape In String: Forward \/""", 178))
 
     def test_esc_bracket(self):
         self.assertTrue(TestLexer.checkLexeme(
-            """"Bracket this: \(" """, """Illegal Escape In String: "Bracket this: \(""", 179))
+            """"Bracket this: \(" """, """Illegal Escape In String: Bracket this: \(""", 179))
 
     def test_illegal_confuse(self):
-        self.assertTrue(TestLexer.checkLexeme(""" "abc\\abc" """, '''Illegal Escape In String: "abc\\a''', 200))
+        self.assertTrue(TestLexer.checkLexeme(""" "abc\\abc" """, '''Illegal Escape In String: abc\\a''', 200))
 
     def test_esc_mix(self):
         self.assertTrue(TestLexer.checkLexeme(

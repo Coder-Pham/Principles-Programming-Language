@@ -1,1 +1,1 @@
-Illegal Escape In String: "This \0
+Illegal Escape In String: This \0

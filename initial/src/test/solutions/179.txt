@@ -1,1 +1,1 @@
-Illegal Escape In String: "Bracket this: \(
+Illegal Escape In String: Bracket this: \(
