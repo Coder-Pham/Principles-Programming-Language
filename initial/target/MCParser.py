@@ -8,164 +8,164 @@ import sys
 
 def serializedATN():
     with StringIO() as buf:
-        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\64")
-        buf.write("\u015e\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
+        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\61")
+        buf.write("\u0162\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
         buf.write("\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r\4\16")
         buf.write("\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22\4\23\t\23")
         buf.write("\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31")
         buf.write("\t\31\4\32\t\32\4\33\t\33\4\34\t\34\4\35\t\35\4\36\t\36")
-        buf.write("\4\37\t\37\4 \t \4!\t!\4\"\t\"\3\2\7\2F\n\2\f\2\16\2I")
-        buf.write("\13\2\3\2\3\2\3\3\3\3\5\3O\n\3\3\4\3\4\3\4\3\4\3\4\3\5")
-        buf.write("\3\5\3\5\3\5\3\5\3\6\3\6\3\6\3\6\3\6\5\6`\n\6\3\7\3\7")
-        buf.write("\3\7\7\7e\n\7\f\7\16\7h\13\7\3\b\3\b\3\b\3\b\3\t\3\t\3")
-        buf.write("\t\3\t\3\t\3\n\3\n\3\n\3\n\3\13\3\13\5\13y\n\13\3\f\3")
-        buf.write("\f\3\f\3\f\5\f\177\n\f\3\r\3\r\3\r\7\r\u0084\n\r\f\r\16")
-        buf.write("\r\u0087\13\r\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16")
-        buf.write("\3\16\3\16\3\16\3\16\3\16\3\16\3\16\5\16\u0098\n\16\3")
-        buf.write("\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16")
-        buf.write("\3\16\3\16\3\16\7\16\u00a8\n\16\f\16\16\16\u00ab\13\16")
-        buf.write("\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\5\17\u00b5\n")
-        buf.write("\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17")
-        buf.write("\3\17\7\17\u00c2\n\17\f\17\16\17\u00c5\13\17\3\20\3\20")
-        buf.write("\3\20\3\20\3\20\3\20\3\20\3\20\3\20\3\20\3\20\3\20\5\20")
-        buf.write("\u00d3\n\20\3\20\3\20\3\20\3\20\3\20\3\20\3\20\3\20\3")
-        buf.write("\20\3\20\3\20\7\20\u00e0\n\20\f\20\16\20\u00e3\13\20\3")
-        buf.write("\21\3\21\3\21\3\21\3\21\3\22\3\22\3\23\3\23\3\23\7\23")
-        buf.write("\u00ef\n\23\f\23\16\23\u00f2\13\23\5\23\u00f4\n\23\3\24")
-        buf.write("\3\24\3\24\3\24\3\24\3\25\3\25\3\25\3\25\3\25\3\25\3\25")
-        buf.write("\3\25\5\25\u0103\n\25\3\26\7\26\u0106\n\26\f\26\16\26")
-        buf.write("\u0109\13\26\3\27\3\27\3\27\3\30\3\30\3\30\3\31\3\31\5")
-        buf.write("\31\u0113\n\31\3\31\3\31\3\32\3\32\3\32\3\33\3\33\3\33")
-        buf.write("\3\33\3\33\3\33\3\33\3\33\3\33\3\33\3\34\3\34\3\34\7\34")
-        buf.write("\u0127\n\34\f\34\16\34\u012a\13\34\3\34\3\34\3\35\3\35")
-        buf.write("\3\35\3\35\3\35\3\35\3\36\3\36\3\36\3\36\3\36\3\36\3\36")
-        buf.write("\5\36\u013b\n\36\3\37\3\37\3\37\3\37\3\37\3\37\3\37\3")
-        buf.write("\37\3\37\3\37\3\37\5\37\u0148\n\37\3 \6 \u014b\n \r \16")
-        buf.write(" \u014c\3!\3!\3!\5!\u0152\n!\3!\3!\3!\5!\u0157\n!\3!\3")
-        buf.write("!\3!\3\"\3\"\3\"\2\5\32\34\36#\2\4\6\b\n\f\16\20\22\24")
-        buf.write("\26\30\32\34\36 \"$&(*,.\60\62\64\668:<>@B\2\t\3\2$%\3")
-        buf.write("\2\30\33\3\2\26\27\4\2\17\17\24\24\3\2\20\22\3\2\16\17")
-        buf.write("\4\2\35\36 !\2\u016f\2G\3\2\2\2\4N\3\2\2\2\6P\3\2\2\2")
-        buf.write("\bU\3\2\2\2\n_\3\2\2\2\fa\3\2\2\2\16i\3\2\2\2\20m\3\2")
-        buf.write("\2\2\22r\3\2\2\2\24x\3\2\2\2\26z\3\2\2\2\30\u0080\3\2")
-        buf.write("\2\2\32\u0097\3\2\2\2\34\u00b4\3\2\2\2\36\u00d2\3\2\2")
-        buf.write("\2 \u00e4\3\2\2\2\"\u00e9\3\2\2\2$\u00f3\3\2\2\2&\u00f5")
-        buf.write("\3\2\2\2(\u0102\3\2\2\2*\u0107\3\2\2\2,\u010a\3\2\2\2")
-        buf.write(".\u010d\3\2\2\2\60\u0110\3\2\2\2\62\u0116\3\2\2\2\64\u0119")
-        buf.write("\3\2\2\2\66\u0123\3\2\2\28\u012d\3\2\2\2:\u0133\3\2\2")
-        buf.write("\2<\u0147\3\2\2\2>\u014a\3\2\2\2@\u0151\3\2\2\2B\u015b")
-        buf.write("\3\2\2\2DF\5\4\3\2ED\3\2\2\2FI\3\2\2\2GE\3\2\2\2GH\3\2")
-        buf.write("\2\2HJ\3\2\2\2IG\3\2\2\2JK\7\2\2\3K\3\3\2\2\2LO\5@!\2")
-        buf.write("MO\5\16\b\2NL\3\2\2\2NM\3\2\2\2O\5\3\2\2\2PQ\5B\"\2QR")
-        buf.write("\7-\2\2RS\7%\2\2ST\7.\2\2T\7\3\2\2\2UV\7$\2\2VW\7-\2\2")
-        buf.write("WX\t\2\2\2XY\7.\2\2Y\t\3\2\2\2Z[\7$\2\2[\\\7-\2\2\\]\7")
-        buf.write("%\2\2]`\7.\2\2^`\7$\2\2_Z\3\2\2\2_^\3\2\2\2`\13\3\2\2")
-        buf.write("\2af\5\n\6\2bc\7,\2\2ce\5\n\6\2db\3\2\2\2eh\3\2\2\2fd")
-        buf.write("\3\2\2\2fg\3\2\2\2g\r\3\2\2\2hf\3\2\2\2ij\5B\"\2jk\5\f")
-        buf.write("\7\2kl\7*\2\2l\17\3\2\2\2mn\5B\"\2no\7$\2\2op\7-\2\2p")
-        buf.write("q\7.\2\2q\21\3\2\2\2rs\5B\"\2st\7-\2\2tu\7.\2\2u\23\3")
-        buf.write("\2\2\2vy\5\20\t\2wy\5\22\n\2xv\3\2\2\2xw\3\2\2\2y\25\3")
-        buf.write("\2\2\2z{\5B\"\2{~\7$\2\2|}\7-\2\2}\177\7.\2\2~|\3\2\2")
-        buf.write("\2~\177\3\2\2\2\177\27\3\2\2\2\u0080\u0085\5\26\f\2\u0081")
-        buf.write("\u0082\7,\2\2\u0082\u0084\5\26\f\2\u0083\u0081\3\2\2\2")
-        buf.write("\u0084\u0087\3\2\2\2\u0085\u0083\3\2\2\2\u0085\u0086\3")
-        buf.write("\2\2\2\u0086\31\3\2\2\2\u0087\u0085\3\2\2\2\u0088\u0089")
-        buf.write("\b\16\1\2\u0089\u008a\7&\2\2\u008a\u008b\5\32\16\2\u008b")
-        buf.write("\u008c\7\'\2\2\u008c\u0098\3\2\2\2\u008d\u0098\5\34\17")
-        buf.write("\2\u008e\u008f\5\34\17\2\u008f\u0090\t\3\2\2\u0090\u0091")
-        buf.write("\5\34\17\2\u0091\u0098\3\2\2\2\u0092\u0093\5\36\20\2\u0093")
-        buf.write("\u0094\t\4\2\2\u0094\u0095\5\36\20\2\u0095\u0098\3\2\2")
-        buf.write("\2\u0096\u0098\5(\25\2\u0097\u0088\3\2\2\2\u0097\u008d")
-        buf.write("\3\2\2\2\u0097\u008e\3\2\2\2\u0097\u0092\3\2\2\2\u0097")
-        buf.write("\u0096\3\2\2\2\u0098\u00a9\3\2\2\2\u0099\u009a\f\6\2\2")
-        buf.write("\u009a\u009b\7\23\2\2\u009b\u00a8\5\32\16\7\u009c\u009d")
-        buf.write("\f\5\2\2\u009d\u009e\7\25\2\2\u009e\u00a8\5\32\16\6\u009f")
-        buf.write("\u00a0\f\4\2\2\u00a0\u00a1\7\34\2\2\u00a1\u00a8\5\32\16")
-        buf.write("\4\u00a2\u00a3\f\n\2\2\u00a3\u00a4\7-\2\2\u00a4\u00a5")
-        buf.write("\5\32\16\2\u00a5\u00a6\7.\2\2\u00a6\u00a8\3\2\2\2\u00a7")
-        buf.write("\u0099\3\2\2\2\u00a7\u009c\3\2\2\2\u00a7\u009f\3\2\2\2")
-        buf.write("\u00a7\u00a2\3\2\2\2\u00a8\u00ab\3\2\2\2\u00a9\u00a7\3")
-        buf.write("\2\2\2\u00a9\u00aa\3\2\2\2\u00aa\33\3\2\2\2\u00ab\u00a9")
-        buf.write("\3\2\2\2\u00ac\u00ad\b\17\1\2\u00ad\u00ae\7&\2\2\u00ae")
-        buf.write("\u00af\5\32\16\2\u00af\u00b0\7\'\2\2\u00b0\u00b5\3\2\2")
-        buf.write("\2\u00b1\u00b2\t\5\2\2\u00b2\u00b5\5\34\17\6\u00b3\u00b5")
-        buf.write("\5(\25\2\u00b4\u00ac\3\2\2\2\u00b4\u00b1\3\2\2\2\u00b4")
-        buf.write("\u00b3\3\2\2\2\u00b5\u00c3\3\2\2\2\u00b6\u00b7\f\5\2\2")
-        buf.write("\u00b7\u00b8\t\6\2\2\u00b8\u00c2\5\34\17\6\u00b9\u00ba")
-        buf.write("\f\4\2\2\u00ba\u00bb\t\7\2\2\u00bb\u00c2\5\34\17\5\u00bc")
-        buf.write("\u00bd\f\7\2\2\u00bd\u00be\7-\2\2\u00be\u00bf\5\34\17")
-        buf.write("\2\u00bf\u00c0\7.\2\2\u00c0\u00c2\3\2\2\2\u00c1\u00b6")
-        buf.write("\3\2\2\2\u00c1\u00b9\3\2\2\2\u00c1\u00bc\3\2\2\2\u00c2")
-        buf.write("\u00c5\3\2\2\2\u00c3\u00c1\3\2\2\2\u00c3\u00c4\3\2\2\2")
-        buf.write("\u00c4\35\3\2\2\2\u00c5\u00c3\3\2\2\2\u00c6\u00c7\b\20")
-        buf.write("\1\2\u00c7\u00c8\7&\2\2\u00c8\u00c9\5\32\16\2\u00c9\u00ca")
-        buf.write("\7\'\2\2\u00ca\u00d3\3\2\2\2\u00cb\u00cc\t\5\2\2\u00cc")
-        buf.write("\u00d3\5\36\20\7\u00cd\u00ce\5\34\17\2\u00ce\u00cf\t\3")
-        buf.write("\2\2\u00cf\u00d0\5\34\17\2\u00d0\u00d3\3\2\2\2\u00d1\u00d3")
-        buf.write("\5(\25\2\u00d2\u00c6\3\2\2\2\u00d2\u00cb\3\2\2\2\u00d2")
-        buf.write("\u00cd\3\2\2\2\u00d2\u00d1\3\2\2\2\u00d3\u00e1\3\2\2\2")
-        buf.write("\u00d4\u00d5\f\6\2\2\u00d5\u00d6\t\7\2\2\u00d6\u00e0\5")
-        buf.write("\36\20\7\u00d7\u00d8\f\5\2\2\u00d8\u00d9\t\6\2\2\u00d9")
-        buf.write("\u00e0\5\36\20\6\u00da\u00db\f\b\2\2\u00db\u00dc\7-\2")
-        buf.write("\2\u00dc\u00dd\5\36\20\2\u00dd\u00de\7.\2\2\u00de\u00e0")
-        buf.write("\3\2\2\2\u00df\u00d4\3\2\2\2\u00df\u00d7\3\2\2\2\u00df")
-        buf.write("\u00da\3\2\2\2\u00e0\u00e3\3\2\2\2\u00e1\u00df\3\2\2\2")
-        buf.write("\u00e1\u00e2\3\2\2\2\u00e2\37\3\2\2\2\u00e3\u00e1\3\2")
-        buf.write("\2\2\u00e4\u00e5\5\32\16\2\u00e5\u00e6\7-\2\2\u00e6\u00e7")
-        buf.write("\5\32\16\2\u00e7\u00e8\7.\2\2\u00e8!\3\2\2\2\u00e9\u00ea")
-        buf.write("\5&\24\2\u00ea#\3\2\2\2\u00eb\u00f0\5\32\16\2\u00ec\u00ed")
-        buf.write("\7,\2\2\u00ed\u00ef\5\32\16\2\u00ee\u00ec\3\2\2\2\u00ef")
-        buf.write("\u00f2\3\2\2\2\u00f0\u00ee\3\2\2\2\u00f0\u00f1\3\2\2\2")
-        buf.write("\u00f1\u00f4\3\2\2\2\u00f2\u00f0\3\2\2\2\u00f3\u00eb\3")
-        buf.write("\2\2\2\u00f3\u00f4\3\2\2\2\u00f4%\3\2\2\2\u00f5\u00f6")
-        buf.write("\7$\2\2\u00f6\u00f7\7&\2\2\u00f7\u00f8\5$\23\2\u00f8\u00f9")
-        buf.write("\7\'\2\2\u00f9\'\3\2\2\2\u00fa\u0103\7%\2\2\u00fb\u0103")
-        buf.write("\7\f\2\2\u00fc\u0103\7\13\2\2\u00fd\u0103\7/\2\2\u00fe")
-        buf.write("\u0103\7\60\2\2\u00ff\u0103\7$\2\2\u0100\u0103\5&\24\2")
-        buf.write("\u0101\u0103\5\b\5\2\u0102\u00fa\3\2\2\2\u0102\u00fb\3")
-        buf.write("\2\2\2\u0102\u00fc\3\2\2\2\u0102\u00fd\3\2\2\2\u0102\u00fe")
-        buf.write("\3\2\2\2\u0102\u00ff\3\2\2\2\u0102\u0100\3\2\2\2\u0102")
-        buf.write("\u0101\3\2\2\2\u0103)\3\2\2\2\u0104\u0106\5\16\b\2\u0105")
-        buf.write("\u0104\3\2\2\2\u0106\u0109\3\2\2\2\u0107\u0105\3\2\2\2")
-        buf.write("\u0107\u0108\3\2\2\2\u0108+\3\2\2\2\u0109\u0107\3\2\2")
-        buf.write("\2\u010a\u010b\7\3\2\2\u010b\u010c\7*\2\2\u010c-\3\2\2")
-        buf.write("\2\u010d\u010e\7\4\2\2\u010e\u010f\7*\2\2\u010f/\3\2\2")
-        buf.write("\2\u0110\u0112\7\n\2\2\u0111\u0113\5\32\16\2\u0112\u0111")
-        buf.write("\3\2\2\2\u0112\u0113\3\2\2\2\u0113\u0114\3\2\2\2\u0114")
-        buf.write("\u0115\7*\2\2\u0115\61\3\2\2\2\u0116\u0117\5\32\16\2\u0117")
-        buf.write("\u0118\7*\2\2\u0118\63\3\2\2\2\u0119\u011a\7\t\2\2\u011a")
-        buf.write("\u011b\7&\2\2\u011b\u011c\5\32\16\2\u011c\u011d\7*\2\2")
-        buf.write("\u011d\u011e\5\32\16\2\u011e\u011f\7*\2\2\u011f\u0120")
-        buf.write("\5\32\16\2\u0120\u0121\7\'\2\2\u0121\u0122\5<\37\2\u0122")
-        buf.write("\65\3\2\2\2\u0123\u0124\7(\2\2\u0124\u0128\5*\26\2\u0125")
-        buf.write("\u0127\5<\37\2\u0126\u0125\3\2\2\2\u0127\u012a\3\2\2\2")
-        buf.write("\u0128\u0126\3\2\2\2\u0128\u0129\3\2\2\2\u0129\u012b\3")
-        buf.write("\2\2\2\u012a\u0128\3\2\2\2\u012b\u012c\7)\2\2\u012c\67")
-        buf.write("\3\2\2\2\u012d\u012e\7\5\2\2\u012e\u012f\5> \2\u012f\u0130")
-        buf.write("\7\6\2\2\u0130\u0131\5\32\16\2\u0131\u0132\7*\2\2\u0132")
-        buf.write("9\3\2\2\2\u0133\u0134\7\7\2\2\u0134\u0135\7&\2\2\u0135")
-        buf.write("\u0136\5\32\16\2\u0136\u0137\7\'\2\2\u0137\u013a\5<\37")
-        buf.write("\2\u0138\u0139\7\b\2\2\u0139\u013b\5<\37\2\u013a\u0138")
-        buf.write("\3\2\2\2\u013a\u013b\3\2\2\2\u013b;\3\2\2\2\u013c\u0148")
-        buf.write("\5:\36\2\u013d\u0148\58\35\2\u013e\u0148\5\64\33\2\u013f")
-        buf.write("\u0148\5,\27\2\u0140\u0148\5.\30\2\u0141\u0148\5\60\31")
-        buf.write("\2\u0142\u0148\5\62\32\2\u0143\u0148\5\66\34\2\u0144\u0145")
-        buf.write("\5 \21\2\u0145\u0146\7*\2\2\u0146\u0148\3\2\2\2\u0147")
-        buf.write("\u013c\3\2\2\2\u0147\u013d\3\2\2\2\u0147\u013e\3\2\2\2")
-        buf.write("\u0147\u013f\3\2\2\2\u0147\u0140\3\2\2\2\u0147\u0141\3")
-        buf.write("\2\2\2\u0147\u0142\3\2\2\2\u0147\u0143\3\2\2\2\u0147\u0144")
-        buf.write("\3\2\2\2\u0148=\3\2\2\2\u0149\u014b\5<\37\2\u014a\u0149")
-        buf.write("\3\2\2\2\u014b\u014c\3\2\2\2\u014c\u014a\3\2\2\2\u014c")
-        buf.write("\u014d\3\2\2\2\u014d?\3\2\2\2\u014e\u0152\5B\"\2\u014f")
-        buf.write("\u0152\7\37\2\2\u0150\u0152\5\22\n\2\u0151\u014e\3\2\2")
-        buf.write("\2\u0151\u014f\3\2\2\2\u0151\u0150\3\2\2\2\u0152\u0153")
-        buf.write("\3\2\2\2\u0153\u0154\7$\2\2\u0154\u0156\7&\2\2\u0155\u0157")
-        buf.write("\5\30\r\2\u0156\u0155\3\2\2\2\u0156\u0157\3\2\2\2\u0157")
-        buf.write("\u0158\3\2\2\2\u0158\u0159\7\'\2\2\u0159\u015a\5\66\34")
-        buf.write("\2\u015aA\3\2\2\2\u015b\u015c\t\b\2\2\u015cC\3\2\2\2\35")
-        buf.write("GN_fx~\u0085\u0097\u00a7\u00a9\u00b4\u00c1\u00c3\u00d2")
-        buf.write("\u00df\u00e1\u00f0\u00f3\u0102\u0107\u0112\u0128\u013a")
-        buf.write("\u0147\u014c\u0151\u0156")
+        buf.write("\4\37\t\37\4 \t \4!\t!\4\"\t\"\4#\t#\4$\t$\3\2\6\2J\n")
+        buf.write("\2\r\2\16\2K\3\2\3\2\3\3\3\3\5\3R\n\3\3\4\3\4\3\5\3\5")
+        buf.write("\3\5\3\5\3\5\3\6\3\6\3\6\3\6\3\6\3\7\3\7\3\7\3\7\3\7\5")
+        buf.write("\7e\n\7\3\b\3\b\3\b\7\bj\n\b\f\b\16\bm\13\b\3\t\3\t\3")
+        buf.write("\t\3\t\3\n\3\n\3\n\3\n\3\n\3\13\3\13\3\13\3\13\3\f\3\f")
+        buf.write("\5\f~\n\f\3\r\3\r\3\r\3\r\5\r\u0084\n\r\3\16\3\16\3\16")
+        buf.write("\7\16\u0089\n\16\f\16\16\16\u008c\13\16\3\17\3\17\3\17")
+        buf.write("\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17")
+        buf.write("\3\17\5\17\u009d\n\17\3\17\3\17\3\17\3\17\3\17\3\17\3")
+        buf.write("\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\7\17\u00ad\n\17")
+        buf.write("\f\17\16\17\u00b0\13\17\3\20\3\20\3\20\3\20\3\20\3\20")
+        buf.write("\3\20\3\20\5\20\u00ba\n\20\3\20\3\20\3\20\3\20\3\20\3")
+        buf.write("\20\3\20\3\20\3\20\3\20\3\20\7\20\u00c7\n\20\f\20\16\20")
+        buf.write("\u00ca\13\20\3\21\3\21\3\21\3\21\3\21\3\21\3\21\3\21\3")
+        buf.write("\21\3\21\3\21\3\21\5\21\u00d8\n\21\3\21\3\21\3\21\3\21")
+        buf.write("\3\21\3\21\3\21\3\21\3\21\3\21\3\21\7\21\u00e5\n\21\f")
+        buf.write("\21\16\21\u00e8\13\21\3\22\3\22\3\22\3\22\3\22\3\23\3")
+        buf.write("\23\3\24\3\24\3\24\7\24\u00f4\n\24\f\24\16\24\u00f7\13")
+        buf.write("\24\5\24\u00f9\n\24\3\25\3\25\3\25\3\25\3\25\3\26\3\26")
+        buf.write("\3\26\3\26\5\26\u0104\n\26\3\27\7\27\u0107\n\27\f\27\16")
+        buf.write("\27\u010a\13\27\3\30\3\30\3\30\3\31\3\31\3\31\3\32\3\32")
+        buf.write("\5\32\u0114\n\32\3\32\3\32\3\33\3\33\3\33\3\34\3\34\3")
+        buf.write("\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\35\3\35\7\35")
+        buf.write("\u0127\n\35\f\35\16\35\u012a\13\35\3\35\3\35\3\36\3\36")
+        buf.write("\3\36\3\36\3\36\3\36\3\37\3\37\3\37\3\37\3\37\3\37\3\37")
+        buf.write("\5\37\u013b\n\37\3 \3 \3 \3 \3 \3 \3 \3 \3 \3 \3 \5 \u0148")
+        buf.write("\n \3!\6!\u014b\n!\r!\16!\u014c\3\"\3\"\5\"\u0151\n\"")
+        buf.write("\3#\3#\3#\5#\u0156\n#\3#\3#\3#\5#\u015b\n#\3#\3#\3#\3")
+        buf.write("$\3$\3$\2\5\34\36 %\2\4\6\b\n\f\16\20\22\24\26\30\32\34")
+        buf.write("\36 \"$&(*,.\60\62\64\668:<>@BDF\2\n\5\2\13\13##-.\3\2")
+        buf.write("\"#\3\2\26\31\3\2\24\25\4\2\r\r\22\22\3\2\16\20\3\2\f")
+        buf.write("\r\4\2\33\34\36\37\2\u016e\2I\3\2\2\2\4Q\3\2\2\2\6S\3")
+        buf.write("\2\2\2\bU\3\2\2\2\nZ\3\2\2\2\fd\3\2\2\2\16f\3\2\2\2\20")
+        buf.write("n\3\2\2\2\22r\3\2\2\2\24w\3\2\2\2\26}\3\2\2\2\30\177\3")
+        buf.write("\2\2\2\32\u0085\3\2\2\2\34\u009c\3\2\2\2\36\u00b9\3\2")
+        buf.write("\2\2 \u00d7\3\2\2\2\"\u00e9\3\2\2\2$\u00ee\3\2\2\2&\u00f8")
+        buf.write("\3\2\2\2(\u00fa\3\2\2\2*\u0103\3\2\2\2,\u0108\3\2\2\2")
+        buf.write(".\u010b\3\2\2\2\60\u010e\3\2\2\2\62\u0111\3\2\2\2\64\u0117")
+        buf.write("\3\2\2\2\66\u011a\3\2\2\28\u0124\3\2\2\2:\u012d\3\2\2")
+        buf.write("\2<\u0133\3\2\2\2>\u0147\3\2\2\2@\u014a\3\2\2\2B\u0150")
+        buf.write("\3\2\2\2D\u0155\3\2\2\2F\u015f\3\2\2\2HJ\5\4\3\2IH\3\2")
+        buf.write("\2\2JK\3\2\2\2KI\3\2\2\2KL\3\2\2\2LM\3\2\2\2MN\7\2\2\3")
+        buf.write("N\3\3\2\2\2OR\5D#\2PR\5\20\t\2QO\3\2\2\2QP\3\2\2\2R\5")
+        buf.write("\3\2\2\2ST\t\2\2\2T\7\3\2\2\2UV\5F$\2VW\7+\2\2WX\7#\2")
+        buf.write("\2XY\7,\2\2Y\t\3\2\2\2Z[\7\"\2\2[\\\7+\2\2\\]\t\3\2\2")
+        buf.write("]^\7,\2\2^\13\3\2\2\2_`\7\"\2\2`a\7+\2\2ab\7#\2\2be\7")
+        buf.write(",\2\2ce\7\"\2\2d_\3\2\2\2dc\3\2\2\2e\r\3\2\2\2fk\5\f\7")
+        buf.write("\2gh\7*\2\2hj\5\f\7\2ig\3\2\2\2jm\3\2\2\2ki\3\2\2\2kl")
+        buf.write("\3\2\2\2l\17\3\2\2\2mk\3\2\2\2no\5F$\2op\5\16\b\2pq\7")
+        buf.write("(\2\2q\21\3\2\2\2rs\5F$\2st\7\"\2\2tu\7+\2\2uv\7,\2\2")
+        buf.write("v\23\3\2\2\2wx\5F$\2xy\7+\2\2yz\7,\2\2z\25\3\2\2\2{~\5")
+        buf.write("\22\n\2|~\5\24\13\2}{\3\2\2\2}|\3\2\2\2~\27\3\2\2\2\177")
+        buf.write("\u0080\5F$\2\u0080\u0083\7\"\2\2\u0081\u0082\7+\2\2\u0082")
+        buf.write("\u0084\7,\2\2\u0083\u0081\3\2\2\2\u0083\u0084\3\2\2\2")
+        buf.write("\u0084\31\3\2\2\2\u0085\u008a\5\30\r\2\u0086\u0087\7*")
+        buf.write("\2\2\u0087\u0089\5\30\r\2\u0088\u0086\3\2\2\2\u0089\u008c")
+        buf.write("\3\2\2\2\u008a\u0088\3\2\2\2\u008a\u008b\3\2\2\2\u008b")
+        buf.write("\33\3\2\2\2\u008c\u008a\3\2\2\2\u008d\u008e\b\17\1\2\u008e")
+        buf.write("\u008f\7$\2\2\u008f\u0090\5\34\17\2\u0090\u0091\7%\2\2")
+        buf.write("\u0091\u009d\3\2\2\2\u0092\u009d\5\36\20\2\u0093\u0094")
+        buf.write("\5\36\20\2\u0094\u0095\t\4\2\2\u0095\u0096\5\36\20\2\u0096")
+        buf.write("\u009d\3\2\2\2\u0097\u0098\5 \21\2\u0098\u0099\t\5\2\2")
+        buf.write("\u0099\u009a\5 \21\2\u009a\u009d\3\2\2\2\u009b\u009d\5")
+        buf.write("*\26\2\u009c\u008d\3\2\2\2\u009c\u0092\3\2\2\2\u009c\u0093")
+        buf.write("\3\2\2\2\u009c\u0097\3\2\2\2\u009c\u009b\3\2\2\2\u009d")
+        buf.write("\u00ae\3\2\2\2\u009e\u009f\f\6\2\2\u009f\u00a0\7\21\2")
+        buf.write("\2\u00a0\u00ad\5\34\17\7\u00a1\u00a2\f\5\2\2\u00a2\u00a3")
+        buf.write("\7\23\2\2\u00a3\u00ad\5\34\17\6\u00a4\u00a5\f\4\2\2\u00a5")
+        buf.write("\u00a6\7\32\2\2\u00a6\u00ad\5\34\17\4\u00a7\u00a8\f\n")
+        buf.write("\2\2\u00a8\u00a9\7+\2\2\u00a9\u00aa\5\34\17\2\u00aa\u00ab")
+        buf.write("\7,\2\2\u00ab\u00ad\3\2\2\2\u00ac\u009e\3\2\2\2\u00ac")
+        buf.write("\u00a1\3\2\2\2\u00ac\u00a4\3\2\2\2\u00ac\u00a7\3\2\2\2")
+        buf.write("\u00ad\u00b0\3\2\2\2\u00ae\u00ac\3\2\2\2\u00ae\u00af\3")
+        buf.write("\2\2\2\u00af\35\3\2\2\2\u00b0\u00ae\3\2\2\2\u00b1\u00b2")
+        buf.write("\b\20\1\2\u00b2\u00b3\7$\2\2\u00b3\u00b4\5\34\17\2\u00b4")
+        buf.write("\u00b5\7%\2\2\u00b5\u00ba\3\2\2\2\u00b6\u00b7\t\6\2\2")
+        buf.write("\u00b7\u00ba\5\36\20\6\u00b8\u00ba\5*\26\2\u00b9\u00b1")
+        buf.write("\3\2\2\2\u00b9\u00b6\3\2\2\2\u00b9\u00b8\3\2\2\2\u00ba")
+        buf.write("\u00c8\3\2\2\2\u00bb\u00bc\f\5\2\2\u00bc\u00bd\t\7\2\2")
+        buf.write("\u00bd\u00c7\5\36\20\6\u00be\u00bf\f\4\2\2\u00bf\u00c0")
+        buf.write("\t\b\2\2\u00c0\u00c7\5\36\20\5\u00c1\u00c2\f\7\2\2\u00c2")
+        buf.write("\u00c3\7+\2\2\u00c3\u00c4\5\36\20\2\u00c4\u00c5\7,\2\2")
+        buf.write("\u00c5\u00c7\3\2\2\2\u00c6\u00bb\3\2\2\2\u00c6\u00be\3")
+        buf.write("\2\2\2\u00c6\u00c1\3\2\2\2\u00c7\u00ca\3\2\2\2\u00c8\u00c6")
+        buf.write("\3\2\2\2\u00c8\u00c9\3\2\2\2\u00c9\37\3\2\2\2\u00ca\u00c8")
+        buf.write("\3\2\2\2\u00cb\u00cc\b\21\1\2\u00cc\u00cd\7$\2\2\u00cd")
+        buf.write("\u00ce\5\34\17\2\u00ce\u00cf\7%\2\2\u00cf\u00d8\3\2\2")
+        buf.write("\2\u00d0\u00d1\t\6\2\2\u00d1\u00d8\5 \21\7\u00d2\u00d3")
+        buf.write("\5\36\20\2\u00d3\u00d4\t\4\2\2\u00d4\u00d5\5\36\20\2\u00d5")
+        buf.write("\u00d8\3\2\2\2\u00d6\u00d8\5*\26\2\u00d7\u00cb\3\2\2\2")
+        buf.write("\u00d7\u00d0\3\2\2\2\u00d7\u00d2\3\2\2\2\u00d7\u00d6\3")
+        buf.write("\2\2\2\u00d8\u00e6\3\2\2\2\u00d9\u00da\f\6\2\2\u00da\u00db")
+        buf.write("\t\b\2\2\u00db\u00e5\5 \21\7\u00dc\u00dd\f\5\2\2\u00dd")
+        buf.write("\u00de\t\7\2\2\u00de\u00e5\5 \21\6\u00df\u00e0\f\b\2\2")
+        buf.write("\u00e0\u00e1\7+\2\2\u00e1\u00e2\5 \21\2\u00e2\u00e3\7")
+        buf.write(",\2\2\u00e3\u00e5\3\2\2\2\u00e4\u00d9\3\2\2\2\u00e4\u00dc")
+        buf.write("\3\2\2\2\u00e4\u00df\3\2\2\2\u00e5\u00e8\3\2\2\2\u00e6")
+        buf.write("\u00e4\3\2\2\2\u00e6\u00e7\3\2\2\2\u00e7!\3\2\2\2\u00e8")
+        buf.write("\u00e6\3\2\2\2\u00e9\u00ea\5\34\17\2\u00ea\u00eb\7+\2")
+        buf.write("\2\u00eb\u00ec\5\34\17\2\u00ec\u00ed\7,\2\2\u00ed#\3\2")
+        buf.write("\2\2\u00ee\u00ef\5(\25\2\u00ef%\3\2\2\2\u00f0\u00f5\5")
+        buf.write("\34\17\2\u00f1\u00f2\7*\2\2\u00f2\u00f4\5\34\17\2\u00f3")
+        buf.write("\u00f1\3\2\2\2\u00f4\u00f7\3\2\2\2\u00f5\u00f3\3\2\2\2")
+        buf.write("\u00f5\u00f6\3\2\2\2\u00f6\u00f9\3\2\2\2\u00f7\u00f5\3")
+        buf.write("\2\2\2\u00f8\u00f0\3\2\2\2\u00f8\u00f9\3\2\2\2\u00f9\'")
+        buf.write("\3\2\2\2\u00fa\u00fb\7\"\2\2\u00fb\u00fc\7$\2\2\u00fc")
+        buf.write("\u00fd\5&\24\2\u00fd\u00fe\7%\2\2\u00fe)\3\2\2\2\u00ff")
+        buf.write("\u0104\5\6\4\2\u0100\u0104\7\"\2\2\u0101\u0104\5(\25\2")
+        buf.write("\u0102\u0104\5\n\6\2\u0103\u00ff\3\2\2\2\u0103\u0100\3")
+        buf.write("\2\2\2\u0103\u0101\3\2\2\2\u0103\u0102\3\2\2\2\u0104+")
+        buf.write("\3\2\2\2\u0105\u0107\5\20\t\2\u0106\u0105\3\2\2\2\u0107")
+        buf.write("\u010a\3\2\2\2\u0108\u0106\3\2\2\2\u0108\u0109\3\2\2\2")
+        buf.write("\u0109-\3\2\2\2\u010a\u0108\3\2\2\2\u010b\u010c\7\3\2")
+        buf.write("\2\u010c\u010d\7(\2\2\u010d/\3\2\2\2\u010e\u010f\7\4\2")
+        buf.write("\2\u010f\u0110\7(\2\2\u0110\61\3\2\2\2\u0111\u0113\7\n")
+        buf.write("\2\2\u0112\u0114\5\34\17\2\u0113\u0112\3\2\2\2\u0113\u0114")
+        buf.write("\3\2\2\2\u0114\u0115\3\2\2\2\u0115\u0116\7(\2\2\u0116")
+        buf.write("\63\3\2\2\2\u0117\u0118\5\34\17\2\u0118\u0119\7(\2\2\u0119")
+        buf.write("\65\3\2\2\2\u011a\u011b\7\t\2\2\u011b\u011c\7$\2\2\u011c")
+        buf.write("\u011d\5\34\17\2\u011d\u011e\7(\2\2\u011e\u011f\5\34\17")
+        buf.write("\2\u011f\u0120\7(\2\2\u0120\u0121\5\34\17\2\u0121\u0122")
+        buf.write("\7%\2\2\u0122\u0123\5> \2\u0123\67\3\2\2\2\u0124\u0128")
+        buf.write("\7&\2\2\u0125\u0127\5B\"\2\u0126\u0125\3\2\2\2\u0127\u012a")
+        buf.write("\3\2\2\2\u0128\u0126\3\2\2\2\u0128\u0129\3\2\2\2\u0129")
+        buf.write("\u012b\3\2\2\2\u012a\u0128\3\2\2\2\u012b\u012c\7\'\2\2")
+        buf.write("\u012c9\3\2\2\2\u012d\u012e\7\5\2\2\u012e\u012f\5@!\2")
+        buf.write("\u012f\u0130\7\6\2\2\u0130\u0131\5\34\17\2\u0131\u0132")
+        buf.write("\7(\2\2\u0132;\3\2\2\2\u0133\u0134\7\7\2\2\u0134\u0135")
+        buf.write("\7$\2\2\u0135\u0136\5\34\17\2\u0136\u0137\7%\2\2\u0137")
+        buf.write("\u013a\5> \2\u0138\u0139\7\b\2\2\u0139\u013b\5> \2\u013a")
+        buf.write("\u0138\3\2\2\2\u013a\u013b\3\2\2\2\u013b=\3\2\2\2\u013c")
+        buf.write("\u0148\5<\37\2\u013d\u0148\5:\36\2\u013e\u0148\5\66\34")
+        buf.write("\2\u013f\u0148\5.\30\2\u0140\u0148\5\60\31\2\u0141\u0148")
+        buf.write("\5\62\32\2\u0142\u0148\5\64\33\2\u0143\u0148\58\35\2\u0144")
+        buf.write("\u0145\5\"\22\2\u0145\u0146\7(\2\2\u0146\u0148\3\2\2\2")
+        buf.write("\u0147\u013c\3\2\2\2\u0147\u013d\3\2\2\2\u0147\u013e\3")
+        buf.write("\2\2\2\u0147\u013f\3\2\2\2\u0147\u0140\3\2\2\2\u0147\u0141")
+        buf.write("\3\2\2\2\u0147\u0142\3\2\2\2\u0147\u0143\3\2\2\2\u0147")
+        buf.write("\u0144\3\2\2\2\u0148?\3\2\2\2\u0149\u014b\5> \2\u014a")
+        buf.write("\u0149\3\2\2\2\u014b\u014c\3\2\2\2\u014c\u014a\3\2\2\2")
+        buf.write("\u014c\u014d\3\2\2\2\u014dA\3\2\2\2\u014e\u0151\5\20\t")
+        buf.write("\2\u014f\u0151\5> \2\u0150\u014e\3\2\2\2\u0150\u014f\3")
+        buf.write("\2\2\2\u0151C\3\2\2\2\u0152\u0156\5F$\2\u0153\u0156\7")
+        buf.write("\35\2\2\u0154\u0156\5\24\13\2\u0155\u0152\3\2\2\2\u0155")
+        buf.write("\u0153\3\2\2\2\u0155\u0154\3\2\2\2\u0156\u0157\3\2\2\2")
+        buf.write("\u0157\u0158\7\"\2\2\u0158\u015a\7$\2\2\u0159\u015b\5")
+        buf.write("\32\16\2\u015a\u0159\3\2\2\2\u015a\u015b\3\2\2\2\u015b")
+        buf.write("\u015c\3\2\2\2\u015c\u015d\7%\2\2\u015d\u015e\58\35\2")
+        buf.write("\u015eE\3\2\2\2\u015f\u0160\t\t\2\2\u0160G\3\2\2\2\36")
+        buf.write("KQdk}\u0083\u008a\u009c\u00ac\u00ae\u00b9\u00c6\u00c8")
+        buf.write("\u00d7\u00e4\u00e6\u00f5\u00f8\u0103\u0108\u0113\u0128")
+        buf.write("\u013a\u0147\u014c\u0150\u0155\u015a")
         return buf.getvalue()
 
 
@@ -180,59 +180,60 @@ class MCParser ( Parser ):
     sharedContextCache = PredictionContextCache()
 
     literalNames = [ "<INVALID>", "'break'", "'continue'", "'do'", "'while'", 
-                     "'if'", "'else'", "'for'", "'return'", "'true'", "'false'", 
-                     "<INVALID>", "'+'", "'-'", "'/'", "'*'", "'%'", "'&&'", 
-                     "'!'", "'||'", "'=='", "'!='", "'<'", "'<='", "'>'", 
-                     "'>='", "'='", "'boolean'", "'int'", "'void'", "'float'", 
-                     "'string'", "<INVALID>", "<INVALID>", "<INVALID>", 
-                     "<INVALID>", "'('", "')'", "'{'", "'}'", "';'", "<INVALID>", 
-                     "','", "'['", "']'" ]
+                     "'if'", "'else'", "'for'", "'return'", "<INVALID>", 
+                     "'+'", "'-'", "'/'", "'*'", "'%'", "'&&'", "'!'", "'||'", 
+                     "'=='", "'!='", "'<'", "'<='", "'>'", "'>='", "'='", 
+                     "'boolean'", "'int'", "'void'", "'float'", "'string'", 
+                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
+                     "'('", "')'", "'{'", "'}'", "';'", "<INVALID>", "','", 
+                     "'['", "']'" ]
 
     symbolicNames = [ "<INVALID>", "Break", "Continue", "Do", "While", "If", 
-                      "Else", "For", "Return", "TRUE", "FALSE", "BooleanLIT", 
-                      "ADD", "SUB", "DIV", "MUL", "MOD", "AND", "NOT", "OR", 
-                      "EQ", "NOTEQ", "LT", "LEQ", "GT", "GEQ", "ASSIGN", 
-                      "BOOLTYPE", "INTTYPE", "VOIDTYPE", "FLOATTYPE", "STRINGTYPE", 
-                      "BLOCK_COMMENT", "LINE_COMMENT", "ID", "IntLIT", "LB", 
-                      "RB", "LP", "RP", "SEMI", "WS", "COMMA", "LS", "RS", 
-                      "FloatLIT", "StringLIT", "LITs", "ERROR_CHAR", "UNCLOSE_STRING", 
-                      "ILLEGAL_ESCAPE" ]
+                      "Else", "For", "Return", "BooleanLIT", "ADD", "SUB", 
+                      "DIV", "MUL", "MOD", "AND", "NOT", "OR", "EQ", "NOTEQ", 
+                      "LT", "LEQ", "GT", "GEQ", "ASSIGN", "BOOLTYPE", "INTTYPE", 
+                      "VOIDTYPE", "FLOATTYPE", "STRINGTYPE", "BLOCK_COMMENT", 
+                      "LINE_COMMENT", "ID", "IntLIT", "LB", "RB", "LP", 
+                      "RP", "SEMI", "WS", "COMMA", "LS", "RS", "FloatLIT", 
+                      "StringLIT", "ERROR_CHAR", "UNCLOSE_STRING", "ILLEGAL_ESCAPE" ]
 
     RULE_program = 0
     RULE_declaration = 1
-    RULE_array_type = 2
-    RULE_element_of_array = 3
-    RULE_variable = 4
-    RULE_multi_var = 5
-    RULE_var_declare = 6
-    RULE_input_parameter = 7
-    RULE_output_parameter = 8
-    RULE_array_point = 9
-    RULE_para_declare = 10
-    RULE_multi_para = 11
-    RULE_expression = 12
-    RULE_assoc_expression = 13
-    RULE_equality_expression = 14
-    RULE_index_expression = 15
-    RULE_invocation_expression = 16
-    RULE_list_expression = 17
-    RULE_function_call = 18
-    RULE_operands = 19
-    RULE_declare = 20
-    RULE_break_stmt = 21
-    RULE_continue_stmt = 22
-    RULE_return_stmt = 23
-    RULE_expression_stmt = 24
-    RULE_for_stmt = 25
-    RULE_block_stmt = 26
-    RULE_dowhile_stmt = 27
-    RULE_if_stmt = 28
-    RULE_stmt = 29
-    RULE_statement = 30
-    RULE_func_declare = 31
-    RULE_primitive_type = 32
+    RULE_literals = 2
+    RULE_array_type = 3
+    RULE_element_of_array = 4
+    RULE_variable = 5
+    RULE_multi_var = 6
+    RULE_var_declare = 7
+    RULE_input_parameter = 8
+    RULE_output_parameter = 9
+    RULE_array_point = 10
+    RULE_para_declare = 11
+    RULE_multi_para = 12
+    RULE_expression = 13
+    RULE_assoc_expression = 14
+    RULE_equality_expression = 15
+    RULE_index_expression = 16
+    RULE_invocation_expression = 17
+    RULE_list_expression = 18
+    RULE_function_call = 19
+    RULE_operands = 20
+    RULE_declare = 21
+    RULE_break_stmt = 22
+    RULE_continue_stmt = 23
+    RULE_return_stmt = 24
+    RULE_expression_stmt = 25
+    RULE_for_stmt = 26
+    RULE_block_stmt = 27
+    RULE_dowhile_stmt = 28
+    RULE_if_stmt = 29
+    RULE_stmt = 30
+    RULE_statement = 31
+    RULE_body_block = 32
+    RULE_func_declare = 33
+    RULE_primitive_type = 34
 
-    ruleNames =  [ "program", "declaration", "array_type", "element_of_array", 
+    ruleNames =  [ "program", "declaration", "literals", "array_type", "element_of_array", 
                    "variable", "multi_var", "var_declare", "input_parameter", 
                    "output_parameter", "array_point", "para_declare", "multi_para", 
                    "expression", "assoc_expression", "equality_expression", 
@@ -240,7 +241,7 @@ class MCParser ( Parser ):
                    "function_call", "operands", "declare", "break_stmt", 
                    "continue_stmt", "return_stmt", "expression_stmt", "for_stmt", 
                    "block_stmt", "dowhile_stmt", "if_stmt", "stmt", "statement", 
-                   "func_declare", "primitive_type" ]
+                   "body_block", "func_declare", "primitive_type" ]
 
     EOF = Token.EOF
     Break=1
@@ -251,48 +252,45 @@ class MCParser ( Parser ):
     Else=6
     For=7
     Return=8
-    TRUE=9
-    FALSE=10
-    BooleanLIT=11
-    ADD=12
-    SUB=13
-    DIV=14
-    MUL=15
-    MOD=16
-    AND=17
-    NOT=18
-    OR=19
-    EQ=20
-    NOTEQ=21
-    LT=22
-    LEQ=23
-    GT=24
-    GEQ=25
-    ASSIGN=26
-    BOOLTYPE=27
-    INTTYPE=28
-    VOIDTYPE=29
-    FLOATTYPE=30
-    STRINGTYPE=31
-    BLOCK_COMMENT=32
-    LINE_COMMENT=33
-    ID=34
-    IntLIT=35
-    LB=36
-    RB=37
-    LP=38
-    RP=39
-    SEMI=40
-    WS=41
-    COMMA=42
-    LS=43
-    RS=44
-    FloatLIT=45
-    StringLIT=46
-    LITs=47
-    ERROR_CHAR=48
-    UNCLOSE_STRING=49
-    ILLEGAL_ESCAPE=50
+    BooleanLIT=9
+    ADD=10
+    SUB=11
+    DIV=12
+    MUL=13
+    MOD=14
+    AND=15
+    NOT=16
+    OR=17
+    EQ=18
+    NOTEQ=19
+    LT=20
+    LEQ=21
+    GT=22
+    GEQ=23
+    ASSIGN=24
+    BOOLTYPE=25
+    INTTYPE=26
+    VOIDTYPE=27
+    FLOATTYPE=28
+    STRINGTYPE=29
+    BLOCK_COMMENT=30
+    LINE_COMMENT=31
+    ID=32
+    IntLIT=33
+    LB=34
+    RB=35
+    LP=36
+    RP=37
+    SEMI=38
+    WS=39
+    COMMA=40
+    LS=41
+    RS=42
+    FloatLIT=43
+    StringLIT=44
+    ERROR_CHAR=45
+    UNCLOSE_STRING=46
+    ILLEGAL_ESCAPE=47
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
@@ -338,17 +336,19 @@ class MCParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 69
+            self.state = 71 
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << MCParser.BOOLTYPE) | (1 << MCParser.INTTYPE) | (1 << MCParser.VOIDTYPE) | (1 << MCParser.FLOATTYPE) | (1 << MCParser.STRINGTYPE))) != 0):
-                self.state = 66
+            while True:
+                self.state = 70
                 self.declaration()
-                self.state = 71
+                self.state = 73 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
+                if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << MCParser.BOOLTYPE) | (1 << MCParser.INTTYPE) | (1 << MCParser.VOIDTYPE) | (1 << MCParser.FLOATTYPE) | (1 << MCParser.STRINGTYPE))) != 0)):
+                    break
 
-            self.state = 72
+            self.state = 75
             self.match(MCParser.EOF)
         except RecognitionException as re:
             localctx.exception = re
@@ -390,22 +390,75 @@ class MCParser ( Parser ):
         localctx = MCParser.DeclarationContext(self, self._ctx, self.state)
         self.enterRule(localctx, 2, self.RULE_declaration)
         try:
-            self.state = 76
+            self.state = 79
             self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,1,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 74
+                self.state = 77
                 self.func_declare()
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 75
+                self.state = 78
                 self.var_declare()
                 pass
 
 
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class LiteralsContext(ParserRuleContext):
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def IntLIT(self):
+            return self.getToken(MCParser.IntLIT, 0)
+
+        def BooleanLIT(self):
+            return self.getToken(MCParser.BooleanLIT, 0)
+
+        def FloatLIT(self):
+            return self.getToken(MCParser.FloatLIT, 0)
+
+        def StringLIT(self):
+            return self.getToken(MCParser.StringLIT, 0)
+
+        def getRuleIndex(self):
+            return MCParser.RULE_literals
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitLiterals" ):
+                return visitor.visitLiterals(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def literals(self):
+
+        localctx = MCParser.LiteralsContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 4, self.RULE_literals)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 81
+            _la = self._input.LA(1)
+            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << MCParser.BooleanLIT) | (1 << MCParser.IntLIT) | (1 << MCParser.FloatLIT) | (1 << MCParser.StringLIT))) != 0)):
+                self._errHandler.recoverInline(self)
+            else:
+                self._errHandler.reportMatch(self)
+                self.consume()
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -449,16 +502,16 @@ class MCParser ( Parser ):
     def array_type(self):
 
         localctx = MCParser.Array_typeContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 4, self.RULE_array_type)
+        self.enterRule(localctx, 6, self.RULE_array_type)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 78
+            self.state = 83
             self.primitive_type()
-            self.state = 79
+            self.state = 84
             self.match(MCParser.LS)
-            self.state = 80
+            self.state = 85
             self.match(MCParser.IntLIT)
-            self.state = 81
+            self.state = 86
             self.match(MCParser.RS)
         except RecognitionException as re:
             localctx.exception = re
@@ -505,22 +558,22 @@ class MCParser ( Parser ):
     def element_of_array(self):
 
         localctx = MCParser.Element_of_arrayContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 6, self.RULE_element_of_array)
+        self.enterRule(localctx, 8, self.RULE_element_of_array)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 83
+            self.state = 88
             self.match(MCParser.ID)
-            self.state = 84
+            self.state = 89
             self.match(MCParser.LS)
-            self.state = 85
+            self.state = 90
             _la = self._input.LA(1)
             if not(_la==MCParser.ID or _la==MCParser.IntLIT):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
                 self.consume()
-            self.state = 86
+            self.state = 91
             self.match(MCParser.RS)
         except RecognitionException as re:
             localctx.exception = re
@@ -564,26 +617,26 @@ class MCParser ( Parser ):
     def variable(self):
 
         localctx = MCParser.VariableContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 8, self.RULE_variable)
+        self.enterRule(localctx, 10, self.RULE_variable)
         try:
-            self.state = 93
+            self.state = 98
             self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,2,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 88
+                self.state = 93
                 self.match(MCParser.ID)
-                self.state = 89
+                self.state = 94
                 self.match(MCParser.LS)
-                self.state = 90
+                self.state = 95
                 self.match(MCParser.IntLIT)
-                self.state = 91
+                self.state = 96
                 self.match(MCParser.RS)
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 92
+                self.state = 97
                 self.match(MCParser.ID)
                 pass
 
@@ -631,21 +684,21 @@ class MCParser ( Parser ):
     def multi_var(self):
 
         localctx = MCParser.Multi_varContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 10, self.RULE_multi_var)
+        self.enterRule(localctx, 12, self.RULE_multi_var)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 95
-            self.variable()
             self.state = 100
+            self.variable()
+            self.state = 105
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==MCParser.COMMA:
-                self.state = 96
+                self.state = 101
                 self.match(MCParser.COMMA)
-                self.state = 97
-                self.variable()
                 self.state = 102
+                self.variable()
+                self.state = 107
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -690,14 +743,14 @@ class MCParser ( Parser ):
     def var_declare(self):
 
         localctx = MCParser.Var_declareContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 12, self.RULE_var_declare)
+        self.enterRule(localctx, 14, self.RULE_var_declare)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 103
+            self.state = 108
             self.primitive_type()
-            self.state = 104
+            self.state = 109
             self.multi_var()
-            self.state = 105
+            self.state = 110
             self.match(MCParser.SEMI)
         except RecognitionException as re:
             localctx.exception = re
@@ -742,16 +795,16 @@ class MCParser ( Parser ):
     def input_parameter(self):
 
         localctx = MCParser.Input_parameterContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 14, self.RULE_input_parameter)
+        self.enterRule(localctx, 16, self.RULE_input_parameter)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 107
+            self.state = 112
             self.primitive_type()
-            self.state = 108
+            self.state = 113
             self.match(MCParser.ID)
-            self.state = 109
+            self.state = 114
             self.match(MCParser.LS)
-            self.state = 110
+            self.state = 115
             self.match(MCParser.RS)
         except RecognitionException as re:
             localctx.exception = re
@@ -793,14 +846,14 @@ class MCParser ( Parser ):
     def output_parameter(self):
 
         localctx = MCParser.Output_parameterContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 16, self.RULE_output_parameter)
+        self.enterRule(localctx, 18, self.RULE_output_parameter)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 112
+            self.state = 117
             self.primitive_type()
-            self.state = 113
+            self.state = 118
             self.match(MCParser.LS)
-            self.state = 114
+            self.state = 119
             self.match(MCParser.RS)
         except RecognitionException as re:
             localctx.exception = re
@@ -840,20 +893,20 @@ class MCParser ( Parser ):
     def array_point(self):
 
         localctx = MCParser.Array_pointContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 18, self.RULE_array_point)
+        self.enterRule(localctx, 20, self.RULE_array_point)
         try:
-            self.state = 118
+            self.state = 123
             self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,4,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 116
+                self.state = 121
                 self.input_parameter()
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 117
+                self.state = 122
                 self.output_parameter()
                 pass
 
@@ -901,21 +954,21 @@ class MCParser ( Parser ):
     def para_declare(self):
 
         localctx = MCParser.Para_declareContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 20, self.RULE_para_declare)
+        self.enterRule(localctx, 22, self.RULE_para_declare)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 120
+            self.state = 125
             self.primitive_type()
-            self.state = 121
+            self.state = 126
             self.match(MCParser.ID)
-            self.state = 124
+            self.state = 129
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==MCParser.LS:
-                self.state = 122
+                self.state = 127
                 self.match(MCParser.LS)
-                self.state = 123
+                self.state = 128
                 self.match(MCParser.RS)
 
 
@@ -962,21 +1015,21 @@ class MCParser ( Parser ):
     def multi_para(self):
 
         localctx = MCParser.Multi_paraContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 22, self.RULE_multi_para)
+        self.enterRule(localctx, 24, self.RULE_multi_para)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 126
-            self.para_declare()
             self.state = 131
+            self.para_declare()
+            self.state = 136
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==MCParser.COMMA:
-                self.state = 127
+                self.state = 132
                 self.match(MCParser.COMMA)
-                self.state = 128
-                self.para_declare()
                 self.state = 133
+                self.para_declare()
+                self.state = 138
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -1075,64 +1128,64 @@ class MCParser ( Parser ):
         _parentState = self.state
         localctx = MCParser.ExpressionContext(self, self._ctx, _parentState)
         _prevctx = localctx
-        _startState = 24
-        self.enterRecursionRule(localctx, 24, self.RULE_expression, _p)
+        _startState = 26
+        self.enterRecursionRule(localctx, 26, self.RULE_expression, _p)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 149
+            self.state = 154
             self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,7,self._ctx)
             if la_ == 1:
-                self.state = 135
+                self.state = 140
                 self.match(MCParser.LB)
-                self.state = 136
+                self.state = 141
                 self.expression(0)
-                self.state = 137
+                self.state = 142
                 self.match(MCParser.RB)
                 pass
 
             elif la_ == 2:
-                self.state = 139
+                self.state = 144
                 self.assoc_expression(0)
                 pass
 
             elif la_ == 3:
-                self.state = 140
+                self.state = 145
                 self.assoc_expression(0)
-                self.state = 141
+                self.state = 146
                 _la = self._input.LA(1)
                 if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << MCParser.LT) | (1 << MCParser.LEQ) | (1 << MCParser.GT) | (1 << MCParser.GEQ))) != 0)):
                     self._errHandler.recoverInline(self)
                 else:
                     self._errHandler.reportMatch(self)
                     self.consume()
-                self.state = 142
+                self.state = 147
                 self.assoc_expression(0)
                 pass
 
             elif la_ == 4:
-                self.state = 144
+                self.state = 149
                 self.equality_expression(0)
-                self.state = 145
+                self.state = 150
                 _la = self._input.LA(1)
                 if not(_la==MCParser.EQ or _la==MCParser.NOTEQ):
                     self._errHandler.recoverInline(self)
                 else:
                     self._errHandler.reportMatch(self)
                     self.consume()
-                self.state = 146
+                self.state = 151
                 self.equality_expression(0)
                 pass
 
             elif la_ == 5:
-                self.state = 148
+                self.state = 153
                 self.operands()
                 pass
 
 
             self._ctx.stop = self._input.LT(-1)
-            self.state = 167
+            self.state = 172
             self._errHandler.sync(self)
             _alt = self._interp.adaptivePredict(self._input,9,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
@@ -1140,65 +1193,65 @@ class MCParser ( Parser ):
                     if self._parseListeners is not None:
                         self.triggerExitRuleEvent()
                     _prevctx = localctx
-                    self.state = 165
+                    self.state = 170
                     self._errHandler.sync(self)
                     la_ = self._interp.adaptivePredict(self._input,8,self._ctx)
                     if la_ == 1:
                         localctx = MCParser.ExpressionContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expression)
-                        self.state = 151
+                        self.state = 156
                         if not self.precpred(self._ctx, 4):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 4)")
-                        self.state = 152
+                        self.state = 157
                         self.match(MCParser.AND)
-                        self.state = 153
+                        self.state = 158
                         self.expression(5)
                         pass
 
                     elif la_ == 2:
                         localctx = MCParser.ExpressionContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expression)
-                        self.state = 154
+                        self.state = 159
                         if not self.precpred(self._ctx, 3):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 3)")
-                        self.state = 155
+                        self.state = 160
                         self.match(MCParser.OR)
-                        self.state = 156
+                        self.state = 161
                         self.expression(4)
                         pass
 
                     elif la_ == 3:
                         localctx = MCParser.ExpressionContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expression)
-                        self.state = 157
+                        self.state = 162
                         if not self.precpred(self._ctx, 2):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 2)")
-                        self.state = 158
+                        self.state = 163
                         self.match(MCParser.ASSIGN)
-                        self.state = 159
+                        self.state = 164
                         self.expression(2)
                         pass
 
                     elif la_ == 4:
                         localctx = MCParser.ExpressionContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expression)
-                        self.state = 160
+                        self.state = 165
                         if not self.precpred(self._ctx, 8):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 8)")
-                        self.state = 161
+                        self.state = 166
                         self.match(MCParser.LS)
-                        self.state = 162
+                        self.state = 167
                         self.expression(0)
-                        self.state = 163
+                        self.state = 168
                         self.match(MCParser.RS)
                         pass
 
              
-                self.state = 169
+                self.state = 174
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,9,self._ctx)
 
@@ -1278,42 +1331,42 @@ class MCParser ( Parser ):
         _parentState = self.state
         localctx = MCParser.Assoc_expressionContext(self, self._ctx, _parentState)
         _prevctx = localctx
-        _startState = 26
-        self.enterRecursionRule(localctx, 26, self.RULE_assoc_expression, _p)
+        _startState = 28
+        self.enterRecursionRule(localctx, 28, self.RULE_assoc_expression, _p)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 178
+            self.state = 183
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [MCParser.LB]:
-                self.state = 171
+                self.state = 176
                 self.match(MCParser.LB)
-                self.state = 172
+                self.state = 177
                 self.expression(0)
-                self.state = 173
+                self.state = 178
                 self.match(MCParser.RB)
                 pass
             elif token in [MCParser.SUB, MCParser.NOT]:
-                self.state = 175
+                self.state = 180
                 _la = self._input.LA(1)
                 if not(_la==MCParser.SUB or _la==MCParser.NOT):
                     self._errHandler.recoverInline(self)
                 else:
                     self._errHandler.reportMatch(self)
                     self.consume()
-                self.state = 176
+                self.state = 181
                 self.assoc_expression(4)
                 pass
-            elif token in [MCParser.TRUE, MCParser.FALSE, MCParser.ID, MCParser.IntLIT, MCParser.FloatLIT, MCParser.StringLIT]:
-                self.state = 177
+            elif token in [MCParser.BooleanLIT, MCParser.ID, MCParser.IntLIT, MCParser.FloatLIT, MCParser.StringLIT]:
+                self.state = 182
                 self.operands()
                 pass
             else:
                 raise NoViableAltException(self)
 
             self._ctx.stop = self._input.LT(-1)
-            self.state = 193
+            self.state = 198
             self._errHandler.sync(self)
             _alt = self._interp.adaptivePredict(self._input,12,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
@@ -1321,62 +1374,62 @@ class MCParser ( Parser ):
                     if self._parseListeners is not None:
                         self.triggerExitRuleEvent()
                     _prevctx = localctx
-                    self.state = 191
+                    self.state = 196
                     self._errHandler.sync(self)
                     la_ = self._interp.adaptivePredict(self._input,11,self._ctx)
                     if la_ == 1:
                         localctx = MCParser.Assoc_expressionContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_assoc_expression)
-                        self.state = 180
+                        self.state = 185
                         if not self.precpred(self._ctx, 3):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 3)")
-                        self.state = 181
+                        self.state = 186
                         _la = self._input.LA(1)
                         if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << MCParser.DIV) | (1 << MCParser.MUL) | (1 << MCParser.MOD))) != 0)):
                             self._errHandler.recoverInline(self)
                         else:
                             self._errHandler.reportMatch(self)
                             self.consume()
-                        self.state = 182
+                        self.state = 187
                         self.assoc_expression(4)
                         pass
 
                     elif la_ == 2:
                         localctx = MCParser.Assoc_expressionContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_assoc_expression)
-                        self.state = 183
+                        self.state = 188
                         if not self.precpred(self._ctx, 2):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 2)")
-                        self.state = 184
+                        self.state = 189
                         _la = self._input.LA(1)
                         if not(_la==MCParser.ADD or _la==MCParser.SUB):
                             self._errHandler.recoverInline(self)
                         else:
                             self._errHandler.reportMatch(self)
                             self.consume()
-                        self.state = 185
+                        self.state = 190
                         self.assoc_expression(3)
                         pass
 
                     elif la_ == 3:
                         localctx = MCParser.Assoc_expressionContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_assoc_expression)
-                        self.state = 186
+                        self.state = 191
                         if not self.precpred(self._ctx, 5):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 5)")
-                        self.state = 187
+                        self.state = 192
                         self.match(MCParser.LS)
-                        self.state = 188
+                        self.state = 193
                         self.assoc_expression(0)
-                        self.state = 189
+                        self.state = 194
                         self.match(MCParser.RS)
                         pass
 
              
-                self.state = 195
+                self.state = 200
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,12,self._ctx)
 
@@ -1475,57 +1528,57 @@ class MCParser ( Parser ):
         _parentState = self.state
         localctx = MCParser.Equality_expressionContext(self, self._ctx, _parentState)
         _prevctx = localctx
-        _startState = 28
-        self.enterRecursionRule(localctx, 28, self.RULE_equality_expression, _p)
+        _startState = 30
+        self.enterRecursionRule(localctx, 30, self.RULE_equality_expression, _p)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 208
+            self.state = 213
             self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,13,self._ctx)
             if la_ == 1:
-                self.state = 197
+                self.state = 202
                 self.match(MCParser.LB)
-                self.state = 198
+                self.state = 203
                 self.expression(0)
-                self.state = 199
+                self.state = 204
                 self.match(MCParser.RB)
                 pass
 
             elif la_ == 2:
-                self.state = 201
+                self.state = 206
                 _la = self._input.LA(1)
                 if not(_la==MCParser.SUB or _la==MCParser.NOT):
                     self._errHandler.recoverInline(self)
                 else:
                     self._errHandler.reportMatch(self)
                     self.consume()
-                self.state = 202
+                self.state = 207
                 self.equality_expression(5)
                 pass
 
             elif la_ == 3:
-                self.state = 203
+                self.state = 208
                 self.assoc_expression(0)
-                self.state = 204
+                self.state = 209
                 _la = self._input.LA(1)
                 if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << MCParser.LT) | (1 << MCParser.LEQ) | (1 << MCParser.GT) | (1 << MCParser.GEQ))) != 0)):
                     self._errHandler.recoverInline(self)
                 else:
                     self._errHandler.reportMatch(self)
                     self.consume()
-                self.state = 205
+                self.state = 210
                 self.assoc_expression(0)
                 pass
 
             elif la_ == 4:
-                self.state = 207
+                self.state = 212
                 self.operands()
                 pass
 
 
             self._ctx.stop = self._input.LT(-1)
-            self.state = 223
+            self.state = 228
             self._errHandler.sync(self)
             _alt = self._interp.adaptivePredict(self._input,15,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
@@ -1533,62 +1586,62 @@ class MCParser ( Parser ):
                     if self._parseListeners is not None:
                         self.triggerExitRuleEvent()
                     _prevctx = localctx
-                    self.state = 221
+                    self.state = 226
                     self._errHandler.sync(self)
                     la_ = self._interp.adaptivePredict(self._input,14,self._ctx)
                     if la_ == 1:
                         localctx = MCParser.Equality_expressionContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_equality_expression)
-                        self.state = 210
+                        self.state = 215
                         if not self.precpred(self._ctx, 4):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 4)")
-                        self.state = 211
+                        self.state = 216
                         _la = self._input.LA(1)
                         if not(_la==MCParser.ADD or _la==MCParser.SUB):
                             self._errHandler.recoverInline(self)
                         else:
                             self._errHandler.reportMatch(self)
                             self.consume()
-                        self.state = 212
+                        self.state = 217
                         self.equality_expression(5)
                         pass
 
                     elif la_ == 2:
                         localctx = MCParser.Equality_expressionContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_equality_expression)
-                        self.state = 213
+                        self.state = 218
                         if not self.precpred(self._ctx, 3):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 3)")
-                        self.state = 214
+                        self.state = 219
                         _la = self._input.LA(1)
                         if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << MCParser.DIV) | (1 << MCParser.MUL) | (1 << MCParser.MOD))) != 0)):
                             self._errHandler.recoverInline(self)
                         else:
                             self._errHandler.reportMatch(self)
                             self.consume()
-                        self.state = 215
+                        self.state = 220
                         self.equality_expression(4)
                         pass
 
                     elif la_ == 3:
                         localctx = MCParser.Equality_expressionContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_equality_expression)
-                        self.state = 216
+                        self.state = 221
                         if not self.precpred(self._ctx, 6):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 6)")
-                        self.state = 217
+                        self.state = 222
                         self.match(MCParser.LS)
-                        self.state = 218
+                        self.state = 223
                         self.equality_expression(0)
-                        self.state = 219
+                        self.state = 224
                         self.match(MCParser.RS)
                         pass
 
              
-                self.state = 225
+                self.state = 230
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,15,self._ctx)
 
@@ -1635,16 +1688,16 @@ class MCParser ( Parser ):
     def index_expression(self):
 
         localctx = MCParser.Index_expressionContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 30, self.RULE_index_expression)
+        self.enterRule(localctx, 32, self.RULE_index_expression)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 226
+            self.state = 231
             self.expression(0)
-            self.state = 227
+            self.state = 232
             self.match(MCParser.LS)
-            self.state = 228
+            self.state = 233
             self.expression(0)
-            self.state = 229
+            self.state = 234
             self.match(MCParser.RS)
         except RecognitionException as re:
             localctx.exception = re
@@ -1680,10 +1733,10 @@ class MCParser ( Parser ):
     def invocation_expression(self):
 
         localctx = MCParser.Invocation_expressionContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 32, self.RULE_invocation_expression)
+        self.enterRule(localctx, 34, self.RULE_invocation_expression)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 231
+            self.state = 236
             self.function_call()
         except RecognitionException as re:
             localctx.exception = re
@@ -1728,25 +1781,25 @@ class MCParser ( Parser ):
     def list_expression(self):
 
         localctx = MCParser.List_expressionContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 34, self.RULE_list_expression)
+        self.enterRule(localctx, 36, self.RULE_list_expression)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 241
+            self.state = 246
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << MCParser.TRUE) | (1 << MCParser.FALSE) | (1 << MCParser.SUB) | (1 << MCParser.NOT) | (1 << MCParser.ID) | (1 << MCParser.IntLIT) | (1 << MCParser.LB) | (1 << MCParser.FloatLIT) | (1 << MCParser.StringLIT))) != 0):
-                self.state = 233
-                self.expression(0)
+            if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << MCParser.BooleanLIT) | (1 << MCParser.SUB) | (1 << MCParser.NOT) | (1 << MCParser.ID) | (1 << MCParser.IntLIT) | (1 << MCParser.LB) | (1 << MCParser.FloatLIT) | (1 << MCParser.StringLIT))) != 0):
                 self.state = 238
+                self.expression(0)
+                self.state = 243
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 while _la==MCParser.COMMA:
-                    self.state = 234
+                    self.state = 239
                     self.match(MCParser.COMMA)
-                    self.state = 235
-                    self.expression(0)
                     self.state = 240
+                    self.expression(0)
+                    self.state = 245
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
 
@@ -1795,16 +1848,16 @@ class MCParser ( Parser ):
     def function_call(self):
 
         localctx = MCParser.Function_callContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 36, self.RULE_function_call)
+        self.enterRule(localctx, 38, self.RULE_function_call)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 243
+            self.state = 248
             self.match(MCParser.ID)
-            self.state = 244
+            self.state = 249
             self.match(MCParser.LB)
-            self.state = 245
+            self.state = 250
             self.list_expression()
-            self.state = 246
+            self.state = 251
             self.match(MCParser.RB)
         except RecognitionException as re:
             localctx.exception = re
@@ -1821,20 +1874,9 @@ class MCParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def IntLIT(self):
-            return self.getToken(MCParser.IntLIT, 0)
+        def literals(self):
+            return self.getTypedRuleContext(MCParser.LiteralsContext,0)
 
-        def FALSE(self):
-            return self.getToken(MCParser.FALSE, 0)
-
-        def TRUE(self):
-            return self.getToken(MCParser.TRUE, 0)
-
-        def FloatLIT(self):
-            return self.getToken(MCParser.FloatLIT, 0)
-
-        def StringLIT(self):
-            return self.getToken(MCParser.StringLIT, 0)
 
         def ID(self):
             return self.getToken(MCParser.ID, 0)
@@ -1862,56 +1904,32 @@ class MCParser ( Parser ):
     def operands(self):
 
         localctx = MCParser.OperandsContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 38, self.RULE_operands)
+        self.enterRule(localctx, 40, self.RULE_operands)
         try:
-            self.state = 256
+            self.state = 257
             self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,18,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 248
-                self.match(MCParser.IntLIT)
+                self.state = 253
+                self.literals()
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 249
-                self.match(MCParser.FALSE)
+                self.state = 254
+                self.match(MCParser.ID)
                 pass
 
             elif la_ == 3:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 250
-                self.match(MCParser.TRUE)
+                self.state = 255
+                self.function_call()
                 pass
 
             elif la_ == 4:
                 self.enterOuterAlt(localctx, 4)
-                self.state = 251
-                self.match(MCParser.FloatLIT)
-                pass
-
-            elif la_ == 5:
-                self.enterOuterAlt(localctx, 5)
-                self.state = 252
-                self.match(MCParser.StringLIT)
-                pass
-
-            elif la_ == 6:
-                self.enterOuterAlt(localctx, 6)
-                self.state = 253
-                self.match(MCParser.ID)
-                pass
-
-            elif la_ == 7:
-                self.enterOuterAlt(localctx, 7)
-                self.state = 254
-                self.function_call()
-                pass
-
-            elif la_ == 8:
-                self.enterOuterAlt(localctx, 8)
-                self.state = 255
+                self.state = 256
                 self.element_of_array()
                 pass
 
@@ -1953,17 +1971,17 @@ class MCParser ( Parser ):
     def declare(self):
 
         localctx = MCParser.DeclareContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 40, self.RULE_declare)
+        self.enterRule(localctx, 42, self.RULE_declare)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 261
+            self.state = 262
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << MCParser.BOOLTYPE) | (1 << MCParser.INTTYPE) | (1 << MCParser.FLOATTYPE) | (1 << MCParser.STRINGTYPE))) != 0):
-                self.state = 258
+                self.state = 259
                 self.var_declare()
-                self.state = 263
+                self.state = 264
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -2003,12 +2021,12 @@ class MCParser ( Parser ):
     def break_stmt(self):
 
         localctx = MCParser.Break_stmtContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 42, self.RULE_break_stmt)
+        self.enterRule(localctx, 44, self.RULE_break_stmt)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 264
-            self.match(MCParser.Break)
             self.state = 265
+            self.match(MCParser.Break)
+            self.state = 266
             self.match(MCParser.SEMI)
         except RecognitionException as re:
             localctx.exception = re
@@ -2046,12 +2064,12 @@ class MCParser ( Parser ):
     def continue_stmt(self):
 
         localctx = MCParser.Continue_stmtContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 44, self.RULE_continue_stmt)
+        self.enterRule(localctx, 46, self.RULE_continue_stmt)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 267
-            self.match(MCParser.Continue)
             self.state = 268
+            self.match(MCParser.Continue)
+            self.state = 269
             self.match(MCParser.SEMI)
         except RecognitionException as re:
             localctx.exception = re
@@ -2093,21 +2111,21 @@ class MCParser ( Parser ):
     def return_stmt(self):
 
         localctx = MCParser.Return_stmtContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 46, self.RULE_return_stmt)
+        self.enterRule(localctx, 48, self.RULE_return_stmt)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 270
+            self.state = 271
             self.match(MCParser.Return)
-            self.state = 272
+            self.state = 273
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << MCParser.TRUE) | (1 << MCParser.FALSE) | (1 << MCParser.SUB) | (1 << MCParser.NOT) | (1 << MCParser.ID) | (1 << MCParser.IntLIT) | (1 << MCParser.LB) | (1 << MCParser.FloatLIT) | (1 << MCParser.StringLIT))) != 0):
-                self.state = 271
+            if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << MCParser.BooleanLIT) | (1 << MCParser.SUB) | (1 << MCParser.NOT) | (1 << MCParser.ID) | (1 << MCParser.IntLIT) | (1 << MCParser.LB) | (1 << MCParser.FloatLIT) | (1 << MCParser.StringLIT))) != 0):
+                self.state = 272
                 self.expression(0)
 
 
-            self.state = 274
+            self.state = 275
             self.match(MCParser.SEMI)
         except RecognitionException as re:
             localctx.exception = re
@@ -2146,12 +2164,12 @@ class MCParser ( Parser ):
     def expression_stmt(self):
 
         localctx = MCParser.Expression_stmtContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 48, self.RULE_expression_stmt)
+        self.enterRule(localctx, 50, self.RULE_expression_stmt)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 276
-            self.expression(0)
             self.state = 277
+            self.expression(0)
+            self.state = 278
             self.match(MCParser.SEMI)
         except RecognitionException as re:
             localctx.exception = re
@@ -2209,26 +2227,26 @@ class MCParser ( Parser ):
     def for_stmt(self):
 
         localctx = MCParser.For_stmtContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 50, self.RULE_for_stmt)
+        self.enterRule(localctx, 52, self.RULE_for_stmt)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 279
-            self.match(MCParser.For)
             self.state = 280
-            self.match(MCParser.LB)
+            self.match(MCParser.For)
             self.state = 281
-            self.expression(0)
+            self.match(MCParser.LB)
             self.state = 282
-            self.match(MCParser.SEMI)
+            self.expression(0)
             self.state = 283
-            self.expression(0)
-            self.state = 284
             self.match(MCParser.SEMI)
-            self.state = 285
+            self.state = 284
             self.expression(0)
+            self.state = 285
+            self.match(MCParser.SEMI)
             self.state = 286
-            self.match(MCParser.RB)
+            self.expression(0)
             self.state = 287
+            self.match(MCParser.RB)
+            self.state = 288
             self.stmt()
         except RecognitionException as re:
             localctx.exception = re
@@ -2248,18 +2266,14 @@ class MCParser ( Parser ):
         def LP(self):
             return self.getToken(MCParser.LP, 0)
 
-        def declare(self):
-            return self.getTypedRuleContext(MCParser.DeclareContext,0)
-
-
         def RP(self):
             return self.getToken(MCParser.RP, 0)
 
-        def stmt(self, i:int=None):
+        def body_block(self, i:int=None):
             if i is None:
-                return self.getTypedRuleContexts(MCParser.StmtContext)
+                return self.getTypedRuleContexts(MCParser.Body_blockContext)
             else:
-                return self.getTypedRuleContext(MCParser.StmtContext,i)
+                return self.getTypedRuleContext(MCParser.Body_blockContext,i)
 
 
         def getRuleIndex(self):
@@ -2277,20 +2291,18 @@ class MCParser ( Parser ):
     def block_stmt(self):
 
         localctx = MCParser.Block_stmtContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 52, self.RULE_block_stmt)
+        self.enterRule(localctx, 54, self.RULE_block_stmt)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 289
-            self.match(MCParser.LP)
             self.state = 290
-            self.declare()
+            self.match(MCParser.LP)
             self.state = 294
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << MCParser.Break) | (1 << MCParser.Continue) | (1 << MCParser.Do) | (1 << MCParser.If) | (1 << MCParser.For) | (1 << MCParser.Return) | (1 << MCParser.TRUE) | (1 << MCParser.FALSE) | (1 << MCParser.SUB) | (1 << MCParser.NOT) | (1 << MCParser.ID) | (1 << MCParser.IntLIT) | (1 << MCParser.LB) | (1 << MCParser.LP) | (1 << MCParser.FloatLIT) | (1 << MCParser.StringLIT))) != 0):
+            while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << MCParser.Break) | (1 << MCParser.Continue) | (1 << MCParser.Do) | (1 << MCParser.If) | (1 << MCParser.For) | (1 << MCParser.Return) | (1 << MCParser.BooleanLIT) | (1 << MCParser.SUB) | (1 << MCParser.NOT) | (1 << MCParser.BOOLTYPE) | (1 << MCParser.INTTYPE) | (1 << MCParser.FLOATTYPE) | (1 << MCParser.STRINGTYPE) | (1 << MCParser.ID) | (1 << MCParser.IntLIT) | (1 << MCParser.LB) | (1 << MCParser.LP) | (1 << MCParser.FloatLIT) | (1 << MCParser.StringLIT))) != 0):
                 self.state = 291
-                self.stmt()
+                self.body_block()
                 self.state = 296
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
@@ -2344,7 +2356,7 @@ class MCParser ( Parser ):
     def dowhile_stmt(self):
 
         localctx = MCParser.Dowhile_stmtContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 54, self.RULE_dowhile_stmt)
+        self.enterRule(localctx, 56, self.RULE_dowhile_stmt)
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 299
@@ -2410,7 +2422,7 @@ class MCParser ( Parser ):
     def if_stmt(self):
 
         localctx = MCParser.If_stmtContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 56, self.RULE_if_stmt)
+        self.enterRule(localctx, 58, self.RULE_if_stmt)
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 305
@@ -2502,7 +2514,7 @@ class MCParser ( Parser ):
     def stmt(self):
 
         localctx = MCParser.StmtContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 58, self.RULE_stmt)
+        self.enterRule(localctx, 60, self.RULE_stmt)
         try:
             self.state = 325
             self._errHandler.sync(self)
@@ -2601,7 +2613,7 @@ class MCParser ( Parser ):
     def statement(self):
 
         localctx = MCParser.StatementContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 60, self.RULE_statement)
+        self.enterRule(localctx, 62, self.RULE_statement)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
@@ -2614,8 +2626,64 @@ class MCParser ( Parser ):
                 self.state = 330 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << MCParser.Break) | (1 << MCParser.Continue) | (1 << MCParser.Do) | (1 << MCParser.If) | (1 << MCParser.For) | (1 << MCParser.Return) | (1 << MCParser.TRUE) | (1 << MCParser.FALSE) | (1 << MCParser.SUB) | (1 << MCParser.NOT) | (1 << MCParser.ID) | (1 << MCParser.IntLIT) | (1 << MCParser.LB) | (1 << MCParser.LP) | (1 << MCParser.FloatLIT) | (1 << MCParser.StringLIT))) != 0)):
+                if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << MCParser.Break) | (1 << MCParser.Continue) | (1 << MCParser.Do) | (1 << MCParser.If) | (1 << MCParser.For) | (1 << MCParser.Return) | (1 << MCParser.BooleanLIT) | (1 << MCParser.SUB) | (1 << MCParser.NOT) | (1 << MCParser.ID) | (1 << MCParser.IntLIT) | (1 << MCParser.LB) | (1 << MCParser.LP) | (1 << MCParser.FloatLIT) | (1 << MCParser.StringLIT))) != 0)):
                     break
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class Body_blockContext(ParserRuleContext):
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def var_declare(self):
+            return self.getTypedRuleContext(MCParser.Var_declareContext,0)
+
+
+        def stmt(self):
+            return self.getTypedRuleContext(MCParser.StmtContext,0)
+
+
+        def getRuleIndex(self):
+            return MCParser.RULE_body_block
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitBody_block" ):
+                return visitor.visitBody_block(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def body_block(self):
+
+        localctx = MCParser.Body_blockContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 64, self.RULE_body_block)
+        try:
+            self.state = 334
+            self._errHandler.sync(self)
+            token = self._input.LA(1)
+            if token in [MCParser.BOOLTYPE, MCParser.INTTYPE, MCParser.FLOATTYPE, MCParser.STRINGTYPE]:
+                self.enterOuterAlt(localctx, 1)
+                self.state = 332
+                self.var_declare()
+                pass
+            elif token in [MCParser.Break, MCParser.Continue, MCParser.Do, MCParser.If, MCParser.For, MCParser.Return, MCParser.BooleanLIT, MCParser.SUB, MCParser.NOT, MCParser.ID, MCParser.IntLIT, MCParser.LB, MCParser.LP, MCParser.FloatLIT, MCParser.StringLIT]:
+                self.enterOuterAlt(localctx, 2)
+                self.state = 333
+                self.stmt()
+                pass
+            else:
+                raise NoViableAltException(self)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -2675,44 +2743,44 @@ class MCParser ( Parser ):
     def func_declare(self):
 
         localctx = MCParser.Func_declareContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 62, self.RULE_func_declare)
+        self.enterRule(localctx, 66, self.RULE_func_declare)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 335
+            self.state = 339
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,25,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,26,self._ctx)
             if la_ == 1:
-                self.state = 332
+                self.state = 336
                 self.primitive_type()
                 pass
 
             elif la_ == 2:
-                self.state = 333
+                self.state = 337
                 self.match(MCParser.VOIDTYPE)
                 pass
 
             elif la_ == 3:
-                self.state = 334
+                self.state = 338
                 self.output_parameter()
                 pass
 
 
-            self.state = 337
+            self.state = 341
             self.match(MCParser.ID)
-            self.state = 338
+            self.state = 342
             self.match(MCParser.LB)
-            self.state = 340
+            self.state = 344
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << MCParser.BOOLTYPE) | (1 << MCParser.INTTYPE) | (1 << MCParser.FLOATTYPE) | (1 << MCParser.STRINGTYPE))) != 0):
-                self.state = 339
+                self.state = 343
                 self.multi_para()
 
 
-            self.state = 342
+            self.state = 346
             self.match(MCParser.RB)
-            self.state = 343
+            self.state = 347
             self.block_stmt()
         except RecognitionException as re:
             localctx.exception = re
@@ -2756,11 +2824,11 @@ class MCParser ( Parser ):
     def primitive_type(self):
 
         localctx = MCParser.Primitive_typeContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 64, self.RULE_primitive_type)
+        self.enterRule(localctx, 68, self.RULE_primitive_type)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 345
+            self.state = 349
             _la = self._input.LA(1)
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << MCParser.BOOLTYPE) | (1 << MCParser.INTTYPE) | (1 << MCParser.FLOATTYPE) | (1 << MCParser.STRINGTYPE))) != 0)):
                 self._errHandler.recoverInline(self)
@@ -2780,9 +2848,9 @@ class MCParser ( Parser ):
     def sempred(self, localctx:RuleContext, ruleIndex:int, predIndex:int):
         if self._predicates == None:
             self._predicates = dict()
-        self._predicates[12] = self.expression_sempred
-        self._predicates[13] = self.assoc_expression_sempred
-        self._predicates[14] = self.equality_expression_sempred
+        self._predicates[13] = self.expression_sempred
+        self._predicates[14] = self.assoc_expression_sempred
+        self._predicates[15] = self.equality_expression_sempred
         pred = self._predicates.get(ruleIndex, None)
         if pred is None:
             raise Exception("No predicate with index:" + str(ruleIndex))

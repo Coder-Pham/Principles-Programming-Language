@@ -19,6 +19,11 @@ class MCVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by MCParser#literals.
+    def visitLiterals(self, ctx:MCParser.LiteralsContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by MCParser#array_type.
     def visitArray_type(self, ctx:MCParser.Array_typeContext):
         return self.visitChildren(ctx)
@@ -161,6 +166,11 @@ class MCVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by MCParser#statement.
     def visitStatement(self, ctx:MCParser.StatementContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by MCParser#body_block.
+    def visitBody_block(self, ctx:MCParser.Body_blockContext):
         return self.visitChildren(ctx)
 
 

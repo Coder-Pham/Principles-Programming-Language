@@ -26,7 +26,7 @@ options {
 
 // program: mctype 'main' LB RB (LP RP | block_statement?) EOF;
 
-program: declaration* EOF;
+program: declaration+ EOF;
 
 declaration: func_declare | var_declare;
 //-----------------------------------------------------------------------------------------------------
@@ -42,9 +42,8 @@ Else: 'else';
 For: 'for';
 Return: 'return';
 
-TRUE: 'true';
-FALSE: 'false';
-BooleanLIT: FALSE | TRUE;
+// TRUE: 'true'; FALSE: 'false';
+BooleanLIT: 'true' | 'false';
 
 ADD: '+';
 SUB: '-';
@@ -117,7 +116,7 @@ StringLIT:
 	self.text = self.text[1:-1]
 };
 
-LITs: IntLIT | BooleanLIT | FloatLIT | StringLIT;
+literals: IntLIT | BooleanLIT | FloatLIT | StringLIT;
 
 // --------------------------------------------------------------------------------------------
 
@@ -203,17 +202,9 @@ list_expression: (expression (COMMA expression)*)?;
 
 function_call: ID LB list_expression RB;
 
-// ! Dont know why LITS & BooleanLIT dont work as expect operands: LITs | function_call |
+// ! Dont know why LITS & BooleanLIT dont work as expect operands: literals | function_call |
 // element_of_array | ID;
-operands:
-	IntLIT
-	| FALSE
-	| TRUE
-	| FloatLIT
-	| StringLIT
-	| ID
-	| function_call
-	| element_of_array;
+operands: literals | ID | function_call | element_of_array;
 //---------------------------------------------------------------------------------
 declare: var_declare*;
 
@@ -223,7 +214,7 @@ return_stmt: Return expression? SEMI;
 expression_stmt: expression SEMI;
 for_stmt:
 	For LB expression SEMI expression SEMI expression RB stmt;
-block_stmt: LP body_block RP;
+block_stmt: LP body_block* RP;
 dowhile_stmt: Do statement While expression SEMI;
 if_stmt: If LB expression RB stmt ( Else stmt)?;
 
@@ -240,7 +231,7 @@ stmt:
 
 statement: stmt+;
 
-body_block: (var_declare | stmt)*;
+body_block: var_declare | stmt;
 
 func_declare: (primitive_type | VOIDTYPE | output_parameter) ID LB multi_para? RB block_stmt;
 //-----------------------------------------------------------------------------------------------------
