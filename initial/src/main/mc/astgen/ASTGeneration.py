@@ -23,13 +23,13 @@ class ASTGeneration(MCVisitor):
         param = self.visitMulti_para(ctx.multi_para()) if ctx.multi_para() else []
         # returnType = Type(ctx.getChild(0).accept(self))
         returnType = self.visit(ctx.getChild(0))
-        body = self.visitBlock_stmt(ctx.block_stmt())
+        body = self.visit(ctx.block_stmt())
         return FuncDecl(name, param, returnType, body)
 
     def visitVar_declare(self, ctx: MCParser.Var_declareContext):
         # varType = ctx.primitive_type().accept(self)
         varType = self.visitPrimitive_type(ctx.primitive_type())
-        varList = self.visitMulti_var(ctx.multi_var())
+        varList = self.visit(ctx.multi_var())
         varDeclList = []
         for x in varList:
             if x[1] == "-1":
@@ -42,21 +42,21 @@ class ASTGeneration(MCVisitor):
     def visitMulti_var(self, ctx: MCParser.Multi_varContext):
         varList = []
         for item in ctx.variable():
-            var = self.visitVariable(item)
-            if isinstance(var, list):
-                varList.extend(var)
-            else:
-                varList.append(var)
+            var = self.visit(item)
+            # if isinstance(var, list):
+            #     varList.extend(var)
+            # else:
+            varList.append(var)
         return varList
         # return list(map(lambda x: x.accept(self), ctx.variable()))
 
     def visitVariable(self, ctx: MCParser.VariableContext):
         # Array
         if ctx.getChildCount() == 4:
-            return list(ctx.ID().getText(), ctx.IntLIT().getText())
+            return [ctx.ID().getText(), ctx.IntLIT().getText()]
         # Variable
         else:
-            return list(ctx.ID().getText(), "-1")
+            return [ctx.ID().getText(), "-1"]
 
     # array_point -> input_para | output_para
     def visitArray_point(self, ctx: MCParser.Array_pointContext):

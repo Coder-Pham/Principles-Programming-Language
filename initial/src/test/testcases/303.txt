@@ -1,3 +1,2 @@
-int main () {
-            getIntLn();
-        }
+int main () {}
+        int calc() {}

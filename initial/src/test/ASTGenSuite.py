@@ -6,22 +6,30 @@ class ASTGenSuite(unittest.TestCase):
     def test_simple_program(self):
         """Simple program: int main() {} """
         input = """int main() {}"""
-        expect = str(Program([FuncDecl(Id("main"),[],IntType,Block([]))]))
+        expect = 'Program([FuncDecl(Id(main),[],IntType,Block([]))])'
         self.assertTrue(TestAST.checkASTGen(input,expect,301))
 
     def test_more_complex_program(self):
-        """More complex program"""
-        input = """int main () {
-            putIntLn(4);
-        }"""
-        expect = str(Program([FuncDecl(Id("main"),[],IntType,Block([CallExpr(Id("putIntLn"),[IntLiteral(4)])]))]))
+        """Program with parameter"""
+        input = """int main (int argc) {}"""
+        expect = 'Program([FuncDecl(Id(main),[VarDecl(Id(argc),IntType)],IntType,Block([]))])'
         self.assertTrue(TestAST.checkASTGen(input,expect,302))
     
-    def test_call_without_parameter(self):
-        """More complex program"""
-        input = """int main () {
-            getIntLn();
-        }"""
-        expect = str(Program([FuncDecl(Id("main"),[],IntType,Block([CallExpr(Id("getIntLn"),[])]))]))
+    def test_multi_program(self):
+        """Multi declare function"""
+        input = """int main () {}
+        int calc() {}"""
+        expect = 'Program([FuncDecl(Id(main),[],IntType,Block([])),FuncDecl(Id(calc),[],IntType,Block([]))])'
         self.assertTrue(TestAST.checkASTGen(input,expect,303))
    
+    def test_output_para(self):
+        input = """int[] main() {}"""
+        expect = 'Program([FuncDecl(Id(main),[],ArrayTypePointer(IntType),Block([]))])'
+        self.assertTrue(TestAST.checkASTGen(input, expect, 304))
+
+    def test_var_declare(self):
+        input = """int main() {
+            int a;
+        }"""
+        expect = 'Program([FuncDecl(Id(main),[],IntType,Block([VarDecl(Id(a),IntType)]))])'
+        self.assertTrue(TestAST.checkASTGen(input, expect, 305))
