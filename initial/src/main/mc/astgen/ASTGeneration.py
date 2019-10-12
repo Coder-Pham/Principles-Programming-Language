@@ -186,18 +186,19 @@ class ASTGeneration(MCVisitor):
 # -----------------------------------------------------------------------------------------------
 
     def visitExpression(self, ctx: MCParser.ExpressionContext):
-        if ctx.getChildCount() == 1:
+        if ctx.getChildCount() == 1 and ctx.operands():
             return self.visit(ctx.operands())
+        elif ctx.getChildCount() == 1 and ctx.assoc_expression():
+            return self.visit(ctx.assoc_expression(0))
         elif ctx.getChildCount() == 4:
             return ArrayCell(self.visit(ctx.expression(0)), self.visit(ctx.expression(1)))
+        elif ctx.getChildCount() == 3 and ctx.getChild(0).getText() == '(':
+            return self.visit(ctx.getChild(1))
         else:
-            if ctx.getChild(0).getText() == '(':
-                return self.visit(ctx.getChild(1))
-            else:
-                op = ctx.getChild(1).getText()
-                left = self.visit(ctx.getChild(0))
-                right = self.visit(ctx.getChild(2))
-                return BinaryOp(op, left, right)
+            op = ctx.getChild(1).getText()
+            left = self.visit(ctx.getChild(0))
+            right = self.visit(ctx.getChild(2))
+            return BinaryOp(op, left, right)
 
     def visitAssoc_expression(self, ctx: MCParser.Assoc_expressionContext):
         if ctx.getChildCount() == 1:
