@@ -204,8 +204,9 @@ class ASTGeneration(MCVisitor):
         if ctx.getChildCount() == 1:
             return self.visit(ctx.operands())
         elif ctx.getChildCount() == 2:
-            op = self.visit(ctx.getChild(0))
+            # op = self.visit(ctx.getChild(0))
             body = self.visit(ctx.getChild(1))
+            op = ctx.getChild(0).getText()
             return UnaryOp(op, body)
         elif ctx.getChildCount() == 4:
             return ArrayCell(self.visit(ctx.assoc_expression(0)), self.visit(ctx.assoc_expression(1)))
@@ -222,7 +223,8 @@ class ASTGeneration(MCVisitor):
         if ctx.getChildCount() == 1:
             return self.visit(ctx.operands())
         elif ctx.getChildCount() == 2:
-            op = self.visit(ctx.getChild(0))
+            # op = self.visit(ctx.getChild(0))
+            op = ctx.getChild(0).getText()
             body = self.visit(ctx.getChild(1))
             return UnaryOp(op, body)
         elif ctx.getChildCount() == 4:

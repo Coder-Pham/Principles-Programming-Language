@@ -1,0 +1,1 @@
+Program([FuncDecl(Id(mod),[],IntType,Block([Return(BinaryOp(%,Id(a),Id(b)))]))])

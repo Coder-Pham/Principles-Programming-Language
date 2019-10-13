@@ -1,0 +1,6 @@
+int main(){
+            if (a > 10)
+                return a;
+            else if (a > 100)
+                return 10;
+        }
