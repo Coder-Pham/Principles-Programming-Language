@@ -1,0 +1,4 @@
+int main(){
+            if (accept(7*x))
+                return 0;
+        }

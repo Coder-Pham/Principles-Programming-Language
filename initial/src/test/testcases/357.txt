@@ -1,0 +1,3 @@
+int main() {
+            square(add(double(5)));
+        }

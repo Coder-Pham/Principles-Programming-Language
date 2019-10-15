@@ -1,0 +1,1 @@
+Program([FuncDecl(Id(main),[],IntType,Block([Return(UnaryOp(-,CallExpr(Id(dp),[Id(i)])))]))])

@@ -275,7 +275,10 @@ class ASTGeneration(MCVisitor):
         elif ctx.FloatLIT():
             return FloatLiteral(float(ctx.FloatLIT().getText()))
         elif ctx.BooleanLIT():
-            return BooleanLiteral(ctx.BooleanLIT().getText())
+            if ctx.BooleanLIT().getText() == 'true':
+                return BooleanLiteral(True)
+            else:
+                return BooleanLiteral(False)
         else:
             return StringLiteral(ctx.StringLIT().getText())
 

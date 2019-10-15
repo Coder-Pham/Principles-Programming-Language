@@ -1,0 +1,4 @@
+int bar(){
+            for(i; i || 2 && j; i)
+                print(i);
+        }

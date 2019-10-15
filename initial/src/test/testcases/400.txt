@@ -1,0 +1,4 @@
+void main () {
+            int a;
+            a = "string 	 1 + a";
+        }

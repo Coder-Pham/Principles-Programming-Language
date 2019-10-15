@@ -1,0 +1,3 @@
+int dp(int i){
+            return dp(i+1) + -dp(i-1);
+        }

@@ -26,7 +26,7 @@ options {
 
 // program: mctype 'main' LB RB (LP RP | block_statement?) EOF;
 
-program: declaration+ EOF;
+program: declaration* EOF;
 
 declaration: func_declare | var_declare;
 //-----------------------------------------------------------------------------------------------------
