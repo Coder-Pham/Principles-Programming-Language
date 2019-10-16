@@ -53,7 +53,7 @@ class ASTGenSuite(unittest.TestCase):
         void main() {
             a = 2;
         }'''
-        expect = 'Program([VarDecl(Id(a),IntType),FuncDecl(Id(main),[],None,Block([BinaryOp(=,Id(a),IntLiteral(2))]))])'
+        expect = 'Program([VarDecl(Id(a),IntType),FuncDecl(Id(main),[],VoidType,Block([BinaryOp(=,Id(a),IntLiteral(2))]))])'
         self.assertTrue(TestAST.checkASTGen(input, expect, 308))
 
     def test_local_global(self):
@@ -157,7 +157,7 @@ class ASTGenSuite(unittest.TestCase):
             if(true)
                 continue;
         }'''
-        expect = 'Program([FuncDecl(Id(main),[],None,Block([If(BooleanLiteral(true),Continue())]))])'
+        expect = 'Program([FuncDecl(Id(main),[],VoidType,Block([If(BooleanLiteral(true),Continue())]))])'
         self.assertTrue(TestAST.checkASTGen(input, expect, 323))
 
     def test_return_bool(self):
@@ -191,12 +191,12 @@ class ASTGenSuite(unittest.TestCase):
         input = '''void ass(int a, int b){
             return a = b;
         }'''
-        expect = 'Program([FuncDecl(Id(ass),[VarDecl(Id(a),IntType),VarDecl(Id(b),IntType)],None,Block([Return(BinaryOp(=,Id(a),Id(b)))]))])'
+        expect = 'Program([FuncDecl(Id(ass),[VarDecl(Id(a),IntType),VarDecl(Id(b),IntType)],VoidType,Block([Return(BinaryOp(=,Id(a),Id(b)))]))])'
         self.assertTrue(TestAST.checkASTGen(input, expect, 329))
 
     def test_return_1d(self):
         input = '''void arr(int a[]){ return a[3]; }'''
-        expect = 'Program([FuncDecl(Id(arr),[VarDecl(Id(a),ArrayTypePointer(IntType))],None,Block([Return(ArrayCell(Id(a),IntLiteral(3)))]))])'
+        expect = 'Program([FuncDecl(Id(arr),[VarDecl(Id(a),ArrayTypePointer(IntType))],VoidType,Block([Return(ArrayCell(Id(a),IntLiteral(3)))]))])'
         self.assertTrue(TestAST.checkASTGen(input, expect, 330))
 
     def test_return_arrInarr(self):
@@ -472,7 +472,7 @@ class ASTGenSuite(unittest.TestCase):
         input = '''void main() {
             return add(a + 1, b < 0);
         }'''
-        expect = 'Program([FuncDecl(Id(main),[],None,Block([Return(CallExpr(Id(add),[BinaryOp(+,Id(a),IntLiteral(1)),BinaryOp(<,Id(b),IntLiteral(0))]))]))])'
+        expect = 'Program([FuncDecl(Id(main),[],VoidType,Block([Return(CallExpr(Id(add),[BinaryOp(+,Id(a),IntLiteral(1)),BinaryOp(<,Id(b),IntLiteral(0))]))]))])'
         self.assertTrue(TestAST.checkASTGen(input, expect, 369))
 
     def test_exp_stmt(self):
@@ -508,7 +508,7 @@ class ASTGenSuite(unittest.TestCase):
         input = '''void foo() {
             a >= b;
         }'''
-        expect = 'Program([FuncDecl(Id(foo),[],None,Block([BinaryOp(>=,Id(a),Id(b))]))])'
+        expect = 'Program([FuncDecl(Id(foo),[],VoidType,Block([BinaryOp(>=,Id(a),Id(b))]))])'
         self.assertTrue(TestAST.checkASTGen(input, expect, 374))
 
     def test_cmp_bracket(self):
@@ -536,7 +536,7 @@ class ASTGenSuite(unittest.TestCase):
         input = '''void main(){
             return !!!!!!!!!!!!!!a;
         }'''
-        expect = 'Program([FuncDecl(Id(main),[],None,Block([Return(UnaryOp(!,UnaryOp(!,UnaryOp(!,UnaryOp(!,UnaryOp(!,UnaryOp(!,UnaryOp(!,UnaryOp(!,UnaryOp(!,UnaryOp(!,UnaryOp(!,UnaryOp(!,UnaryOp(!,UnaryOp(!,Id(a))))))))))))))))]))])'
+        expect = 'Program([FuncDecl(Id(main),[],VoidType,Block([Return(UnaryOp(!,UnaryOp(!,UnaryOp(!,UnaryOp(!,UnaryOp(!,UnaryOp(!,UnaryOp(!,UnaryOp(!,UnaryOp(!,UnaryOp(!,UnaryOp(!,UnaryOp(!,UnaryOp(!,UnaryOp(!,Id(a))))))))))))))))]))])'
         self.assertTrue(TestAST.checkASTGen(input, expect, 378))
     
     def test_add_nega(self):
@@ -643,7 +643,7 @@ class ASTGenSuite(unittest.TestCase):
         input = '''void foo(int a[]){
             foo()[(2+4)*3] = b+3;
         }'''
-        expect = 'Program([FuncDecl(Id(foo),[VarDecl(Id(a),ArrayTypePointer(IntType))],None,Block([BinaryOp(=,ArrayCell(CallExpr(Id(foo),[]),BinaryOp(*,BinaryOp(+,IntLiteral(2),IntLiteral(4)),IntLiteral(3))),BinaryOp(+,Id(b),IntLiteral(3)))]))])'
+        expect = 'Program([FuncDecl(Id(foo),[VarDecl(Id(a),ArrayTypePointer(IntType))],VoidType,Block([BinaryOp(=,ArrayCell(CallExpr(Id(foo),[]),BinaryOp(*,BinaryOp(+,IntLiteral(2),IntLiteral(4)),IntLiteral(3))),BinaryOp(+,Id(b),IntLiteral(3)))]))])'
         self.assertTrue(TestAST.checkASTGen(input, expect, 393))
 
     def test_2loop(self):
@@ -670,14 +670,14 @@ class ASTGenSuite(unittest.TestCase):
         input = '''void main(){{{{{{{
             print("Ok enough");
         }}}}}}}'''
-        expect = 'Program([FuncDecl(Id(main),[],None,Block([Block([Block([Block([Block([Block([Block([CallExpr(Id(print),[StringLiteral(Ok enough)])])])])])])])]))])'
+        expect = 'Program([FuncDecl(Id(main),[],VoidType,Block([Block([Block([Block([Block([Block([Block([CallExpr(Id(print),[StringLiteral(Ok enough)])])])])])])])]))])'
         self.assertTrue(TestAST.checkASTGen(input, expect, 396))
 
     def test_block_consecutive(self):
         input = '''void main(){ {}
         { print(1); }
         }'''
-        expect = 'Program([FuncDecl(Id(main),[],None,Block([Block([]),Block([CallExpr(Id(print),[IntLiteral(1)])])]))])'
+        expect = 'Program([FuncDecl(Id(main),[],VoidType,Block([Block([]),Block([CallExpr(Id(print),[IntLiteral(1)])])]))])'
         self.assertTrue(TestAST.checkASTGen(input, expect, 397))
 
     def test_exp_id(self):
@@ -691,7 +691,7 @@ class ASTGenSuite(unittest.TestCase):
         input = '''void main(){
             a = foo(2,5)[a + b] == true;
         }'''
-        expect = 'Program([FuncDecl(Id(main),[],None,Block([BinaryOp(=,Id(a),BinaryOp(==,ArrayCell(CallExpr(Id(foo),[IntLiteral(2),IntLiteral(5)]),BinaryOp(+,Id(a),Id(b))),BooleanLiteral(true)))]))])'
+        expect = 'Program([FuncDecl(Id(main),[],VoidType,Block([BinaryOp(=,Id(a),BinaryOp(==,ArrayCell(CallExpr(Id(foo),[IntLiteral(2),IntLiteral(5)]),BinaryOp(+,Id(a),Id(b))),BooleanLiteral(true)))]))])'
         self.assertTrue(TestAST.checkASTGen(input, expect, 399))
 
     def test_esc_string(self):
@@ -699,5 +699,5 @@ class ASTGenSuite(unittest.TestCase):
             int a;
             a = "string \t 1 + a";
         }'''
-        expect = 'Program([FuncDecl(Id(main),[],None,Block([VarDecl(Id(a),IntType),BinaryOp(=,Id(a),StringLiteral(string 	 1 + a))]))])'
+        expect = 'Program([FuncDecl(Id(main),[],VoidType,Block([VarDecl(Id(a),IntType),BinaryOp(=,Id(a),StringLiteral(string 	 1 + a))]))])'
         self.assertTrue(TestAST.checkASTGen(input, expect, 400))

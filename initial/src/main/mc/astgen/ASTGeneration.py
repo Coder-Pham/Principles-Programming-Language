@@ -22,7 +22,10 @@ class ASTGeneration(MCVisitor):
         name = Id(ctx.ID().getText())
         param = self.visitMulti_para(ctx.multi_para()) if ctx.multi_para() else []
         # returnType = Type(ctx.getChild(0).accept(self))
-        returnType = self.visit(ctx.getChild(0))
+        if ctx.VOIDTYPE():
+            returnType = VoidType()
+        else:
+            returnType = self.visit(ctx.getChild(0))
         body = self.visit(ctx.block_stmt())
         return FuncDecl(name, param, returnType, body)
 
