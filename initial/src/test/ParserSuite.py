@@ -192,7 +192,8 @@ class ParserSuite(unittest.TestCase):
         input = '''int main() {
             foo[5][5] = 1;
         }'''
-        self.assertTrue(TestParser.checkParser(input, success, 232))
+        expect = 'Error on line 2 col 18: ['
+        self.assertTrue(TestParser.checkParser(input, expect, 232))
 
     def test_2d_func(self):
         input = '''int main(){

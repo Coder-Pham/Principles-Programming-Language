@@ -520,9 +520,9 @@ class ASTGenSuite(unittest.TestCase):
 
     def test_2d_assign(self):
         input = '''int main() {
-            foo[5][5] = 1;
+            return (foo)[5] = 1;
         }'''
-        expect = 'Program([FuncDecl(Id(main),[],IntType,Block([BinaryOp(=,ArrayCell(ArrayCell(Id(foo),IntLiteral(5)),IntLiteral(5)),IntLiteral(1))]))])'
+        expect = 'Program([FuncDecl(Id(main),[],IntType,Block([Return(BinaryOp(=,ArrayCell(Id(foo),IntLiteral(5)),IntLiteral(1)))]))])'
         self.assertTrue(TestAST.checkASTGen(input, expect, 376))
 
     def test_2d_func_assign(self):
@@ -681,10 +681,8 @@ class ASTGenSuite(unittest.TestCase):
         self.assertTrue(TestAST.checkASTGen(input, expect, 397))
 
     def test_exp_id(self):
-        input = '''int main(){
-            return (foo + bar)[i];
-        }'''
-        expect = 'Program([FuncDecl(Id(main),[],IntType,Block([Return(ArrayCell(BinaryOp(+,Id(foo),Id(bar)),Id(i)))]))])'
+        input = '''int foo() { foo[3] = ((a(c,c*d+false,10.99e1)[3])[10[1]])[c+2]; }'''
+        expect = 'Program([FuncDecl(Id(foo),[],IntType,Block([BinaryOp(=,ArrayCell(Id(foo),IntLiteral(3)),ArrayCell(ArrayCell(ArrayCell(CallExpr(Id(a),[Id(c),BinaryOp(+,BinaryOp(*,Id(c),Id(d)),BooleanLiteral(false)),FloatLiteral(109.9)]),IntLiteral(3)),ArrayCell(IntLiteral(10),IntLiteral(1))),BinaryOp(+,Id(c),IntLiteral(2))))]))])'
         self.assertTrue(TestAST.checkASTGen(input, expect, 398))
 
     def test_assign_cmp(self):

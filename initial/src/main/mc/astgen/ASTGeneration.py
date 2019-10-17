@@ -194,7 +194,8 @@ class ASTGeneration(MCVisitor):
         elif ctx.getChildCount() == 1 and ctx.assoc_expression():
             return self.visit(ctx.assoc_expression(0))
         elif ctx.getChildCount() == 4:
-            return ArrayCell(self.visit(ctx.expression(0)), self.visit(ctx.expression(1)))
+            # return ArrayCell(self.visit(ctx.expression(0)), self.visit(ctx.expression(1)))
+            return ArrayCell(self.visit(ctx.operands()), self.visit(ctx.expression(0)))
         elif ctx.getChildCount() == 3 and ctx.getChild(0).getText() == '(':
             return self.visit(ctx.getChild(1))
         else:
@@ -212,7 +213,8 @@ class ASTGeneration(MCVisitor):
             op = ctx.getChild(0).getText()
             return UnaryOp(op, body)
         elif ctx.getChildCount() == 4:
-            return ArrayCell(self.visit(ctx.assoc_expression(0)), self.visit(ctx.assoc_expression(1)))
+            # return ArrayCell(self.visit(ctx.assoc_expression(0)), self.visit(ctx.assoc_expression(1)))
+            return ArrayCell(self.visit(ctx.operands()), self.visit(ctx.assoc_expression(0)))
         else:
             if ctx.getChild(0).getText() == '(':
                 return self.visit(ctx.getChild(1))
@@ -231,7 +233,8 @@ class ASTGeneration(MCVisitor):
             body = self.visit(ctx.getChild(1))
             return UnaryOp(op, body)
         elif ctx.getChildCount() == 4:
-            return ArrayCell(self.visit(ctx.equality_expression(0)), self.visit(ctx.equality_expression(1)))
+            # return ArrayCell(self.visit(ctx.equality_expression(0)), self.visit(ctx.equality_expression(1)))
+            return ArrayCell(self.visit(ctx.operands()), self.visit(ctx.equality_expression(0)))
         else:
             if ctx.getChild(0).getText() == '(':
                 return self.visit(ctx.getChild(1))
@@ -242,8 +245,8 @@ class ASTGeneration(MCVisitor):
                 return BinaryOp(op, left, right)
 
     def visitIndex_expression(self, ctx: MCParser.Index_expressionContext):
-        arr = self.visit(ctx.expression(0))
-        idx = self.visit(ctx.expression(1))
+        arr = self.visit(ctx.operands())
+        idx = self.visit(ctx.expression())
         return ArrayCell(arr, idx)
 
     def visitInvocation_expression(self, ctx: MCParser.Invocation_expressionContext):
@@ -269,6 +272,8 @@ class ASTGeneration(MCVisitor):
     def visitOperands(self, ctx: MCParser.OperandsContext):
         if ctx.ID():
             return Id(ctx.ID().getText())
+        elif ctx.expression():
+            return self.visit(ctx.expression())
         else:
             return self.visit(ctx.getChild(0))
 

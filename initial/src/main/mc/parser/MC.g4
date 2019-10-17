@@ -155,7 +155,7 @@ multi_para: para_declare (COMMA para_declare)*;
 
 expression:
 	LB expression RB
-	| expression LS expression RS
+	| operands LS expression RS
 	// | expression_SB (LS | RS)
 	| assoc_expression
 	| assoc_expression (LT | LEQ | GT | GEQ) assoc_expression
@@ -168,7 +168,7 @@ expression:
 // == relational_expression
 assoc_expression:
 	LB expression RB
-	| assoc_expression LS assoc_expression RS
+	| operands LS assoc_expression RS
 	| <assoc = right> (SUB | NOT) assoc_expression
 	| <assoc = left> assoc_expression (MUL | DIV | MOD) assoc_expression
 	| <assoc = left> assoc_expression (ADD | SUB) assoc_expression
@@ -188,14 +188,14 @@ assoc_expression:
 
 equality_expression:
 	LB expression RB
-	| equality_expression LS equality_expression RS
+	| operands LS equality_expression RS
 	| <assoc = right> (SUB | NOT) equality_expression
 	| <assoc = left> equality_expression (ADD | SUB) equality_expression
 	| <assoc = left> equality_expression (MUL | DIV | MOD) equality_expression
 	| assoc_expression (LT | LEQ | GT | GEQ) assoc_expression
 	| operands;
 
-index_expression: expression LS expression RS;
+index_expression: operands LS expression RS;
 invocation_expression: function_call;
 list_expression: (expression (COMMA expression)*)?;
 //---------------------------------------------------------------------------------
@@ -204,7 +204,7 @@ function_call: ID LB list_expression RB;
 
 // ! Dont know why LITS & BooleanLIT dont work as expect operands: literals | function_call |
 // element_of_array | ID;
-operands: literals | ID | function_call | element_of_array;
+operands: literals | ID | function_call | LB expression RB; // | element_of_array;
 //---------------------------------------------------------------------------------
 declare: var_declare*;
 
