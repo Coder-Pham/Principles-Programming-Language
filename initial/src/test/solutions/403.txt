@@ -1,1 +1,1 @@
-['foo']
+Redeclared Function: a
