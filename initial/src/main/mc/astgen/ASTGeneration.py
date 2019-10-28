@@ -36,7 +36,7 @@ class ASTGeneration(MCVisitor):
         varDeclList = []
         for x in varList:
             if x[1] == "-1":
-                varDeclList.append(VarDecl(Id(x[0]), varType))
+                varDeclList.append(VarDecl(x[0], varType))
             else:
                 varDeclList.append(VarDecl(Id(x[0]), ArrayType(
                     IntLiteral(int(x[1])), varType)))
