@@ -38,8 +38,7 @@ class ASTGeneration(MCVisitor):
             if x[1] == "-1":
                 varDeclList.append(VarDecl(x[0], varType))
             else:
-                varDeclList.append(VarDecl(Id(x[0]), ArrayType(
-                    IntLiteral(int(x[1])), varType)))
+                varDeclList.append(VarDecl(x[0], ArrayType(IntLiteral(int(x[1])), varType)))
         return varDeclList
 
     def visitMulti_var(self, ctx: MCParser.Multi_varContext):
@@ -87,7 +86,7 @@ class ASTGeneration(MCVisitor):
     def visitPara_declare(self, ctx: MCParser.Para_declareContext):
         # paraType = Type(ctx.primitive_type().accept(self))
         paraType = self.visit(ctx.primitive_type())
-        paraName = Id(ctx.ID().getText())
+        paraName = ctx.ID().getText()
         if ctx.getChildCount() == 4:
             return VarDecl(paraName, ArrayPointerType(paraType))
         else:

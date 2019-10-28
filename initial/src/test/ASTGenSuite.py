@@ -81,7 +81,7 @@ class ASTGenSuite(unittest.TestCase):
         input = """int main() {
             int a,b;
         }"""
-        expect = 'Program([FuncDecl(Id(main),[],IntType,Block([VarDecl(a,IntType),VarDecl(b),IntType)]))])'
+        expect = 'Program([FuncDecl(Id(main),[],IntType,Block([VarDecl(a,IntType),VarDecl(b,IntType)]))])'
         self.assertTrue(TestAST.checkASTGen(input, expect, 312))
 
     def test_floatvar(self):

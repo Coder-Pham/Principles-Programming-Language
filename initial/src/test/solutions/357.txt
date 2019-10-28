@@ -1,0 +1,1 @@
+Program([FuncDecl(Id(main),[],IntType,Block([CallExpr(Id(square),[CallExpr(Id(add),[CallExpr(Id(double),[IntLiteral(5)])])])]))])
