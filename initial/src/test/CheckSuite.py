@@ -2,6 +2,7 @@ import unittest
 from TestUtils import TestChecker
 from AST import *
 
+
 class CheckSuite(unittest.TestCase):
     # def test_undeclared_function(self):
     #     """Simple program: int main() {} """
@@ -16,7 +17,7 @@ class CheckSuite(unittest.TestCase):
     #     }"""
     #     expect = "['main']"
     #     self.assertTrue(TestChecker.test(input,expect,402))
-    
+
     # def test_diff_numofparam_expr(self):
     #     """More complex program"""
     #     input = """int foo () {
@@ -44,7 +45,8 @@ class CheckSuite(unittest.TestCase):
     #                 CallExpr(Id("putIntLn"),[])]))])
     #     expect = "Type Mismatch In Statement: CallExpr(Id(putIntLn),[])"
     #     self.assertTrue(TestChecker.test(input,expect,406))
-    
+    # ---------------------------------------------------------------------------------------------------------------------------
+
     def test_redelared_func(self):
         input = Program([FuncDecl(Id("main"),[],IntType(),Block([])),FuncDecl(Id("main"),[],IntType(),Block([]))])
         expect = 'Redeclared Function: main'
@@ -54,7 +56,7 @@ class CheckSuite(unittest.TestCase):
         input = Program([VarDecl('a',IntType),VarDecl('a',IntType)])
         expect = 'Redeclared Variable: a'
         self.assertTrue(TestChecker.test(input, expect, 402))
-    
+
     def test_redeclare_varfunc(self):
         input = Program([VarDecl('a',IntType),FuncDecl(Id("a"),[],IntType(),Block([]))])
         expect = 'Redeclared Function: a'
@@ -67,10 +69,41 @@ class CheckSuite(unittest.TestCase):
 
     def test_redeclare_local(self):
         input = Program([FuncDecl(Id("main"),[],IntType(),Block([VarDecl('a',IntType),VarDecl('a',FloatType)]))])
-        expect = ''
+        expect = 'Redeclared Variable: a'
         self.assertTrue(TestChecker.test(input, expect, 405))
-    
+
     def test_local_global(self):
         input = Program([VarDecl('a',IntType),FuncDecl(Id("main"),[],IntType(),Block([VarDecl('a',IntType),VarDecl('a',FloatType)]))])
-        expect = ''
+        expect = 'Redeclared Variable: a'
         self.assertTrue(TestChecker.test(input, expect, 406))
+
+    # -------------------------------------------------------------------------------
+    def test_redecl_para(self):
+        input = Program([FuncDecl(Id('main'), [VarDecl(
+            'argc', IntType), VarDecl('argc', IntType)], IntType, Block([]))])
+        expect = 'Redeclared Parameter: argc'
+        self.assertTrue(TestChecker.test(input, expect, 407))
+
+    def test_redecl_local(self):
+        input = Program([FuncDecl(Id('main'), [VarDecl(
+            'argc', IntType)], IntType, Block([VarDecl('argc', IntType)]))])
+        expect = 'Redeclared Variable: argc'
+        self.assertTrue(TestChecker.test(input, expect, 408))
+
+    def test_redecl_global(self):
+        input = Program([VarDecl('argc', IntType), FuncDecl(Id('main'), [
+                        VarDecl('argc', IntType)], IntType, Block([VarDecl('argc', IntType)]))])
+        expect = 'Redeclared Variable: argc'
+        self.assertTrue(TestChecker.test(input, expect, 409))
+
+    def test_redecl_multi(self):
+        input = Program([VarDecl('b', IntType), FuncDecl(Id('main'), [VarDecl(
+            'a', IntType), VarDecl('a', IntType)], IntType, Block([VarDecl('b', IntType)]))])
+        expect = 'Redeclared Parameter: a'
+        self.assertTrue(TestChecker.test(input, expect, 410))
+
+    def test_redecl_func(self):
+        input = Program([FuncDecl(Id('main'), [VarDecl('argc', IntType)], IntType, Block([])), FuncDecl(
+            Id('main'), [VarDecl('argc', IntType)], IntType, Block([VarDecl('argc', IntType)]))])
+        expect = 'Redeclared Function: main'
+        self.assertTrue(TestChecker.test(input, expect, 411))

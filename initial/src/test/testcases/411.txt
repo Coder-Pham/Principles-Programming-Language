@@ -1,0 +1,1 @@
+Program([FuncDecl(Id(main),[VarDecl(argc,<class 'AST.IntType'>)],<class 'AST.IntType'>,Block([])),FuncDecl(Id(main),[VarDecl(argc,<class 'AST.IntType'>)],<class 'AST.IntType'>,Block([VarDecl(argc,<class 'AST.IntType'>)]))])
