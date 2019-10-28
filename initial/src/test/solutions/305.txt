@@ -1,1 +1,0 @@
-Program([FuncDecl(Id(main),[VarDecl(Id(argv),ArrayTypePointer(IntType))],IntType,Block([VarDecl(Id(a),IntType)]))])

@@ -1,1 +1,0 @@
-Program([FuncDecl(Id(main),[],IntType,Block([If(BooleanLiteral(true),If(Id(a),Return(IntLiteral(2)),Return(IntLiteral(3))),Return(IntLiteral(4)))]))])

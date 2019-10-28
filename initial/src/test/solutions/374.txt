@@ -1,1 +1,0 @@
-Program([FuncDecl(Id(foo),[],VoidType,Block([BinaryOp(>=,Id(a),Id(b))]))])

@@ -1,1 +1,0 @@
-Program([FuncDecl(Id(main),[],IntType,Block([If(CallExpr(Id(accept),[BinaryOp(*,IntLiteral(7),Id(x))]),Return(IntLiteral(0)))]))])

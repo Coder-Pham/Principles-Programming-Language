@@ -1,1 +1,0 @@
-Program([FuncDecl(Id(main),[],VoidType,Block([VarDecl(Id(a),IntType),BinaryOp(=,Id(a),StringLiteral(string 	 1 + a))]))])

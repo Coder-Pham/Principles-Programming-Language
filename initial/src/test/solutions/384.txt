@@ -1,1 +1,0 @@
-Program([FuncDecl(Id(foo),[],IntType,Block([BinaryOp(!=,BinaryOp(==,Id(a),IntLiteral(7)),BooleanLiteral(true))]))])
