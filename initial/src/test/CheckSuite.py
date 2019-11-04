@@ -107,3 +107,36 @@ class CheckSuite(unittest.TestCase):
             Id('main'), [VarDecl('argc', IntType)], IntType, Block([VarDecl('argc', IntType)]))])
         expect = 'Redeclared Function: main'
         self.assertTrue(TestChecker.test(input, expect, 411))
+
+# ------------------------------------------------------------------------------------------------------------------
+
+    def test_undecl_main(self):
+        input = Program([FuncDecl(Id("main"),[],IntType(),Block([Id('a')]))])
+        expect = 'Undeclared Identifier: a'
+        self.assertTrue(TestChecker.test(input, expect, 412))
+
+    def test_undecl_para(self):
+        input = Program([FuncDecl(Id("main"),[VarDecl('a',IntType())],IntType(),Block([Id('a'), Id('b')]))])
+        expect = 'Undeclared Identifier: b'
+        self.assertTrue(TestChecker.test(input, expect, 413))
+
+    def test_undecl_global(self):
+        input = Program([VarDecl('a',IntType()),FuncDecl(Id("main"),[VarDecl('a',IntType())],IntType(),Block([Id('a'), Id('b')]))])
+        expect = 'Undeclared Identifier: b'
+        self.assertTrue(TestChecker.test(input, expect, 414))
+
+    def test_undecl_block(self):
+        # input = '''int a;
+        # int main(int a){
+        #     int m;
+        #     {
+        #         int b;
+        #         a;
+        #         d; 
+        #         m;
+        #     }
+        # }'''
+        input = Program([VarDecl('a',IntType()),FuncDecl(Id("main"),[VarDecl('a',IntType())],IntType(),Block([VarDecl('m',IntType()),Block([VarDecl('b',IntType()), Id('a'),Id('d'),Id('m')])]))])
+
+        expect = 'Undeclared Identifier: d'
+        self.assertTrue(TestChecker.test(input, expect, 415))

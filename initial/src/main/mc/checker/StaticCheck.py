@@ -52,7 +52,7 @@ class StaticChecker(BaseVisitor, Utils):
             raise Redeclared(Parameter(), e.n)
 
         body = functools.reduce(lambda env, decl: env + [self.visit(decl, env)], list(
-            filter(lambda x: type(x) is VarDecl, ast.body.member)), param)
+            filter(lambda x: type(x) in [VarDecl,Id,Block], ast.body.member)), param)
 
         return ast.name.name
 
@@ -61,19 +61,29 @@ class StaticChecker(BaseVisitor, Utils):
             raise Redeclared(Variable(), ast.variable)
         return ast.variable
 
-    def visitCallExpr(self, ast, c):
-        at = [self.visit(x, (c[0], False)) for x in ast.param]
+    # def visitCallExpr(self, ast, c):
+    #     at = [self.visit(x, (c[0], False)) for x in ast.param]
 
-        res = self.lookup(ast.method.name, c[0], lambda x: x.name)
-        if res is None or not type(res.mtype) is MType:
-            raise Undeclared(Function(), ast.method.name)
-        elif len(res.mtype.partype) != len(at):
-            if c[1]:
-                raise TypeMismatchInStatement(ast)
-            else:
-                raise TypeMismatchInExpression(ast)
+    #     res = self.lookup(ast.method.name, c[0], lambda x: x.name)
+    #     if res is None or not type(res.mtype) is MType:
+    #         raise Undeclared(Function(), ast.method.name)
+    #     elif len(res.mtype.partype) != len(at):
+    #         if c[1]:
+    #             raise TypeMismatchInStatement(ast)
+    #         else:
+    #             raise TypeMismatchInExpression(ast)
+    #     else:
+    #         return res.mtype.rettype
+
+    def visitBlock(self, ast, c):
+        return [self.visit(x, c) for x in ast.member]
+
+    def visitId(self, ast, c):
+        res = self.lookup(ast.name, c, lambda x: x)
+        if res is None:
+            raise Undeclared(Identifier(), ast.name)
         else:
-            return res.mtype.rettype
+            return ast.name
 
     def visitIntLiteral(self, ast, c):
         return IntType()
