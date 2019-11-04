@@ -38,28 +38,41 @@ class StaticChecker(BaseVisitor, Utils):
     def check(self):
         return self.visit(self.ast, StaticChecker.global_envi)
 
+    def flatten(self, lst):
+        return [x for i in lst for x in i]
+
     def visitProgram(self, ast, c):
-        return functools.reduce(lambda env, decl: env + [self.visit(decl, env)], ast.decl, [])
+        # global_decl = []
+        # for x in ast.decl:
+        #     if self.getName(x) not in global_decl:
+        #         global_decl.append(self.getName(x))
+        #     else:
+        #         raise Redeclared(Function(), self.getName(x))
+        # self.scope.append(global_decl)
+
+        # return functools.reduce(lambda env, decl: env.append(self.visit(decl, env)), ast.decl, self.scope)
+        return functools.reduce(lambda env, decl: [env[0] + self.visit(decl, env)], ast.decl, [[]])
+
 
     def visitFuncDecl(self, ast, c):
-        if ast.name.name in c:
+        if ast.name.name in c[0]:
             raise Redeclared(Function(), ast.name.name)
+        glenv = [[ast.name.name] + c[0]]
 
         try:
             param = functools.reduce(
-                lambda env, decl: env + [self.visit(decl, env)], ast.param, [])
+                lambda env, decl: [env[0] + self.visit(decl, env)], ast.param, [[]])
         except Redeclared as e:
             raise Redeclared(Parameter(), e.n)
 
-        body = functools.reduce(lambda env, decl: env + [self.visit(decl, env)], list(
-            filter(lambda x: type(x) in [VarDecl,Id,Block], ast.body.member)), param)
+        functools.reduce(lambda env, member: [env[0] + self.visit(member, env), env[1]] , ast.body.member , param + glenv)
 
-        return ast.name.name
+        return [ast.name.name]
 
     def visitVarDecl(self, ast, c):
-        if ast.variable in c:
+        if ast.variable in c[0]:
             raise Redeclared(Variable(), ast.variable)
-        return ast.variable
+        return [ast.variable]
 
     # def visitCallExpr(self, ast, c):
     #     at = [self.visit(x, (c[0], False)) for x in ast.param]
@@ -76,14 +89,14 @@ class StaticChecker(BaseVisitor, Utils):
     #         return res.mtype.rettype
 
     def visitBlock(self, ast, c):
-        return [self.visit(x, c) for x in ast.member]
+        functools.reduce(lambda env, member: [env[0] + self.visit(member, env)], ast.member, [[]] + c)
+        return []
 
     def visitId(self, ast, c):
-        res = self.lookup(ast.name, c, lambda x: x)
-        if res is None:
+        if not ast.name in self.flatten(c):
             raise Undeclared(Identifier(), ast.name)
         else:
-            return ast.name
+            return []
 
     def visitIntLiteral(self, ast, c):
         return IntType()

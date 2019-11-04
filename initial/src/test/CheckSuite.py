@@ -126,17 +126,11 @@ class CheckSuite(unittest.TestCase):
         self.assertTrue(TestChecker.test(input, expect, 414))
 
     def test_undecl_block(self):
-        # input = '''int a;
-        # int main(int a){
-        #     int m;
-        #     {
-        #         int b;
-        #         a;
-        #         d; 
-        #         m;
-        #     }
-        # }'''
         input = Program([VarDecl('a',IntType()),FuncDecl(Id("main"),[VarDecl('a',IntType())],IntType(),Block([VarDecl('m',IntType()),Block([VarDecl('b',IntType()), Id('a'),Id('d'),Id('m')])]))])
-
         expect = 'Undeclared Identifier: d'
         self.assertTrue(TestChecker.test(input, expect, 415))
+
+    def test_undecl_block(self):
+        input = Program([VarDecl('a',IntType()),FuncDecl(Id("main"),[VarDecl('a',IntType())],IntType(),Block([VarDecl('a',IntType()),Block([VarDecl('b',IntType()), Id('a'),Id('d'),Id('m')])]))])
+        expect = 'Redeclared Variable: a'
+        self.assertTrue(TestChecker.test(input, expect, 416))

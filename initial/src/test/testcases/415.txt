@@ -1,1 +1,10 @@
-Program([VarDecl(a,IntType),FuncDecl(Id(main),[VarDecl(a,IntType)],IntType,Block([VarDecl(m,IntType),Block([VarDecl(b,IntType),Id(a),Id(d),Id(m)])]))])
+int a;
+        int main(int a){
+            int m;
+            {
+                int b;
+                a;
+                d; 
+                m;
+            }
+        }
