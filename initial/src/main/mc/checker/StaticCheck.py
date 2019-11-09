@@ -278,26 +278,26 @@ class StaticChecker(BaseVisitor,Utils):
                 # ! Despite type = ArrayType, it's ArrayCell which use eleType in ArrayType
                 if type(lhsType) == ArrayType:
                     if type(rhsType) == ArrayType:
-                        if type(lhsType.eleType) == type(rhsType.eleType) or (type(lhsType.eleType) == FloatType and type(rhsType) == IntType):
-                            return True
+                        if type(lhsType.eleType) == type(rhsType.eleType) or (type(lhsType.eleType) == FloatType and type(rhsType.eleType) == IntType):
+                            return type(lhsType.eleType)
                         else:
-                            return False
+                            raise TypeMismatchInExpression(ast)
                     # rhs is Id or Literal
                     elif type(rhsType) == type(lhsType.eleType) or (type(lhsType.eleType) == FloatType and type(rhsType) == IntType):
-                        return True
+                        return type(lhsType.eleType)
                     else:
                         raise TypeMismatchInExpression(ast)
                 # * LHS is a Id because Symbol (has name) but not 2 kind of ArrayType
                 elif type(lhsType) != ArrayPointerType:
                     # * RHS is ArrayCell
                     if type(rhsType) == ArrayType:
-                        if type(lhsType) == type(rhsType.eleType) or (type(lhsType) == FloatType and type(rhsType) == IntType):
-                            return True
+                        if type(lhsType) == type(rhsType.eleType) or (type(lhsType) == FloatType and type(rhsType.eleType) == IntType):
+                            return type(lhsType)
                         else:
-                            return False 
+                            raise TypeMismatchInExpression(ast) 
                     # * RHS is Id or Literal, can't be ArrayPointerType because it cause error from ASTGen
                     elif type(rhsType) == type(lhsType) or (type(lhsType) == FloatType and type(rhsType) == IntType):
-                        return True
+                        return type(lhsType)
                     else:
                         raise TypeMismatchInExpression(ast)
             else:
@@ -347,31 +347,65 @@ class StaticChecker(BaseVisitor,Utils):
 
     def visitCallExpr(self, ast, c): 
         # TODO: Handle TypeMismatchInExp when different parameter in function declare c[-1]
-        at = [self.visit(x,(c[0],False)) for x in ast.param]
+        # * at = [Symbol(name, Type), Symbol(name, ArrayType), Symbol(name, ArrayPointerType)]
+        at = [self.visit(x,c) for x in ast.param]
         
-        res = self.lookup(ast.method.name,c[0],lambda x: x.name)
-        if res is None or not type(res.mtype) is MType:
-            raise Undeclared(Function(),ast.method.name)
-        elif len(res.mtype.partype) != len(at):
-            if c[1]:
-                raise TypeMismatchInStatement(ast)
+        res = self.lookup(ast.method.name, filter(lambda x: type(x.mtype) == MType, c[-1]), lambda x: x.name)
+        # * res = Symbol(name, MType([], rettype)) -> res.mtype.partype -> ArrayPointerType.eleType, Type
+        if res != None:
+            if len(res.mtype.partype) == len(at):
+                for i in range(len(at)):
+                    lhs = res.mtype.partype[i]
+                    rhs = at[i].mtype
+                    if type(lhs) == ArrayPointerType:
+                        if type(rhs) in [ArrayPointerType, ArrayType] and type(lhs.eleType) == type(rhs.eleType):
+                            pass
+                        else:
+                            raise TypeMismatchInExpression(ast)
+                    # * lhs is Type -> rhs is ArrayCell, Id
+                    else:
+                        if type(rhs) == ArrayType and type(rhs.eleType) == type(lhs):
+                            pass 
+                        elif type(rhs) == type(lhs):
+                            pass
+                        else:
+                            raise TypeMismatchInExpression(ast)
+                return res.mtype.rettype
             else:
                 raise TypeMismatchInExpression(ast)
         else:
-            return res.mtype.rettype
+            raise Undeclared(Function, ast.method.name)
 
 # --------------------------------------------------------------------------------
     def visitIntLiteral(self,ast, c): 
-        return IntType()
+        return IntType
     
     def visitFloatLiteral(self, ast, c):
-        return FloatType()
+        return FloatType
 
     def visitBooleanLiteral(self, ast, c):
-        return BoolType()
+        return BoolType
 
     def visitStringLiteral(self, ast, c):
-        return StringType()
+        return StringType
 
-    def visitIntType(self, param):
-        return super().visitIntType(param)
+    def visitIntType(self, ast, c):
+        return IntType
+
+    def visitFloatType(self, ast, c):
+        return FloatType
+    
+    def visitBoolType(self, ast, c):
+        return BoolType
+
+    def visitStringType(self, ast, c):
+        return StringType
+
+    def visitVoidType(self, ast, c):
+        return VoidType
+
+    def visitArrayType(self, ast, c):
+        return ast
+    
+    def visitArrayPointerType(self, ast, c):
+        return ast
