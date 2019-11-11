@@ -1,1 +1,1 @@
-['main']
+Redeclared Function: main

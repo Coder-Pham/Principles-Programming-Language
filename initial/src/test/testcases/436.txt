@@ -1,0 +1,5 @@
+ int[] foo(int a[]) { return 1; }
+        void main(){
+            int a[3];
+            foo(a);
+        }

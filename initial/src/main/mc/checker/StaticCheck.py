@@ -71,23 +71,52 @@ class StaticChecker(BaseVisitor,Utils):
 
     def checkType(self, x, func):
         '''
-            @x: list(Return() AST node, Symbol("return", Type | Symbol(name, Array..Type(_,eleType))))
+            @x: list(Return_AST_node, Symbol("return", Symbol_x))
+                Symbol_x.mtype: Type -> Literal
+                Symbol_x.mtype: Symbol -> Id, ArrayType (Cell), ArrayPointerType
+                    -> Symbol_x.mtype.mtype: Type
             @func: FuncDecl() class
+        NOTE: if function need to return IntType, but we return Id of ArrayType (First address of array) -> OK
         '''
-        # print(x[1].name, x[1].mtype.name, type(x[1].mtype.mtype))
-        # print(type(func.returnType))
-        if type(func.returnType) == FloatType:
-            if not (x[1].mtype == FloatType or x[1].mtype == IntType):
-                raise TypeMismatchInStatement(x[0])
-        elif type(func.returnType) == ArrayPointerType: 
-            if type(x[1].mtype) == Symbol:    # * Symbol -> ArrayType, ArrayPointerType
-                stmtType = type(x[1].mtype.mtype.eleType)
-                if not stmtType == type(func.returnType.eleType):
+        # If return a ID, ArrayCell, ArrayPointer
+        if type(x[1].mtype) == Symbol:
+            if type(func.returnType) == FloatType:
+                # Return arrayCell OR first address of Array
+                if type(x[1].mtype.mtype) in [ArrayPointerType, ArrayType] and type(x[1].mtype.mtype.eleType) not in [FloatType, IntType]:
                     raise TypeMismatchInStatement(x[0])
-            else:
+                if x[1].mtype.mtype not in [FloatType, IntType]:
+                    raise TypeMismatchInStatement(x[0])
+            elif type(func.returnType) == ArrayPointerType and type(x[1].mtype.mtype) in [ArrayPointerType, ArrayType]: 
+                stmtType = type(x[1].mtype.mtype.eleType)
+                if type(func.returnType.eleType) == FloatType:
+                    if stmtType not in [IntType, FloatType]:
+                        raise TypeMismatchInStatement(x[0])
+                else:
+                    if stmtType != type(func.returnType.eleType):
+                        raise TypeMismatchInStatement(x[0])
+            elif type(func.returnType) != type(x[1].mtype.mtype):
+                raise TypeMismatchInStatement(x[0]) 
+        # If return a Literal
+        else:
+            if type(func.returnType) == FloatType:
+                if x[1].mtype not in [FloatType, IntType]:
+                    raise TypeMismatchInStatement(x[0])
+            elif type(func.returnType) != x[1].mtype:
                 raise TypeMismatchInStatement(x[0])
-        elif x[1].mtype != type(func.returnType):
-            raise TypeMismatchInStatement(x[0])
+
+
+        # if type(func.returnType) == FloatType:
+        #     if not (x[1].mtype == FloatType or x[1].mtype == IntType):
+        #         raise TypeMismatchInStatement(x[0])
+        # elif type(func.returnType) == ArrayPointerType: 
+        #     if type(x[1].mtype) == Symbol:    # * Symbol -> ArrayType, ArrayPointerType
+        #         stmtType = type(x[1].mtype.mtype.eleType)
+        #         if not stmtType == type(func.returnType.eleType):
+        #             raise TypeMismatchInStatement(x[0])
+        #     else:
+        #         raise TypeMismatchInStatement(x[0])
+        # elif x[1].mtype != type(func.returnType):
+        #     raise TypeMismatchInStatement(x[0])
 
 # ------------------------------------------------------------------------------------
 
@@ -166,7 +195,11 @@ class StaticChecker(BaseVisitor,Utils):
                 env = [env[0] + self.visit(x, env), env[1]]
             else:
                 mem = self.visit(x, env)
-                if isinstance(mem[0], Symbol):
+                # If mem = Expressin
+                if mem in [IntType, FloatType, BoolType, StringType]:
+                    pass
+                # If mem = list of list of statement | List of Symbol
+                elif isinstance(mem[0], Symbol):
                     blockMember = blockMember[:-1] + [blockMember[0] + mem]
                 else:
                     blockMember = mem + blockMember 
@@ -189,7 +222,11 @@ class StaticChecker(BaseVisitor,Utils):
         if not self.visit(ast.expr,c) == BoolType:
             raise TypeMismatchInStatement(ast)
         thenStmt = self.visit(ast.thenStmt, c)
-        if isinstance(thenStmt[0], Symbol):
+        # If thenStmt = Expression
+        if thenStmt in [IntType, FloatType, BoolType, StringType]:
+            pass
+        # If thenStmt = stmt
+        elif isinstance(thenStmt[0], Symbol):
             if thenStmt[0].name == 'return':
                 thenReturn = True
             else:
@@ -199,7 +236,9 @@ class StaticChecker(BaseVisitor,Utils):
 
         if ast.elseStmt is not None:
             elseStmt = self.visit(ast.elseStmt, c)
-            if isinstance(elseStmt[0], Symbol):
+            if elseStmt in [IntType, FloatType, BoolType, StringType]:
+                pass
+            elif isinstance(elseStmt[0], Symbol):
                 if elseStmt[0].name == 'return':
                     elseReturn = True
                 else:

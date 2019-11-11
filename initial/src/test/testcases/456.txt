@@ -1,0 +1,9 @@
+int foo() { return 1; }
+        int main(){
+            int a;
+            if (foo() == 1)
+            {
+                a = 0;
+            }
+            return a;
+        }

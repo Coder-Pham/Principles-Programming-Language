@@ -1,1 +1,1 @@
-['a']
+Redeclared Variable: argc
