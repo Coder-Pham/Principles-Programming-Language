@@ -137,17 +137,14 @@ class CheckSuite(unittest.TestCase):
 
     
     def test_assign(self):
-        input = '''int main(int c[]){
-            if (c[0] == 1)
-                return 1;
-            else
-                return 0;
+        input = '''int[] main(int c[]){
+            int a[4];
+            return a;
         }'''
         expect = ''
         self.assertTrue(TestChecker.test(input, expect, 468))
 
 # --------------------------------------------------------------------------------------
-
     def test_func_notcall(self):
         input = '''int foo() { return 0; }
         int main(){ return 1; }'''
