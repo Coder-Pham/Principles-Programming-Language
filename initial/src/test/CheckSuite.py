@@ -45,7 +45,7 @@ class CheckSuite(unittest.TestCase):
     #                 CallExpr(Id("putIntLn"),[])]))])
     #     expect = "Type Mismatch In Statement: CallExpr(Id(putIntLn),[])"
     #     self.assertTrue(TestChecker.test(input,expect,406))
-    # ---------------------------------------------------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------------------------------------------
 
     def test_redelared_func(self):
         input = Program([FuncDecl(Id("main"),[],IntType(),Block([])),FuncDecl(Id("main"),[],IntType(),Block([]))])
@@ -77,7 +77,7 @@ class CheckSuite(unittest.TestCase):
         expect = 'Redeclared Variable: a'
         self.assertTrue(TestChecker.test(input, expect, 406))
 
-    # -------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------
     def test_redecl_para(self):
         input = Program([FuncDecl(Id('main'), [VarDecl(
             'argc', IntType), VarDecl('argc', IntType)], IntType, Block([]))])
@@ -134,3 +134,21 @@ class CheckSuite(unittest.TestCase):
         input = Program([VarDecl('a',IntType()),FuncDecl(Id("main"),[VarDecl('a',IntType())],IntType(),Block([VarDecl('a',IntType()),Block([VarDecl('b',IntType()), Id('a'),Id('d'),Id('m')])]))])
         expect = 'Redeclared Variable: a'
         self.assertTrue(TestChecker.test(input, expect, 416))
+
+# ----------------------------------------------------------------------------------------------------
+
+    # def test_int_multi(self):
+    #     input = '''int main() {
+    #         int a;
+    #         a = 1 / 2;
+    #     }'''
+    #     expect = 'Type Mismatch In Expression: BinaryOp(/,IntLiteral(1),IntLiteral(2))'
+    #     self.assertTrue(TestChecker.test(input, expect, 417))
+
+    def test_float_plus(self):
+        input = '''int main() {
+            float a;
+            a = 1.2 * 1;
+        }'''
+        expect = ''
+        self.assertTrue(TestChecker.test(input, expect, 418))

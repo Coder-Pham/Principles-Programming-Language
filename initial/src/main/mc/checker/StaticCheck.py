@@ -41,6 +41,13 @@ class StaticChecker(BaseVisitor, Utils):
     def flatten(self, lst):
         return [x for i in lst for x in i]
 
+    def getType(self, ast):
+        if isinstance(ast, VarDecl):
+            return ast.varType
+        else:
+            listPara = list(map(lambda x: x.varType, ast.param))
+            return MType(listPara, ast.returnType)
+
     def visitProgram(self, ast, c):
         # global_decl = []
         # for x in ast.decl:
@@ -53,26 +60,32 @@ class StaticChecker(BaseVisitor, Utils):
         # return functools.reduce(lambda env, decl: env.append(self.visit(decl, env)), ast.decl, self.scope)
         return functools.reduce(lambda env, decl: [env[0] + self.visit(decl, env)], ast.decl, [[]])
 
-
     def visitFuncDecl(self, ast, c):
-        if ast.name.name in c[0]:
+        # if ast.name.name in c[0]:
+        if self.lookup(ast.name.name, self.flatten(c), lambda x: x.name) != None:
             raise Redeclared(Function(), ast.name.name)
-        glenv = [[ast.name.name] + c[0]]
+        glenv = [[Symbol(ast.name.name, self.getType(ast))] + c[0]]
 
         try:
             param = functools.reduce(
                 lambda env, decl: [env[0] + self.visit(decl, env)], ast.param, [[]])
         except Redeclared as e:
             raise Redeclared(Parameter(), e.n)
+        env = param + glenv
+        for x in ast.body.member:
+            if type(x) == VarDecl:
+                env = [env[0] + self.visit(x, env), env[1]]
+            else:
+                self.visit(x, env)
+        # functools.reduce(lambda env, member: [env[0] + self.visit(member, env), env[1]] , ast.body.member , param + glenv)
 
-        functools.reduce(lambda env, member: [env[0] + self.visit(member, env), env[1]] , ast.body.member , param + glenv)
-
-        return [ast.name.name]
+        return [Symbol(ast.name.name, self.getType(ast))]
 
     def visitVarDecl(self, ast, c):
-        if ast.variable in c[0]:
+        if self.lookup(ast.variable, self.flatten(c), lambda x: x.name) != None:
+        # if ast.variable in c[0]:
             raise Redeclared(Variable(), ast.variable)
-        return [ast.variable]
+        return [Symbol(ast.variable, self.getType(ast))]
 
     # def visitCallExpr(self, ast, c):
     #     at = [self.visit(x, (c[0], False)) for x in ast.param]
@@ -93,10 +106,38 @@ class StaticChecker(BaseVisitor, Utils):
         return []
 
     def visitId(self, ast, c):
-        if not ast.name in self.flatten(c):
+        res = self.lookup(ast.name, self.flatten(c), lambda x: x.name)
+        if res == None:
+        # if not ast.name in self.flatten(c):
             raise Undeclared(Identifier(), ast.name)
         else:
-            return []
+            return res
 
     def visitIntLiteral(self, ast, c):
         return IntType()
+
+    def visitFloatLiteral(self, ast, c):
+        return FloatType()
+
+    def visitBinaryOp(self, ast, c):
+        op = ast.op
+        lhs = self.visit(ast.left, c)
+        rhs = self.visit(ast.right, c)
+        
+        lhs = lhs.mtype if type(lhs) == Symbol else lhs
+        rhs = rhs.mtype if type(rhs) == Symbol else rhs
+
+        if op in ['+', '-', '*']:
+            if lhs == rhs == IntType():
+                return IntType()
+            else:
+                return FloatType()
+        elif op == '=':
+            if lhs == rhs == IntType():
+                return IntType()
+            elif lhs == FloatType() and rhs in [FloatType(), IntType()]:
+                return FloatType()
+            else:
+                raise TypeMismatchInStatement(ast)
+        else:
+            raise TypeMismatchInExpression(ast)
