@@ -1,0 +1,17 @@
+int foo() {
+            do
+                return 1;
+                continue;
+            while(false);
+        }
+
+        int goo(){  
+            do
+                continue;
+                return 1;
+            while(false);
+        }
+        void main(){
+            foo();
+            goo();
+        }

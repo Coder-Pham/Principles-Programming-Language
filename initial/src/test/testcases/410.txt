@@ -1,0 +1,8 @@
+void main(){
+            {   
+                float a;
+                a = getFloat();
+                int a;
+                a = getInt();
+            }
+        }

@@ -1,0 +1,12 @@
+void main() {
+            int a;
+            {
+                float a;
+                if (a >= 1)
+                {
+                    boolean a;
+                    a = true;
+                }
+                int a;
+            }
+        }

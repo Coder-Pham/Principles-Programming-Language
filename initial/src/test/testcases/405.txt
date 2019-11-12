@@ -1,0 +1,4 @@
+void putLn(){}
+        void main(){
+            int a;
+        }

@@ -84,7 +84,7 @@ class StaticChecker(BaseVisitor,Utils):
                 # Return arrayCell OR first address of Array
                 if type(x[1].mtype.mtype) in [ArrayPointerType, ArrayType] and type(x[1].mtype.mtype.eleType) not in [FloatType, IntType]:
                     raise TypeMismatchInStatement(x[0])
-                if x[1].mtype.mtype not in [FloatType, IntType]:
+                if not isinstance(x[1].mtype.mtype, IntType) and not isinstance(x[1].mtype.mtype, FloatType):
                     raise TypeMismatchInStatement(x[0])
             elif type(func.returnType) == ArrayPointerType and type(x[1].mtype.mtype) in [ArrayPointerType, ArrayType]: 
                 stmtType = type(x[1].mtype.mtype.eleType)
@@ -99,24 +99,13 @@ class StaticChecker(BaseVisitor,Utils):
         # If return a Literal
         else:
             if type(func.returnType) == FloatType:
-                if x[1].mtype not in [FloatType, IntType]:
+                if not x[1].mtype in [FloatType(), IntType()]:
                     raise TypeMismatchInStatement(x[0])
-            elif type(func.returnType) != x[1].mtype:
+            elif type(func.returnType) == VoidType:
+                if not isinstance(x[1].mtype, VoidType):
+                    raise TypeMismatchInStatement(x[0])
+            elif func.returnType != x[1].mtype :
                 raise TypeMismatchInStatement(x[0])
-
-
-        # if type(func.returnType) == FloatType:
-        #     if not (x[1].mtype == FloatType or x[1].mtype == IntType):
-        #         raise TypeMismatchInStatement(x[0])
-        # elif type(func.returnType) == ArrayPointerType: 
-        #     if type(x[1].mtype) == Symbol:    # * Symbol -> ArrayType, ArrayPointerType
-        #         stmtType = type(x[1].mtype.mtype.eleType)
-        #         if not stmtType == type(func.returnType.eleType):
-        #             raise TypeMismatchInStatement(x[0])
-        #     else:
-        #         raise TypeMismatchInStatement(x[0])
-        # elif x[1].mtype != type(func.returnType):
-        #     raise TypeMismatchInStatement(x[0])
 
 # ------------------------------------------------------------------------------------
 
@@ -152,6 +141,7 @@ class StaticChecker(BaseVisitor,Utils):
         # ! create function to check each Return with ast.returnType
         self.isReturn = False
         self.returnStmt = []
+        self.currentFuncName = ast.name.name
 
         # TODO: Redeclare parameter
         try:
@@ -192,17 +182,18 @@ class StaticChecker(BaseVisitor,Utils):
         blockMember = [[]]
         for x in ast.member:
             if isinstance(x, VarDecl):
-                env = [env[0] + self.visit(x, env), env[1]]
+                env = [env[0] + self.visit(x, env)] + env[1:]
             else:
                 mem = self.visit(x, env)
-                # If mem = Expressin
-                if mem in [IntType, FloatType, BoolType, StringType]:
-                    pass
                 # If mem = list of list of statement | List of Symbol
-                elif isinstance(mem[0], Symbol):
-                    blockMember = blockMember[:-1] + [blockMember[0] + mem]
-                else:
-                    blockMember = mem + blockMember 
+                if isinstance(mem, list): 
+                    if isinstance(mem[0], Symbol):
+                        blockMember = [blockMember[0] + mem] + blockMember[1:] 
+                    else:
+                        blockMember = mem + blockMember
+                # If mem = Expression
+                elif mem in [IntType(), FloatType(), BoolType(), StringType()]:
+                    pass
         return blockMember
 
     def visitVarDecl(self, ast, c):
@@ -219,19 +210,25 @@ class StaticChecker(BaseVisitor,Utils):
             + is Block -> lookup('return') -> elseReturn = ?
         - thenReturn == elseReturn == True -> isReturn = true
         '''
-        if not self.visit(ast.expr,c) == BoolType:
+        if not type(self.visit(ast.expr,c)) == BoolType:
             raise TypeMismatchInStatement(ast)
+
+        lc_env = [[Symbol("if", None)]]
+        thenReturn = elseReturn = False
+
         thenStmt = self.visit(ast.thenStmt, c)
-        # If thenStmt = Expression
+        # If thenStmt = Expression = Type()
         if thenStmt in [IntType, FloatType, BoolType, StringType]:
             pass
         # If thenStmt = stmt
         elif isinstance(thenStmt[0], Symbol):
             if thenStmt[0].name == 'return':
+                lc_env = [thenStmt + lc_env[0]]
                 thenReturn = True
             else:
                 thenReturn = False
         else:
+            lc_env = thenStmt + lc_env
             thenReturn = (self.lookup('return', self.flatten(thenStmt), lambda x: x.name) != None)
 
         if ast.elseStmt is not None:
@@ -240,28 +237,44 @@ class StaticChecker(BaseVisitor,Utils):
                 pass
             elif isinstance(elseStmt[0], Symbol):
                 if elseStmt[0].name == 'return':
+                    lc_env = [elseStmt + lc_env[0]]
                     elseReturn = True
                 else:
                     elseReturn = False
             else:
+                lc_env = elseStmt + lc_env
                 elseReturn = (self.lookup('return', self.flatten(elseStmt), lambda x: x.name) != None)
+
+            # ! If has then-else clause, also have return Stmt
             if thenReturn == elseReturn == True:
                 self.isReturn = True
-            
-        return [Symbol("if", None)]
+            elif thenReturn != elseReturn: 
+                self.isReturn = False
+        # ! No Else statement & RETURN exists in thenStmt
+        elif thenReturn == True:
+            self.isReturn = False
+
+        return lc_env
 
     def visitFor(self, ast, c):
-        if not self.visit(ast.expr1, c) == IntType:
+        if not self.visit(ast.expr1, c) == IntType():
             raise TypeMismatchInStatement(ast)
-        if not self.visit(ast.expr2, c) == BoolType:
+        if not self.visit(ast.expr2, c) == BoolType():
             raise TypeMismatchInStatement(ast)
-        if not self.visit(ast.expr3, c) == IntType:
+        if not self.visit(ast.expr3, c) == IntType():
             raise TypeMismatchInStatement(ast)
+
+        # ! If inside loop has RETURN -> Ignore it
+        # * If only RETURN in it -> Function No return
+        prevReturn = self.isReturn
+
         self.visit(ast.loop, [c[0] + [Symbol("0_loop", None)]] + c[1:])
+        
+        self.isReturn = prevReturn
         return [Symbol("0_loop", None)]
 
     def visitDowhile(self, ast, c):
-        if not self.visit(ast.exp, c) == BoolType:
+        if not self.visit(ast.exp, c) == BoolType():
             raise TypeMismatchInStatement(ast)
         for x in ast.sl:
             self.visit(x, [c[0] + [Symbol("0_loop", None)]] + c[1:])
@@ -278,10 +291,17 @@ class StaticChecker(BaseVisitor,Utils):
             raise ContinueNotInLoop()
 
     def visitReturn(self, ast, c):
+        self.isReturn = True
         if ast.expr is None:
             retStmt = Symbol("return", VoidType())
         else:
-            retStmt = Symbol("return", self.visit(ast.expr, c))
+            expr = self.visit(ast.expr, c)
+            # Sth is VoidType -> Replace with something else
+            # ! SHOULD refactor this
+            if isinstance(expr, VoidType):
+                retStmt = Symbol("return", IntType)
+            else:
+                retStmt = Symbol("return", expr)
         self.returnStmt.append([ast, retStmt])
         return [retStmt]
 
@@ -296,30 +316,30 @@ class StaticChecker(BaseVisitor,Utils):
         rhsType = rhs.mtype if type(rhs) == Symbol else rhs
 
         ''' 
-        ! Literal -> lhsType == IntType
-        ! Id -> type(lhsType) == IntType 
+        ! Literal -> type(lhsType) == IntType()
+        ! Id -> type(lhsType) == IntType()
         ''' 
-
+        
         if op in ['+', '-', '*', '/', '%']:
-            if lhsType == rhsType or type(lhsType) == type(rhsType) or type(lhsType) == rhsType or lhsType == type(rhsType) and (lhsType == IntType or type(lhsType) == IntType):
-                return IntType
-            elif (lhsType in [IntType, FloatType] or type(lhsType) in [IntType, FloatType]) and (rhsType in [IntType, FloatType] or type(rhsType) in [IntType, FloatType]):
-                return FloatType
+            if type(lhsType) == type(rhsType) and lhsType == IntType():
+                return IntType()
+            elif lhsType in [IntType(), FloatType()] and rhsType in [IntType(), FloatType()]:
+                return FloatType()
             else:
                 raise TypeMismatchInExpression(ast)
         elif op in ['<', '>', '<=', '>=']:
-            if (lhsType in [IntType, FloatType] or type(lhsType) in [IntType, FloatType]) and (rhsType in [IntType, FloatType] or type(rhsType) in [IntType, FloatType]):
-                return BoolType
+            if lhsType in [IntType(), FloatType()] and rhsType in [IntType(), FloatType()]:
+                return BoolType()
             else:
                 raise TypeMismatchInExpression(ast)
         elif op in ['==', '!=']:
-            if (lhsType == rhsType or type(lhsType) == type(rhsType) or type(lhsType) == rhsType or lhsType == type(rhsType)) and (lhsType in [IntType, BoolType] or type(lhsType) in [IntType, BoolType]):
-                return BoolType
+            if type(lhsType) == type(rhsType) and lhsType in [IntType(), BoolType()]:
+                return BoolType()
             else:
                 raise TypeMismatchInExpression(ast)
         elif op in ['&&', '||']:
-            if lhsType == rhsType or type(lhsType) == type(rhsType) or type(lhsType) == rhsType or lhsType == type(rhsType) and (lhsType == BoolType or type(lhsType) == BoolType):
-                return BoolType
+            if type(lhsType) == type(rhsType) and lhsType == BoolType():
+                return BoolType()
             else:
                 raise TypeMismatchInExpression(ast)
         elif op == '=':
@@ -331,25 +351,25 @@ class StaticChecker(BaseVisitor,Utils):
                     if type(rhsType) == ArrayType:
                         # * both are ArrayType -> get eleType
                         if type(lhsType.eleType) == type(rhsType.eleType) or (type(lhsType.eleType) == FloatType and type(rhsType.eleType) == IntType):
-                            return type(lhsType.eleType)
+                            return lhsType.eleType
                         else:
                             raise TypeMismatchInExpression(ast)
                     # * rhs is Id or Literal
                     elif type(rhsType) == type(lhsType.eleType) or (type(lhsType.eleType) == FloatType and type(rhsType) == IntType):
-                        return type(lhsType.eleType)
+                        return lhsType.eleType
                     else:
                         raise TypeMismatchInExpression(ast)
                 # * LHS is a Id because Symbol (has name) but not 2 kind of ArrayType
                 elif type(lhsType) != ArrayPointerType:
                     # * RHS is ArrayType or ArrayPointerType
-                    if type(rhsType) == ArrayType or type(rhs) == ArrayPointerType:
+                    if type(rhsType) == ArrayType or type(rhsType) == ArrayPointerType:
                         raise TypeMismatchInExpression(ast)
-                    # * RHS is Id or ArrayCell, can't be ArrayPointerType because it cause error from ASTGen
+                    # * RHS is Id or ArrayCell or Literal, can't be ArrayPointerType because it cause error from ASTGen
                     elif type(rhsType) == type(lhsType) or (type(lhsType) == FloatType and type(rhsType) == IntType):
-                        return type(lhsType)
+                        return lhsType
                     # * RHS is Literal
-                    elif rhsType == type(lhsType) or (type(lhsType) == FloatType and rhs == IntType):
-                        return type(lhsType)
+                    # elif rhsType == lhsType or (lhsType == FloatType() and rhsType == IntType()):
+                    #     return lhsType
                     else:
                         raise TypeMismatchInExpression(ast)
             else:
@@ -367,21 +387,21 @@ class StaticChecker(BaseVisitor,Utils):
                 body = body.eleType
         if op == '-':
             if type(body) == IntType:
-                return IntType
+                return IntType()
             elif type(body) == FloatType:
-                return FloatType
+                return FloatType()
             else:
                 raise TypeMismatchInExpression(ast)
         elif op == '!':
             if type(body) == BoolType:
-                return BoolType
+                return BoolType()
             else:
                 raise TypeMismatchInExpression(ast)
         else:
             raise TypeMismatchInExpression(ast)
 
     def visitId(self, ast, c):
-        res = self.lookup(ast.name, self.flatten(c), lambda x: x.name)
+        res = self.lookup(ast.name, filter(lambda x: type(x.mtype) != MType, self.flatten(c)), lambda x: x.name)
         if res is None:
             raise Undeclared(Identifier(), ast.name)
         else:
@@ -392,6 +412,11 @@ class StaticChecker(BaseVisitor,Utils):
         arrType = self.visit(ast.arr, c)
         if self.visit(ast.idx, c) != IntType:
             raise TypeMismatchInExpression(ast)
+
+        # * Get ArrayPointerType from function return
+        if type(arrType) == ArrayPointerType:
+            return Symbol(ast.arr, arrType.eleType)
+        # * Get cell from array parameter or arrayType
         elif type(arrType.mtype) == ArrayType or type(arrType.mtype) == ArrayPointerType:
             return Symbol(arrType.name, arrType.mtype.eleType)  # Symbol(name, Type)
         else: 
@@ -408,7 +433,8 @@ class StaticChecker(BaseVisitor,Utils):
             if len(res.mtype.partype) == len(at):
                 for i in range(len(at)):
                     lhs = res.mtype.partype[i]
-                    rhs = at[i].mtype
+                    rhs = at[i].mtype if type(at[i]) == Symbol else at[i]
+
                     if type(lhs) == ArrayPointerType:
                         if type(rhs) in [ArrayPointerType, ArrayType] and type(lhs.eleType) == type(rhs.eleType):
                             pass
@@ -422,8 +448,9 @@ class StaticChecker(BaseVisitor,Utils):
                             pass
                         else:
                             raise TypeMismatchInExpression(ast)
-                # ! Mark that this function has been called at least 1
-                self.funcCall[ast.method.name] = True
+                # ! Mark that this function has been called at least 1 from another
+                if ast.method.name != self.currentFuncName:
+                    self.funcCall[ast.method.name] = True
                 return res.mtype.rettype
             else:
                 raise TypeMismatchInExpression(ast)
@@ -432,31 +459,31 @@ class StaticChecker(BaseVisitor,Utils):
 
 # --------------------------------------------------------------------------------
     def visitIntLiteral(self,ast, c): 
-        return IntType
+        return IntType()
     
     def visitFloatLiteral(self, ast, c):
-        return FloatType
+        return FloatType()
 
     def visitBooleanLiteral(self, ast, c):
-        return BoolType
+        return BoolType()
 
     def visitStringLiteral(self, ast, c):
-        return StringType
+        return StringType()
 
     def visitIntType(self, ast, c):
-        return IntType
+        return IntType()
 
     def visitFloatType(self, ast, c):
-        return FloatType
+        return FloatType()
     
     def visitBoolType(self, ast, c):
-        return BoolType
+        return BoolType()
 
     def visitStringType(self, ast, c):
-        return StringType
+        return StringType()
 
     def visitVoidType(self, ast, c):
-        return VoidType
+        return VoidType()
 
     def visitArrayType(self, ast, c):
         return ast
