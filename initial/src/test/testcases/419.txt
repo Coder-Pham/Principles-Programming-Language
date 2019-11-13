@@ -1,0 +1,11 @@
+int main(){
+            if (true)
+            {
+                a = 1;
+                {
+                    float a;
+                    a = 2.5;
+                }
+            }
+            return 0;
+        }

@@ -1,0 +1,7 @@
+int main(){
+            float a;
+            a = 1;
+            for (-a; a < 5; a = a + 5)
+                putFloat(a);
+            return a;
+        }

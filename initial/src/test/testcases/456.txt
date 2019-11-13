@@ -1,0 +1,6 @@
+void main(){
+            string a, b;
+            a = "Hello";
+            b = "PPL";
+            a = a + b;
+        }

@@ -1,0 +1,6 @@
+int main(){
+            int a;
+            for (a ; a < 5; a = a * 2)
+                putInt(a);
+            return 0;
+        }

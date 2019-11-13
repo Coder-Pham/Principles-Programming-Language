@@ -12,6 +12,5 @@ int foo() {
             while(false);
         }
         void main(){
-            foo();
-            goo();
+            foo() = goo();
         }

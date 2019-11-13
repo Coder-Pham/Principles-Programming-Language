@@ -1,0 +1,1 @@
+Type Mismatch In Statement: For(BinaryOp(=,Id(a),FloatLiteral(0.25));BinaryOp(<,Id(a),IntLiteral(1));BinaryOp(=,Id(a),BinaryOp(+,Id(a),FloatLiteral(0.05)));CallExpr(Id(putFloat),[Id(a)]))

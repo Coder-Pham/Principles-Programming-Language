@@ -1,0 +1,5 @@
+void main(){
+            float a;
+            for (a = 0.25; a < 1; a = a + 0.05)
+                putFloat(a);
+        }

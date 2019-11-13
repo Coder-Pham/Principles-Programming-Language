@@ -257,11 +257,11 @@ class StaticChecker(BaseVisitor,Utils):
         return lc_env
 
     def visitFor(self, ast, c):
-        if not self.visit(ast.expr1, c) == IntType():
+        if not type(self.visit(ast.expr1, c)) == IntType:
             raise TypeMismatchInStatement(ast)
-        if not self.visit(ast.expr2, c) == BoolType():
+        if not type(self.visit(ast.expr2, c)) == BoolType:
             raise TypeMismatchInStatement(ast)
-        if not self.visit(ast.expr3, c) == IntType():
+        if not type(self.visit(ast.expr3, c)) == IntType:
             raise TypeMismatchInStatement(ast)
 
         # ! If inside loop has RETURN -> Ignore it
@@ -274,7 +274,7 @@ class StaticChecker(BaseVisitor,Utils):
         return [Symbol("0_loop", None)]
 
     def visitDowhile(self, ast, c):
-        if not self.visit(ast.exp, c) == BoolType():
+        if not type(self.visit(ast.exp, c)) == BoolType:
             raise TypeMismatchInStatement(ast)
         for x in ast.sl:
             self.visit(x, [c[0] + [Symbol("0_loop", None)]] + c[1:])
@@ -321,24 +321,24 @@ class StaticChecker(BaseVisitor,Utils):
         ''' 
         
         if op in ['+', '-', '*', '/', '%']:
-            if type(lhsType) == type(rhsType) and lhsType == IntType():
+            if type(lhsType) == type(rhsType) and type(lhsType) == IntType:
                 return IntType()
-            elif lhsType in [IntType(), FloatType()] and rhsType in [IntType(), FloatType()]:
+            elif type(lhsType) in [IntType, FloatType] and type(rhsType) in [IntType, FloatType]:
                 return FloatType()
             else:
                 raise TypeMismatchInExpression(ast)
         elif op in ['<', '>', '<=', '>=']:
-            if lhsType in [IntType(), FloatType()] and rhsType in [IntType(), FloatType()]:
+            if type(lhsType) in [IntType, FloatType] and type(rhsType) in [IntType, FloatType]:
                 return BoolType()
             else:
                 raise TypeMismatchInExpression(ast)
         elif op in ['==', '!=']:
-            if type(lhsType) == type(rhsType) and lhsType in [IntType(), BoolType()]:
+            if type(lhsType) == type(rhsType) and type(lhsType) in [IntType, BoolType]:
                 return BoolType()
             else:
                 raise TypeMismatchInExpression(ast)
         elif op in ['&&', '||']:
-            if type(lhsType) == type(rhsType) and lhsType == BoolType():
+            if type(lhsType) == type(rhsType) and type(lhsType) == BoolType:
                 return BoolType()
             else:
                 raise TypeMismatchInExpression(ast)

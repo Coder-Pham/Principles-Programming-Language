@@ -1,0 +1,3 @@
+boolean ex() {
+            return main();
+        }
