@@ -192,7 +192,7 @@ class StaticChecker(BaseVisitor,Utils):
                     else:
                         blockMember = mem + blockMember
                 # If mem = Expression
-                elif mem in [IntType(), FloatType(), BoolType(), StringType()]:
+                elif type(mem) in [IntType, FloatType, BoolType, StringType]:
                     pass
         return blockMember
 
@@ -218,7 +218,7 @@ class StaticChecker(BaseVisitor,Utils):
 
         thenStmt = self.visit(ast.thenStmt, c)
         # If thenStmt = Expression = Type()
-        if thenStmt in [IntType, FloatType, BoolType, StringType]:
+        if type(thenStmt) in [IntType, FloatType, BoolType, StringType]:
             pass
         # If thenStmt = stmt
         elif isinstance(thenStmt[0], Symbol):
@@ -233,7 +233,7 @@ class StaticChecker(BaseVisitor,Utils):
 
         if ast.elseStmt is not None:
             elseStmt = self.visit(ast.elseStmt, c)
-            if elseStmt in [IntType, FloatType, BoolType, StringType]:
+            if type(elseStmt) in [IntType, FloatType, BoolType, StringType]:
                 pass
             elif isinstance(elseStmt[0], Symbol):
                 if elseStmt[0].name == 'return':
@@ -276,10 +276,17 @@ class StaticChecker(BaseVisitor,Utils):
     def visitDowhile(self, ast, c):
         if not type(self.visit(ast.exp, c)) == BoolType:
             raise TypeMismatchInStatement(ast)
+
+        doMember = [[]]
         for x in ast.sl:
-            self.visit(x, [c[0] + [Symbol("0_loop", None)]] + c[1:])
+            mem = self.visit(x, [c[0] + [Symbol("0_loop", None)]] + c[1:])
+            if isinstance(mem, list):
+                if isinstance(mem[0], list):
+                   doMember = mem + doMember
+                elif isinstance(mem[0], Symbol):
+                    doMember = doMember[:-1] + [[mem[0]] + doMember[-1]]
         # functools.reduce(lambda env, mem: self.visit(mem, env), ast.sl, [c[0] + [Symbol("0_loop", None)]] + c[1:])
-        return [Symbol("0_loop", None)]
+        return doMember
 
     def visitBreak(self, ast, c):
         # TODO: Check loop Symbol in previous scope (or all scope)
@@ -354,9 +361,6 @@ class StaticChecker(BaseVisitor,Utils):
                             return lhsType.eleType
                         else:
                             raise TypeMismatchInExpression(ast)
-                    # * rhs is Id or Literal
-                    elif type(rhsType) == type(lhsType.eleType) or (type(lhsType.eleType) == FloatType and type(rhsType) == IntType):
-                        return lhsType.eleType
                     else:
                         raise TypeMismatchInExpression(ast)
                 # * LHS is a Id because Symbol (has name) but not 2 kind of ArrayType
@@ -367,9 +371,6 @@ class StaticChecker(BaseVisitor,Utils):
                     # * RHS is Id or ArrayCell or Literal, can't be ArrayPointerType because it cause error from ASTGen
                     elif type(rhsType) == type(lhsType) or (type(lhsType) == FloatType and type(rhsType) == IntType):
                         return lhsType
-                    # * RHS is Literal
-                    # elif rhsType == lhsType or (lhsType == FloatType() and rhsType == IntType()):
-                    #     return lhsType
                     else:
                         raise TypeMismatchInExpression(ast)
             else:
@@ -401,7 +402,8 @@ class StaticChecker(BaseVisitor,Utils):
             raise TypeMismatchInExpression(ast)
 
     def visitId(self, ast, c):
-        res = self.lookup(ast.name, filter(lambda x: type(x.mtype) != MType, self.flatten(c)), lambda x: x.name)
+        # res = self.lookup(ast.name, filter(lambda x: type(x.mtype) != MType, self.flatten(c)), lambda x: x.name)
+        res = self.lookup(ast.name, self.flatten(c), lambda x: x.name)
         if res is None:
             raise Undeclared(Identifier(), ast.name)
         else:
@@ -410,7 +412,7 @@ class StaticChecker(BaseVisitor,Utils):
     def visitArrayCell(self, ast, c):
         # * Handle Undeclared from visitId -> return Symbol(name, mtype) (type = ArrayType, ArrayPointerType)
         arrType = self.visit(ast.arr, c)
-        if self.visit(ast.idx, c) != IntType:
+        if type(self.visit(ast.idx, c)) != IntType:
             raise TypeMismatchInExpression(ast)
 
         # * Get ArrayPointerType from function return

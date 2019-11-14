@@ -4,15 +4,15 @@ from AST import *
 
 class CheckSuite(unittest.TestCase):
     '''
-    - 10 Redeclared (1 - 10)
-    - 10 Undeclared (11 - 20)
-    - 25 MismatchStatement (21 - 45)
-    - 25 MismatchExp (46 - 70)
-    - 10 Not return (71 - 80)
-    - 5 Break/Continue in Loop (81 - 85)
-    - 5 No entry (86 - 90)
-    - 5 Unreachable function (91 - 95)
-    - 5 Not Left Value (96 - 100)
+    - 10 Redeclared (1 - 10)                -> Done
+    - 10 Undeclared (11 - 20)               -> Done
+    - 25 MismatchStatement (21 - 45)        30 -> 45
+    - 25 MismatchExp (46 - 70)              49,62 -> 70
+    - 10 Not return (71 - 80)               -> Done
+    - 5 Break/Continue in Loop (81 - 85)    -> Done
+    - 2 No entry (86 - 87)                  -> Done
+    - 5 Unreachable function (88 - 92)      miss 88 89
+    - 8 Not Left Value (93 - 100)           98
     '''
 # ------------------------------------------------------------------------------------
     def test_redeclare_local(self):
@@ -31,7 +31,7 @@ class CheckSuite(unittest.TestCase):
 
     def test_redeclare_para(self):
         input = '''void main(int a, int b, float a){
-            bool c;
+            boolean c;
         }'''
         expect = 'Redeclared Parameter: a'
         self.assertTrue(TestChecker.test(input, expect, 403))
@@ -116,9 +116,9 @@ class CheckSuite(unittest.TestCase):
         self.assertTrue(TestChecker.test(input,expect,412))
 
     def test_callexp_noBracket(self):
-        input = '''int foo(){ return 3 ; }
-        void main() { foo; foo(); }'''
-        expect = 'Undeclared Identifier: foo'
+        input = '''int foo(int a){ return 3 ; }
+        void main() { foo(food_bar); }'''
+        expect = 'Undeclared Identifier: food_bar'
         self.assertTrue(TestChecker.test(input, expect, 413))
 
     def test_call_id(self):
@@ -129,13 +129,11 @@ class CheckSuite(unittest.TestCase):
         expect = 'Undeclared Function: foo'
         self.assertTrue(TestChecker.test(input, expect, 414))
 
-    def test_func_cell(self):
-        input = '''float a(int b) 
-        { 
-            return b + 2.5;
-        }
-        void main() { 
-            a[10] ; 
+    def test_use_before_decl(self):
+        input = '''void main(){
+            a = 1 + 1;
+            float a;
+            a = 0.5;
         }'''
         expect = 'Undeclared Identifier: a'
         self.assertTrue(TestChecker.test(input, expect, 415))
@@ -148,12 +146,19 @@ class CheckSuite(unittest.TestCase):
         expect = 'Undeclared Identifier: a'
         self.assertTrue(TestChecker.test(input, expect, 416))
 
-    def test_varName_func(self):
-        input = '''int foo() { return 1; }
-        void main() {
-            foo = 1;
+    def test_decl_in_another_blck(self):
+        input = '''void main(){
+            if (true)
+            {
+                a = 1 + 1;
+                a = a*a;
+            }
+            do {
+                int a;
+                a = 1 + 2;
+            } while (true);
         }'''
-        expect = 'Undeclared Identifier: foo'
+        expect = 'Undeclared Identifier: a'
         self.assertTrue(TestChecker.test(input, expect, 417))
 
     def test_funcCall_in_builtin(self):
@@ -179,13 +184,15 @@ class CheckSuite(unittest.TestCase):
         expect = 'Undeclared Identifier: a'
         self.assertTrue(TestChecker.test(input, expect, 419))
 
-    def test_useBuilin_asVar(self):
-        input = '''int main(){
-            int a;
-            a = getInt;
-            return a;
+    def test_decl_inside_while(self):
+        input = '''void main() {
+            do {
+                int a;
+                a = 2;
+                a = a * a;
+            } while (a < 16);
         }'''
-        expect = 'Undeclared Identifier: getInt'
+        expect = 'Undeclared Identifier: a'
         self.assertTrue(TestChecker.test(input, expect, 420))
 
 # -------------------------------------------------------------------------------
@@ -295,7 +302,7 @@ class CheckSuite(unittest.TestCase):
         expect = "Type Mismatch In Expression: CallExpr(Id(getInt),[IntLiteral(4)])"
         self.assertTrue(TestChecker.test(input,expect,447))
 
-    def test_assign(self):
+    def test_assign_int_array(self):
         input = '''int main() {
             int a;
             int b[3];
@@ -305,7 +312,7 @@ class CheckSuite(unittest.TestCase):
         expect = 'Type Mismatch In Expression: BinaryOp(=,Id(a),Id(b))'
         self.assertTrue(TestChecker.test(input, expect, 448))
 
-    def test_assign(self):
+    def test_assign_arr_arrPointer(self):
         input = '''int[] foo(int c[]){ return c; }
         void main(){
             int a[3], b[5];
@@ -314,12 +321,12 @@ class CheckSuite(unittest.TestCase):
         expect = 'Type Mismatch In Expression: BinaryOp(=,Id(b),CallExpr(Id(foo),[Id(a)]))'
         self.assertTrue(TestChecker.test(input, expect, 450))
 
-    def test_pointer_assign(self):
+    def test_pointer_plus(self):
         input = '''int[] foo(){ int a[3]; return a; }
         void main() {
-            foo()[2] = 2;
+            foo() + 2;
         }'''
-        expect = 'Type Mismatch In Expression: ArrayCell(CallExpr(Id(foo),[]),IntLiteral(2))'
+        expect = 'Type Mismatch In Expression: BinaryOp(+,CallExpr(Id(foo),[]),IntLiteral(2))'
         self.assertTrue(TestChecker.test(input, expect, 451))
 
     def test_not_int(self):
@@ -374,6 +381,42 @@ class CheckSuite(unittest.TestCase):
         }'''
         expect = 'Type Mismatch In Expression: BinaryOp(>,Id(a),Id(b))'
         self.assertTrue(TestChecker.test(input, expect, 457))
+
+    def test_assign_id_arrayType(self):
+        input = '''void main(){
+            int a[5];
+            a = 1;
+        }'''
+        expect = 'Type Mismatch In Expression: BinaryOp(=,Id(a),IntLiteral(1))'
+        self.assertTrue(TestChecker.test(input, expect, 458))
+
+    def test_func_cell(self):
+        input = '''float a(int b) 
+        { 
+            return b + 2.5;
+        }
+        void main() { 
+            a[10] ; 
+        }'''
+        expect = 'Type Mismatch In Expression: ArrayCell(Id(a),IntLiteral(10))'
+        self.assertTrue(TestChecker.test(input, expect, 459))
+
+    def test_varName_func(self):
+        input = '''int foo() { return 1; }
+        void main() {
+            foo = 1;
+        }'''
+        expect = 'Type Mismatch In Expression: BinaryOp(=,Id(foo),IntLiteral(1))'
+        self.assertTrue(TestChecker.test(input, expect, 460))
+
+    def test_useBuilin_asVar(self):
+        input = '''int main(){
+            int a;
+            a = getInt;
+            return a;
+        }'''
+        expect = 'Type Mismatch In Expression: BinaryOp(=,Id(a),Id(getInt))'
+        self.assertTrue(TestChecker.test(input, expect, 461))
 
 # ----------------------------------------------------------------------------------------
     def test_no_return(self):
@@ -430,6 +473,138 @@ class CheckSuite(unittest.TestCase):
         expect = 'Function main Not Return '
         self.assertTrue(TestChecker.test(input, expect, 475))
 
+    def test_do_for(self):
+        input = '''int main(){
+            do {
+                int a;
+                for (a = 1; a < 10; a = a * 2)
+                    return 1;
+            } while (true);
+        }'''
+        expect = 'Function main Not Return '
+        self.assertTrue(TestChecker.test(input, expect, 476))
+
+    def test_do_if(self):
+        input = '''float main() {
+            int a;
+            a = getInt();
+            do 
+                if (a >= 1)
+                    return a;
+            while (a < 2);
+        }'''
+        expect = 'Function main Not Return '
+        self.assertTrue(TestChecker.test(input, expect, 477))
+
+    def test_else_return(self):
+        input = '''float main(){
+            float a;
+            a = 0.5;
+            if (a < 0)
+                a = -a;
+            else 
+                return a;
+        }'''
+        expect = 'Function main Not Return '
+        self.assertTrue(TestChecker.test(input, expect, 478))
+
+    def test_if_for_do(self):
+        input = '''int main(){
+            int a, b;
+            if (a < b)
+                for(a = 1; a <= b; a = a + 1)
+                    return a;
+            else 
+                do 
+                    a = a * 2;
+                    b = b / 2;
+                    return b;
+                while (true);
+        }'''
+        expect = 'Function main Not Return '
+        self.assertTrue(TestChecker.test(input, expect, 479))
+
+    def test_dowhile_for(self):
+        input = '''int main(){
+            int a;
+            do 
+                for (a = 1; a < 5; a = a + 1){
+                    int b;
+                    b = b + a;
+                    return b;
+                }
+                return a;
+            while (a == 1);
+        }'''
+        expect = ''
+        self.assertTrue(TestChecker.test(input, expect, 480))
+
+# ---------------------------------------------------------------------------------------
+    def test_break_block(self):
+        input = '''void main(){
+            int a;
+            a = 1;
+            break;
+            a = 1 * 1;
+        }'''
+        expect = 'Break Not In Loop'
+        self.assertTrue(TestChecker.test(input, expect, 481))
+
+    def test_break_if(self):
+        input = '''int main(){
+            int a, b;
+            if (a > b)
+                break;
+            else
+                return b;
+            return a;
+        }'''
+        expect = 'Break Not In Loop'
+        self.assertTrue(TestChecker.test(input, expect, 482))
+
+    def test_continue_if(self):
+        input = '''int main(){
+            if (1 == 1)
+            {
+                continue;
+                int a;
+                a = 1;
+                return 1;
+            }
+            return 0;
+        }'''
+        expect = 'Continue Not In Loop'
+        self.assertTrue(TestChecker.test(input, expect, 483))
+
+    def test_break_in_MultiIf(self):
+        input = '''void main(){
+            int a;
+            if (a == 6)
+            {
+                int b;
+                {
+                    b = 1;
+                    break;
+                    b = 2;
+                }
+                b = 3;
+            }
+        }'''
+        expect = 'Break Not In Loop'
+        self.assertTrue(TestChecker.test(input, expect, 484))
+
+    def test_break_outside_loop(self):
+        input = '''void main(){
+            int a;
+            if (true) {
+                for (a = 1; a < 5; a = a + 1)
+                    a = a - 2;
+                break;
+            }
+        }'''
+        expect = 'Break Not In Loop'
+        self.assertTrue(TestChecker.test(input, expect, 485))
+
 # ----------------------------------------------------------------------------------------
     def test_bool_main(self):
         input = '''boolean ex() {
@@ -443,7 +618,20 @@ class CheckSuite(unittest.TestCase):
         expect = 'No Entry Point'
         self.assertTrue(TestChecker.test(input, expect, 487))
         
-# --------------------------------------------------------------------------------------
+# # --------------------------------------------------------------------------------------
+    def test_2_diff_funccall(self):
+        input = '''int main(){
+            return 0;
+        }
+        int cal1(int a){
+            return a;
+        }
+        int cal2(){
+            return cal1(cal2());
+        }'''
+        expect = 'Unreachable Function: cal2'
+        self.assertTrue(TestChecker.test(input, expect, 490))
+    
     def test_func_notcall(self):
         input = '''int foo() { return 0; }
         int main(){ return 1; }'''
@@ -464,6 +652,37 @@ class CheckSuite(unittest.TestCase):
         self.assertTrue(TestChecker.test(input, expect, 492))
 
 # -----------------------------------------------------------------------------------
+    def test_builtin_assign(self):
+        input = '''void main(){
+            int a;
+            putLn() = a; 
+        }'''
+        expect = 'Not Left Value: BinaryOp(=,CallExpr(Id(putLn),[]),Id(a))'
+        self.assertTrue(TestChecker.test(input, expect, 493))
+
+    def test_func_with_para(self):
+        input = '''int foo(int a) {
+            a= a + 1;
+            return a;
+        }    
+        void main(){
+            int a;
+            foo(a) = a;
+        }'''
+        expect = 'Not Left Value: BinaryOp(=,CallExpr(Id(foo),[Id(a)]),Id(a))'
+        self.assertTrue(TestChecker.test(input, expect, 494))
+
+    def test_assign_voidFunc(self):
+        input = '''void cal(int a, int b){
+            a = a + b;
+        }
+        int main(){
+            int a, b, s;
+            cal(a, b) = s; 
+            return 0;
+        }'''
+        expect = 'Not Left Value: BinaryOp(=,CallExpr(Id(cal),[Id(a),Id(b)]),Id(s))'
+        self.assertTrue(TestChecker.test(input, expect, 495))
 
     def test_assign_void(self):
         input = '''void foo(){
@@ -495,3 +714,19 @@ class CheckSuite(unittest.TestCase):
         }'''
         expect = 'Not Left Value: BinaryOp(=,CallExpr(Id(foo),[]),CallExpr(Id(goo),[]))'
         self.assertTrue(TestChecker.test(input, expect, 497))
+
+    def test_assign_literal(self):
+        input = '''void main(){
+            int a;
+            5 = a;
+        }'''
+        expect = 'Not Left Value: BinaryOp(=,IntLiteral(5),Id(a))'
+        self.assertTrue(TestChecker.test(input, expect, 499))
+
+    def test_pointer_assign(self):
+        input = '''int[] foo(){ int a[3]; return a; }
+        void main() {
+            foo() = 2;
+        }'''
+        expect = 'Not Left Value: BinaryOp(=,CallExpr(Id(foo),[]),IntLiteral(2))'
+        self.assertTrue(TestChecker.test(input, expect, 500))
