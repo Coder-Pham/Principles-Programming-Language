@@ -1,0 +1,6 @@
+int val(int a, float b) { return a + b; }
+        void main(){
+            int a;
+            float b;
+            putFloat(val(a, b));
+        }

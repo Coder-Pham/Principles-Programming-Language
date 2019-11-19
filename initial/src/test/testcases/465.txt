@@ -1,0 +1,6 @@
+boolean main(){
+            float a, b;
+            a = 3.2;
+            b = 3.21;
+            return a == b;
+        }

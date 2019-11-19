@@ -1,4 +1,11 @@
-int foo() { return 1; }
-        void main() {
-            foo = 1;
+void main(){
+            if (true)
+            {
+                a = 1 + 1;
+                a = a*a;
+            }
+            do {
+                int a;
+                a = 1 + 2;
+            } while (true);
         }

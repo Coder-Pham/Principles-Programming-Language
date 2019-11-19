@@ -1,0 +1,8 @@
+void cal(int a, int b){
+            a = a + b;
+        }
+        int main(){
+            int a, b, s;
+            cal(a, b) = s; 
+            return 0;
+        }

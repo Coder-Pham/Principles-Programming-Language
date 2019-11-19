@@ -1,1 +1,1 @@
-Not Left Value: BinaryOp(=,CallExpr(Id(foo),[]),CallExpr(Id(goo),[]))
+Not Left Value: CallExpr(Id(foo),[])

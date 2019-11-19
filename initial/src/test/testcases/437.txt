@@ -1,0 +1,5 @@
+void main(){
+            string a;
+            for (a = "a"; a < "z"; a = a + 1)
+                putLn(a);
+        }

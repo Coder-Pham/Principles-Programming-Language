@@ -1,0 +1,11 @@
+int main(){
+            int a;
+            do 
+                for (a = 1; a < 5; a = a + 1){
+                    int b;
+                    b = b + a;
+                    return b;
+                }
+                return a;
+            while (a == 1);
+        }

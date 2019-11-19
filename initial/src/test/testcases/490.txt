@@ -1,0 +1,9 @@
+int main(){
+            return 0;
+        }
+        int cal1(int a){
+            return a;
+        }
+        int cal2(){
+            return cal1(cal2());
+        }

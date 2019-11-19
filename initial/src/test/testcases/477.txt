@@ -1,0 +1,8 @@
+float main() {
+            int a;
+            a = getInt();
+            do 
+                if (a >= 1)
+                    return a;
+            while (a < 2);
+        }

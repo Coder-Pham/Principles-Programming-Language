@@ -1,0 +1,8 @@
+float main(){
+            float a;
+            a = 0.5;
+            if (a < 0)
+                a = -a;
+            else 
+                return a;
+        }

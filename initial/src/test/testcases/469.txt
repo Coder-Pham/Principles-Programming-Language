@@ -1,0 +1,8 @@
+int cal(int a, int arr[]){
+            return a + arr[0];
+        }
+        void main() {
+            int a;
+            int visited[5];
+            cal(visited, a);
+        }

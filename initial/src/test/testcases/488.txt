@@ -1,0 +1,9 @@
+int main;
+        int foo(){
+            bar();
+            return 1;
+        }
+        void bar(){
+            int a, b;
+            foo();
+        }

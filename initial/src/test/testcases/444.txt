@@ -1,0 +1,10 @@
+float[] glue(int a , int b []) {
+            int arr[9];
+            glue(3,arr);
+            return arr;
+        }
+        void main(){
+            int c[15];
+            glue(2,c);
+            return ; 
+        }

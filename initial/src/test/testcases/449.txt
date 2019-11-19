@@ -1,0 +1,7 @@
+float foo(float a[]){
+            return a[0];
+        }
+        void main(){
+            int a[5];
+            foo(a);
+        }

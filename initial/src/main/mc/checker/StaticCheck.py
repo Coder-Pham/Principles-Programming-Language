@@ -88,12 +88,12 @@ class StaticChecker(BaseVisitor,Utils):
                     raise TypeMismatchInStatement(x[0])
             elif type(func.returnType) == ArrayPointerType and type(x[1].mtype.mtype) in [ArrayPointerType, ArrayType]: 
                 stmtType = type(x[1].mtype.mtype.eleType)
-                if type(func.returnType.eleType) == FloatType:
-                    if stmtType not in [IntType, FloatType]:
-                        raise TypeMismatchInStatement(x[0])
-                else:
-                    if stmtType != type(func.returnType.eleType):
-                        raise TypeMismatchInStatement(x[0])
+                # if type(func.returnType.eleType) == FloatType:
+                #     if stmtType not in [IntType, FloatType]:
+                #         raise TypeMismatchInStatement(x[0])
+                # else:
+                if stmtType != type(func.returnType.eleType):
+                    raise TypeMismatchInStatement(x[0])
             elif type(func.returnType) != type(x[1].mtype.mtype):
                 raise TypeMismatchInStatement(x[0]) 
         # If return a Literal
@@ -104,7 +104,7 @@ class StaticChecker(BaseVisitor,Utils):
             elif type(func.returnType) == VoidType:
                 if not isinstance(x[1].mtype, VoidType):
                     raise TypeMismatchInStatement(x[0])
-            elif func.returnType != x[1].mtype :
+            elif type(func.returnType) != type(x[1].mtype):
                 raise TypeMismatchInStatement(x[0])
 
 # ------------------------------------------------------------------------------------
@@ -124,7 +124,7 @@ class StaticChecker(BaseVisitor,Utils):
                 self.funcCall[self.getName(x)] = False
         
         # TODO: No Entry Point
-        if not self.lookup('main', glenv[0], lambda x: x.name):
+        if not self.lookup('main', filter(lambda x: type(x.mtype) == MType, glenv[0]), lambda x: x.name):
             raise NoEntryPoint()
 
         for x in ast.decl: 
@@ -374,7 +374,7 @@ class StaticChecker(BaseVisitor,Utils):
                     else:
                         raise TypeMismatchInExpression(ast)
             else:
-                raise NotLeftValue(ast)
+                raise NotLeftValue(ast.left)
         else:
             raise TypeMismatchInExpression(ast)
     
@@ -429,7 +429,13 @@ class StaticChecker(BaseVisitor,Utils):
         # * at = [Symbol(name, Type), Symbol(name, ArrayType), Symbol(name, ArrayPointerType)]
         at = [self.visit(x,c) for x in ast.param]
         
-        res = self.lookup(ast.method.name, filter(lambda x: type(x.mtype) == MType, c[-1]), lambda x: x.name)
+        # res = self.lookup(ast.method.name, filter(lambda x: type(x.mtype) == MType, c[-1]), lambda x: x.name)
+        
+        res = self.lookup(ast.method.name, self.flatten(c), lambda x: x.name)
+        # Function name is override by another variable
+        if res != None and type(res.mtype) != MType:
+            raise Undeclared(Function(), ast.method.name)
+
         # * res = Symbol(name, MType([], rettype)) -> res.mtype.partype -> ArrayPointerType.eleType, Type
         if res != None:
             if len(res.mtype.partype) == len(at):
@@ -446,7 +452,7 @@ class StaticChecker(BaseVisitor,Utils):
                     else:
                         if type(rhs) == ArrayType and type(rhs.eleType) == type(lhs):
                             pass 
-                        elif type(rhs) == type(lhs):
+                        elif type(rhs) == type(lhs) or (type(lhs) == FloatType and type(rhs) == IntType):
                             pass
                         else:
                             raise TypeMismatchInExpression(ast)

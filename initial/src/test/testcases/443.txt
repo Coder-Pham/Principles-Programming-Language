@@ -1,0 +1,5 @@
+int[] main(){
+            int valid[5];
+            valid[0] = 5;
+            return valid[0];
+        }

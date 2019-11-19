@@ -6,13 +6,13 @@ class CheckSuite(unittest.TestCase):
     '''
     - 10 Redeclared (1 - 10)                -> Done
     - 10 Undeclared (11 - 20)               -> Done
-    - 25 MismatchStatement (21 - 45)        30 -> 45
-    - 25 MismatchExp (46 - 70)              49,62 -> 70
+    - 25 MismatchStatement (21 - 45)        -> Done
+    - 25 MismatchExp (46 - 70)              -> Done
     - 10 Not return (71 - 80)               -> Done
     - 5 Break/Continue in Loop (81 - 85)    -> Done
     - 2 No entry (86 - 87)                  -> Done
-    - 5 Unreachable function (88 - 92)      miss 88 89
-    - 8 Not Left Value (93 - 100)           98
+    - 5 Unreachable function (88 - 92)      -> Done
+    - 8 Not Left Value (93 - 100)           -> Done
     '''
 # ------------------------------------------------------------------------------------
     def test_redeclare_local(self):
@@ -162,11 +162,14 @@ class CheckSuite(unittest.TestCase):
         self.assertTrue(TestChecker.test(input, expect, 417))
 
     def test_funcCall_in_builtin(self):
-        input = '''int main() {
-            putIntLn(toInt(4));
-            return 0;
-        }'''
-        expect = 'Undeclared Function: toInt'
+        input = """int foo(int foo) {
+            return foo * foo(foo - 1);
+        }
+        void main(){
+            int a;
+            foo(a);
+        }"""
+        expect = "Undeclared Function: foo"
         self.assertTrue(TestChecker.test(input, expect, 418))
 
     def test_used_before_decl(self):
@@ -205,7 +208,7 @@ class CheckSuite(unittest.TestCase):
         expect = 'Type Mismatch In Statement: Return(IntLiteral(1))'
         self.assertTrue(TestChecker.test(input, expect, 421))
 
-    def test_return_void(self):
+    def test_return_voidFunc(self):
         input = '''void foo(){ return; }
         void main(){
             return foo();
@@ -284,6 +287,173 @@ class CheckSuite(unittest.TestCase):
         expect = 'Type Mismatch In Statement: For(BinaryOp(=,Id(a),IntLiteral(1));UnaryOp(-,Id(a));BinaryOp(=,Id(a),BinaryOp(-,Id(a),IntLiteral(1)));CallExpr(Id(putInt),[Id(a)]))'
         self.assertTrue(TestChecker.test(input, expect, 429))
 
+    def test_dowhile_str(self):
+        input = '''void main(){
+            string a;
+            float var;
+            a = "true";
+            do 
+                var = var + 1;
+            while (a);
+        }'''
+        expect = 'Type Mismatch In Statement: Dowhile([BinaryOp(=,Id(var),BinaryOp(+,Id(var),IntLiteral(1)))],Id(a))'
+        self.assertTrue(TestChecker.test(input, expect, 430))
+
+    def test_returnInt_str(self):
+        input = '''string foo(int a) { return a + 1; }
+        void main(){
+            int a;
+            foo(a);
+        }'''
+        expect = 'Type Mismatch In Statement: Return(BinaryOp(+,Id(a),IntLiteral(1)))'
+        self.assertTrue(TestChecker.test(input, expect, 431))
+
+    def test_reverse_coerrene(self):
+        input = '''int val(int a, float b) { return a + b; }
+        void main(){
+            int a;
+            float b;
+            putFloat(val(a, b));
+        }'''
+        expect = 'Type Mismatch In Statement: Return(BinaryOp(+,Id(a),Id(b)))'
+        self.assertTrue(TestChecker.test(input, expect, 432))
+
+    def test_assign_if(self):
+        input = '''void main(){
+            int a;
+            if (a = 1) {
+                return a;
+            }
+            else 
+                return 0;
+        }'''
+        expect = 'Type Mismatch In Statement: If(BinaryOp(=,Id(a),IntLiteral(1)),Block([Return(Id(a))]),Return(IntLiteral(0)))'
+        self.assertTrue(TestChecker.test(input, expect, 433))
+
+    def test_return_nothing(self):
+        input = '''int main(){
+            int a;
+            a = 1;
+            return ;
+        }'''
+        expect = 'Type Mismatch In Statement: Return()'
+        self.assertTrue(TestChecker.test(input, expect, 434))
+
+    def test_if_id(self):
+        input = '''void main(){
+            float a, b;
+            if (a)
+                return b;
+            else 
+                return a;
+        }'''
+        expect = 'Type Mismatch In Statement: If(Id(a),Return(Id(b)),Return(Id(a)))'
+        self.assertTrue(TestChecker.test(input, expect, 435))
+
+    def test_for_in_for(self):
+        input = '''void main(){
+            int a[5], b[6], c[3];
+            if (a[0] < b[0])
+                if (a[1] < b[1])
+                    if (a[3] < c[0])
+                        if (c)
+                            return 1;
+        }'''
+        expect = 'Type Mismatch In Statement: If(Id(c),Return(IntLiteral(1)))'
+        self.assertTrue(TestChecker.test(input, expect, 436))
+
+    def test_loop_countStr(self):
+        input = '''void main(){
+            string a;
+            for (a = "a"; a < "z"; a = a + 1)
+                putLn(a);
+        }'''
+        expect = 'Type Mismatch In Statement: For(BinaryOp(=,Id(a),StringLiteral(a));BinaryOp(<,Id(a),StringLiteral(z));BinaryOp(=,Id(a),BinaryOp(+,Id(a),IntLiteral(1)));CallExpr(Id(putLn),[Id(a)]))'
+        self.assertTrue(TestChecker.test(input, expect, 437))
+
+    def test_FloatPointer_inarray(self):
+        input = '''float[] foo(int a)
+        {
+            float b[5];
+            return b ;
+        }
+        void main() { 
+            int a,b,c;
+            float d,e,f ; 
+            for(a = 3; foo(a)[2] > b; foo(3)[1] * b)
+                d - e * f ; 
+        } '''
+        expect = 'Type Mismatch In Statement: For(BinaryOp(=,Id(a),IntLiteral(3));BinaryOp(>,ArrayCell(CallExpr(Id(foo),[Id(a)]),IntLiteral(2)),Id(b));BinaryOp(*,ArrayCell(CallExpr(Id(foo),[IntLiteral(3)]),IntLiteral(1)),Id(b));BinaryOp(-,Id(d),BinaryOp(*,Id(e),Id(f))))'
+        self.assertTrue(TestChecker.test(input, expect, 438))
+
+    def test_str_literal_dowhile(self):
+        input = '''void main() {
+            int a, b, c;
+            do 
+                a = b * 2;
+                b = c*3;
+                c = c*c;
+            while ("true");
+        }'''
+        expect = 'Type Mismatch In Statement: Dowhile([BinaryOp(=,Id(a),BinaryOp(*,Id(b),IntLiteral(2))),BinaryOp(=,Id(b),BinaryOp(*,Id(c),IntLiteral(3))),BinaryOp(=,Id(c),BinaryOp(*,Id(c),Id(c)))],StringLiteral(true))'
+        self.assertTrue(TestChecker.test(input, expect, 439))
+
+    def test_return_in_voidFunc(self):
+        input = '''void main(){
+            return "ABC";
+        }'''
+        expect = 'Type Mismatch In Statement: Return(StringLiteral(ABC))'
+        self.assertTrue(TestChecker.test(input, expect, 440))
+
+    def test_return_void(self):
+        input = '''int main(){
+            return ;
+        }'''
+        expect = 'Type Mismatch In Statement: Return()'
+        self.assertTrue(TestChecker.test(input, expect, 441))
+
+    def test_returnPointer_intFunc(self):
+        input = '''int main(){
+            int a[7];
+            return a;
+        }'''
+        expect = 'Type Mismatch In Statement: Return(Id(a))'
+        self.assertTrue(TestChecker.test(input, expect, 442))
+
+    def test_return_arrayCell_pointerFunc(self):
+        input = '''int[] main(){
+            int valid[5];
+            valid[0] = 5;
+            return valid[0];
+        }'''
+        expect = 'Type Mismatch In Statement: Return(ArrayCell(Id(valid),IntLiteral(0)))'
+        self.assertTrue(TestChecker.test(input, expect, 443))
+
+    def test_array_arrPointer_returnFunc(self):
+        input = '''float[] glue(int a , int b []) {
+            int arr[9];
+            glue(3,arr);
+            return arr;
+        }
+        void main(){
+            int c[15];
+            glue(2,c);
+            return ; 
+        }'''
+        expect = 'Type Mismatch In Statement: Return(Id(arr))'
+        self.assertTrue(TestChecker.test(input, expect, 444))
+
+    def test_wrong_para_arraytype(self):
+        input = '''float foo(int a[]){
+            return a[1];
+        }
+        void main(){
+            float a[5];
+            foo(a);
+        }'''
+        expect = 'Type Mismatch In Expression: CallExpr(Id(foo),[Id(a)])'
+        self.assertTrue(TestChecker.test(input, expect, 445))
+
 # ---------------------------------------------------------------------------------
 
     def test_miss_para(self):
@@ -311,6 +481,17 @@ class CheckSuite(unittest.TestCase):
         }'''
         expect = 'Type Mismatch In Expression: BinaryOp(=,Id(a),Id(b))'
         self.assertTrue(TestChecker.test(input, expect, 448))
+
+    def test_floatPara_intpass(self):
+        input = '''float foo(float a[]){
+            return a[0];
+        }
+        void main(){
+            int a[5];
+            foo(a);
+        }'''
+        expect = 'Type Mismatch In Expression: CallExpr(Id(foo),[Id(a)])'
+        self.assertTrue(TestChecker.test(input, expect, 449))
 
     def test_assign_arr_arrPointer(self):
         input = '''int[] foo(int c[]){ return c; }
@@ -417,6 +598,96 @@ class CheckSuite(unittest.TestCase):
         }'''
         expect = 'Type Mismatch In Expression: BinaryOp(=,Id(a),Id(getInt))'
         self.assertTrue(TestChecker.test(input, expect, 461))
+
+    def test_for_floatExp3(self):
+        input = '''int main(){
+            int a;
+            for (a = 0; a < 10; a = a * 1.5)
+                putInt(a);
+            return 0;
+        }'''
+        expect = 'Type Mismatch In Expression: BinaryOp(=,Id(a),BinaryOp(*,Id(a),FloatLiteral(1.5)))'
+        self.assertTrue(TestChecker.test(input, expect, 462))
+
+    def test_multiunary(self):
+        input = '''void main(){
+            boolean visited;
+            if (!-!visited)
+                return;
+        }'''
+        expect = 'Type Mismatch In Expression: UnaryOp(-,UnaryOp(!,Id(visited)))'
+        self.assertTrue(TestChecker.test(input, expect, 463))
+
+    def test_unOp_biOp(self):
+        input = '''void main() {
+            int a, b;
+            b = -a + !a;
+        }'''
+        expect = 'Type Mismatch In Expression: UnaryOp(!,Id(a))'
+        self.assertTrue(TestChecker.test(input, expect, 464))
+
+    def test_equal_Float(self):
+        input = '''boolean main(){
+            float a, b;
+            a = 3.2;
+            b = 3.21;
+            return a == b;
+        }'''
+        expect = 'Type Mismatch In Expression: BinaryOp(==,Id(a),Id(b))'
+        self.assertTrue(TestChecker.test(input, expect, 465))
+
+    def test_assignCell_Pointer(self):
+        input = '''int[] foo(int a[]){
+            a[0] = 1 + 1;
+            return a;
+        }
+        void main(){
+            int a[5];
+            a[1] = foo(a);
+        }'''
+        expect = 'Type Mismatch In Expression: BinaryOp(=,ArrayCell(Id(a),IntLiteral(1)),CallExpr(Id(foo),[Id(a)]))'
+        self.assertTrue(TestChecker.test(input, expect, 466))
+
+    def test_idx_bool(self):
+        input = '''void main(){
+            int a[5];
+            float i, j;
+            a[i] = a[j];
+        }'''
+        expect = 'Type Mismatch In Expression: ArrayCell(Id(a),Id(i))'
+        self.assertTrue(TestChecker.test(input, expect, 467))
+
+    def test_notCell_notation(self):
+        input = '''int main(){
+            int a;
+            a[0] = 1;
+            a[1] = 2;
+        }'''
+        expect = 'Type Mismatch In Expression: ArrayCell(Id(a),IntLiteral(0))'
+        self.assertTrue(TestChecker.test(input, expect, 468))
+
+    def test_wrongpara_Pointer_Cell(self):
+        input = '''int cal(int a, int arr[]){
+            return a + arr[0];
+        }
+        void main() {
+            int a;
+            int visited[5];
+            cal(visited, a);
+        }'''
+        expect = 'Type Mismatch In Expression: CallExpr(Id(cal),[Id(visited),Id(a)])'
+        self.assertTrue(TestChecker.test(input, expect, 469))
+
+    def test_not_same_number_parameter(self):
+        input = '''int sum3(int a, int b, int c){
+            return a + b + c;
+        }
+        void main(){
+            int a, b, c;
+            c = sum3(a, b);
+        }'''
+        expect = 'Type Mismatch In Expression: CallExpr(Id(sum3),[Id(a),Id(b)])'
+        self.assertTrue(TestChecker.test(input, expect, 470))
 
 # ----------------------------------------------------------------------------------------
     def test_no_return(self):
@@ -606,7 +877,7 @@ class CheckSuite(unittest.TestCase):
         self.assertTrue(TestChecker.test(input, expect, 485))
 
 # ----------------------------------------------------------------------------------------
-    def test_bool_main(self):
+    def test_no_mainFunc(self):
         input = '''boolean ex() {
             return main();
         }'''
@@ -617,6 +888,27 @@ class CheckSuite(unittest.TestCase):
         input = '''int a, b, c;'''
         expect = 'No Entry Point'
         self.assertTrue(TestChecker.test(input, expect, 487))
+
+    def test_decl_mainvar(self):
+        input = '''int main;
+        int foo(){
+            bar();
+            return 1;
+        }
+        void bar(){
+            int a, b;
+            foo();
+        }'''
+        expect =  'No Entry Point'
+        self.assertTrue(TestChecker.test(input, expect, 488))
+
+    def test_no_mainkw(self):
+        input = '''int a;
+        int cal(int a, int b){
+            return a + b;
+        }'''
+        expect = 'No Entry Point'
+        self.assertTrue(TestChecker.test(input, expect, 489))
         
 # # --------------------------------------------------------------------------------------
     def test_2_diff_funccall(self):
@@ -652,12 +944,12 @@ class CheckSuite(unittest.TestCase):
         self.assertTrue(TestChecker.test(input, expect, 492))
 
 # -----------------------------------------------------------------------------------
-    def test_builtin_assign(self):
+    def test_multi_assign(self):
         input = '''void main(){
-            int a;
-            putLn() = a; 
+            int a, b, c;
+            a * b = c = 2 ;
         }'''
-        expect = 'Not Left Value: BinaryOp(=,CallExpr(Id(putLn),[]),Id(a))'
+        expect = 'Not Left Value: BinaryOp(*,Id(a),Id(b))'
         self.assertTrue(TestChecker.test(input, expect, 493))
 
     def test_func_with_para(self):
@@ -669,7 +961,7 @@ class CheckSuite(unittest.TestCase):
             int a;
             foo(a) = a;
         }'''
-        expect = 'Not Left Value: BinaryOp(=,CallExpr(Id(foo),[Id(a)]),Id(a))'
+        expect = 'Not Left Value: CallExpr(Id(foo),[Id(a)])'
         self.assertTrue(TestChecker.test(input, expect, 494))
 
     def test_assign_voidFunc(self):
@@ -681,7 +973,7 @@ class CheckSuite(unittest.TestCase):
             cal(a, b) = s; 
             return 0;
         }'''
-        expect = 'Not Left Value: BinaryOp(=,CallExpr(Id(cal),[Id(a),Id(b)]),Id(s))'
+        expect = 'Not Left Value: CallExpr(Id(cal),[Id(a),Id(b)])'
         self.assertTrue(TestChecker.test(input, expect, 495))
 
     def test_assign_void(self):
@@ -692,7 +984,7 @@ class CheckSuite(unittest.TestCase):
             float a ;
             foo() = a ;
         }'''
-        expect = 'Not Left Value: BinaryOp(=,CallExpr(Id(foo),[]),Id(a))'
+        expect = 'Not Left Value: CallExpr(Id(foo),[])'
         self.assertTrue(TestChecker.test(input, expect, 496))
 
     def test_assign_func2func(self):
@@ -712,7 +1004,7 @@ class CheckSuite(unittest.TestCase):
         void main(){
             foo() = goo();
         }'''
-        expect = 'Not Left Value: BinaryOp(=,CallExpr(Id(foo),[]),CallExpr(Id(goo),[]))'
+        expect = 'Not Left Value: CallExpr(Id(foo),[])'
         self.assertTrue(TestChecker.test(input, expect, 497))
 
     def test_assign_literal(self):
@@ -720,7 +1012,7 @@ class CheckSuite(unittest.TestCase):
             int a;
             5 = a;
         }'''
-        expect = 'Not Left Value: BinaryOp(=,IntLiteral(5),Id(a))'
+        expect = 'Not Left Value: IntLiteral(5)'
         self.assertTrue(TestChecker.test(input, expect, 499))
 
     def test_pointer_assign(self):
@@ -728,5 +1020,13 @@ class CheckSuite(unittest.TestCase):
         void main() {
             foo() = 2;
         }'''
-        expect = 'Not Left Value: BinaryOp(=,CallExpr(Id(foo),[]),IntLiteral(2))'
+        expect = 'Not Left Value: CallExpr(Id(foo),[])'
         self.assertTrue(TestChecker.test(input, expect, 500))
+
+    def test_binaryLHS(self):
+        input = '''void main(){
+            int a;
+            a + 1 = 3;
+        }'''
+        expect = 'Not Left Value: BinaryOp(+,Id(a),IntLiteral(1))'
+        self.assertTrue(TestChecker.test(input, expect, 498))

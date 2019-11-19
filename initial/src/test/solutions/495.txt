@@ -1,0 +1,1 @@
+Not Left Value: CallExpr(Id(cal),[Id(a),Id(b)])

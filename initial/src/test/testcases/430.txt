@@ -1,0 +1,8 @@
+void main(){
+            string a;
+            float var;
+            a = "true";
+            do 
+                var = var + 1;
+            while (a);
+        }

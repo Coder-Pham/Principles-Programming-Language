@@ -1,0 +1,8 @@
+void main(){
+            int a;
+            if (true) {
+                for (a = 1; a < 5; a = a + 1)
+                    a = a - 2;
+                break;
+            }
+        }

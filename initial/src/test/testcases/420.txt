@@ -1,5 +1,7 @@
-int main(){
-            int a;
-            a = getInt;
-            return a;
+void main() {
+            do {
+                int a;
+                a = 2;
+                a = a * a;
+            } while (a < 16);
         }

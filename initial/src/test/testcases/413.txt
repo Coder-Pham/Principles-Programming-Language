@@ -1,2 +1,2 @@
-int foo(){ return 3 ; }
-        void main() { foo; foo(); }
+int foo(int a){ return 3 ; }
+        void main() { foo(food_bar); }

@@ -1,4 +1,7 @@
-int main() {
-            putIntLn(toInt(4));
-            return 0;
+int foo(int foo) {
+            return foo * foo(foo - 1);
+        }
+        void main(){
+            int a;
+            foo(a);
         }

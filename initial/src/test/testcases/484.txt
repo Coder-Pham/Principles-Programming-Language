@@ -1,0 +1,13 @@
+void main(){
+            int a;
+            if (a == 6)
+            {
+                int b;
+                {
+                    b = 1;
+                    break;
+                    b = 2;
+                }
+                b = 3;
+            }
+        }
