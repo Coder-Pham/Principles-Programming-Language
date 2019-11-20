@@ -210,8 +210,13 @@ class StaticChecker(BaseVisitor,Utils):
             + is Block -> lookup('return') -> elseReturn = ?
         - thenReturn == elseReturn == True -> isReturn = true
         '''
-        if not type(self.visit(ast.expr,c)) == BoolType:
-            raise TypeMismatchInStatement(ast)
+        expr = self.visit(ast.expr,c)
+        if type(expr) == Symbol:
+            if not type(expr.mtype) == BoolType:
+                raise TypeMismatchInStatement(ast)
+        else:
+            if not type(expr) == BoolType:
+                raise TypeMismatchInStatement(ast)
 
         lc_env = [[Symbol("if", None)]]
         thenReturn = elseReturn = False
@@ -257,12 +262,30 @@ class StaticChecker(BaseVisitor,Utils):
         return lc_env
 
     def visitFor(self, ast, c):
-        if not type(self.visit(ast.expr1, c)) == IntType:
-            raise TypeMismatchInStatement(ast)
-        if not type(self.visit(ast.expr2, c)) == BoolType:
-            raise TypeMismatchInStatement(ast)
-        if not type(self.visit(ast.expr3, c)) == IntType:
-            raise TypeMismatchInStatement(ast)
+        # Check expression 1
+        expr1 = self.visit(ast.expr1, c)
+        if type(expr1) == Symbol:
+            if not type(expr1.mtype) == IntType:
+                raise TypeMismatchInStatement(ast)
+        else:
+            if not type(expr1) == IntType:
+                raise TypeMismatchInStatement(ast)
+        # Check expression 2
+        expr2 = self.visit(ast.expr2, c)
+        if type(expr2) == Symbol:
+            if not type(expr2.mtype) == BoolType:
+                raise TypeMismatchInStatement(ast)
+        else:
+            if not type(expr2) == BoolType:
+                raise TypeMismatchInStatement(ast)
+        # Check expression 3
+        expr3 = self.visit(ast.expr3, c)
+        if type(expr3) == Symbol:
+            if not type(expr3.mtype) == IntType:
+                raise TypeMismatchInStatement(ast)
+        else:
+            if not type(expr3) == IntType:
+                raise TypeMismatchInStatement(ast)
 
         # ! If inside loop has RETURN -> Ignore it
         # * If only RETURN in it -> Function No return
@@ -274,8 +297,13 @@ class StaticChecker(BaseVisitor,Utils):
         return [Symbol("0_loop", None)]
 
     def visitDowhile(self, ast, c):
-        if not type(self.visit(ast.exp, c)) == BoolType:
-            raise TypeMismatchInStatement(ast)
+        exp = self.visit(ast.exp, c)
+        if type(exp) == Symbol:
+            if not type(exp.mtype) == BoolType:
+                raise TypeMismatchInStatement(ast)
+        else:
+            if not type(exp) == BoolType:
+                raise TypeMismatchInStatement(ast)
 
         doMember = [[]]
         for x in ast.sl:
@@ -434,7 +462,8 @@ class StaticChecker(BaseVisitor,Utils):
         res = self.lookup(ast.method.name, self.flatten(c), lambda x: x.name)
         # Function name is override by another variable
         if res != None and type(res.mtype) != MType:
-            raise Undeclared(Function(), ast.method.name)
+            # raise Undeclared(Function(), ast.method.name)
+            raise TypeMismatchInExpression(ast)
 
         # * res = Symbol(name, MType([], rettype)) -> res.mtype.partype -> ArrayPointerType.eleType, Type
         if res != None:

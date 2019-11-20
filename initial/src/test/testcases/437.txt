@@ -1,5 +1,6 @@
 void main(){
             string a;
-            for (a = "a"; a < "z"; a = a + 1)
+            int strLen;
+            for (a = "a"; strLen < 5; strLen = strLen + 1)
                 putLn(a);
         }

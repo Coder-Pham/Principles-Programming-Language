@@ -3,17 +3,6 @@ from TestUtils import TestChecker
 from AST import *
 
 class CheckSuite(unittest.TestCase):
-    '''
-    - 10 Redeclared (1 - 10)                -> Done
-    - 10 Undeclared (11 - 20)               -> Done
-    - 25 MismatchStatement (21 - 45)        -> Done
-    - 25 MismatchExp (46 - 70)              -> Done
-    - 10 Not return (71 - 80)               -> Done
-    - 5 Break/Continue in Loop (81 - 85)    -> Done
-    - 2 No entry (86 - 87)                  -> Done
-    - 5 Unreachable function (88 - 92)      -> Done
-    - 8 Not Left Value (93 - 100)           -> Done
-    '''
 # ------------------------------------------------------------------------------------
     def test_redeclare_local(self):
         input = '''void main(){
@@ -126,7 +115,7 @@ class CheckSuite(unittest.TestCase):
         void main(){
             foo();
         }'''
-        expect = 'Undeclared Function: foo'
+        expect = 'Type Mismatch In Expression: CallExpr(Id(foo),[])'
         self.assertTrue(TestChecker.test(input, expect, 414))
 
     def test_use_before_decl(self):
@@ -169,7 +158,7 @@ class CheckSuite(unittest.TestCase):
             int a;
             foo(a);
         }"""
-        expect = "Undeclared Function: foo"
+        expect = "Type Mismatch In Expression: CallExpr(Id(foo),[BinaryOp(-,Id(foo),IntLiteral(1))])"
         self.assertTrue(TestChecker.test(input, expect, 418))
 
     def test_used_before_decl(self):
@@ -238,14 +227,14 @@ class CheckSuite(unittest.TestCase):
         expect = 'Type Mismatch In Statement: For(BinaryOp(==,Id(a),IntLiteral(1));BinaryOp(<,Id(a),IntLiteral(5));BinaryOp(=,Id(a),BinaryOp(+,Id(a),IntLiteral(1)));Block([CallExpr(Id(putIntLn),[Id(a)])]))'
         self.assertTrue(TestChecker.test(input, expect, 424))
 
-    def test_for_noInitStart(self):
+    def test_for_InitWrongType(self):
         input = '''int main(){
             int a;
-            for (a ; a < 5; a = a * 2)
+            for (a = 0.25; a < 5; a = a * 2)
                 putInt(a);
             return 0;
         }'''
-        expect = 'Type Mismatch In Statement: For(Id(a);BinaryOp(<,Id(a),IntLiteral(5));BinaryOp(=,Id(a),BinaryOp(*,Id(a),IntLiteral(2)));CallExpr(Id(putInt),[Id(a)]))'
+        expect = 'Type Mismatch In Expression: BinaryOp(=,Id(a),FloatLiteral(0.25))'
         self.assertTrue(TestChecker.test(input, expect, 425))
 
     def test_for_startUnary(self):
@@ -365,10 +354,11 @@ class CheckSuite(unittest.TestCase):
     def test_loop_countStr(self):
         input = '''void main(){
             string a;
-            for (a = "a"; a < "z"; a = a + 1)
+            int strLen;
+            for (a = "a"; strLen < 5; strLen = strLen + 1)
                 putLn(a);
         }'''
-        expect = 'Type Mismatch In Statement: For(BinaryOp(=,Id(a),StringLiteral(a));BinaryOp(<,Id(a),StringLiteral(z));BinaryOp(=,Id(a),BinaryOp(+,Id(a),IntLiteral(1)));CallExpr(Id(putLn),[Id(a)]))'
+        expect = 'Type Mismatch In Statement: For(BinaryOp(=,Id(a),StringLiteral(a));BinaryOp(<,Id(strLen),IntLiteral(5));BinaryOp(=,Id(strLen),BinaryOp(+,Id(strLen),IntLiteral(1)));CallExpr(Id(putLn),[Id(a)]))'
         self.assertTrue(TestChecker.test(input, expect, 437))
 
     def test_FloatPointer_inarray(self):
