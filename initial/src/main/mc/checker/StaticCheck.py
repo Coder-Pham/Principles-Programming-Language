@@ -440,6 +440,9 @@ class StaticChecker(BaseVisitor,Utils):
     def visitArrayCell(self, ast, c):
         # * Handle Undeclared from visitId -> return Symbol(name, mtype) (type = ArrayType, ArrayPointerType)
         arrType = self.visit(ast.arr, c)
+        if type(arrType) in [IntType, FloatType, BoolType, StringType]:
+            raise TypeMismatchInExpression(ast)
+
         if type(self.visit(ast.idx, c)) != IntType:
             raise TypeMismatchInExpression(ast)
 
