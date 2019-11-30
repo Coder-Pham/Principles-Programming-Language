@@ -223,7 +223,7 @@ class StaticChecker(BaseVisitor,Utils):
 
         thenStmt = self.visit(ast.thenStmt, c)
         # If thenStmt = Expression = Type()
-        if type(thenStmt) in [IntType, FloatType, BoolType, StringType, VoidType]:
+        if type(thenStmt) in [IntType, FloatType, BoolType, StringType, VoidType] or thenStmt is None:
             pass
         # If thenStmt = stmt
         elif isinstance(thenStmt[0], Symbol):
@@ -238,7 +238,7 @@ class StaticChecker(BaseVisitor,Utils):
 
         if ast.elseStmt is not None:
             elseStmt = self.visit(ast.elseStmt, c)
-            if type(elseStmt) in [IntType, FloatType, BoolType, StringType, VoidType]:
+            if type(elseStmt) in [IntType, FloatType, BoolType, StringType, VoidType] or elseStmt is None:
                 pass
             elif isinstance(elseStmt[0], Symbol):
                 if elseStmt[0].name == 'return':
