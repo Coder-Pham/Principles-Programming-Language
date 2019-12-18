@@ -1,0 +1,13 @@
+void main(){
+            int i;
+            for(i=0; i<5; i=i+1){
+                putBoolLn(boo(false, i));
+            }
+        }
+        boolean boo(boolean boo, int i){
+            if(i%2)
+                return boo;
+            else
+                return !boo;
+            return false;
+        }

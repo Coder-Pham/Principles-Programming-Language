@@ -1,0 +1,7 @@
+void main(){ 
+            int a; 
+            float b; 
+            b=4+5-(a=3); 
+            putIntLn(a);
+            putFloat(b);
+        }

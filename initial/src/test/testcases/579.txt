@@ -1,0 +1,46 @@
+boolean boo(boolean bool) {
+            a = 2;
+            if(a==2) {
+                {
+                    if(bool) {
+                        for(a=0; bool; a=a+1){
+                            return bool;
+                        }
+                    }
+                    return bool;
+                }
+            }
+            else 
+                return bool;
+            return bool;
+        }
+        int a;
+        float flo() {
+            do
+                fl = 5;
+                a = a + 2;
+                if(a==2) {
+                    {
+                        if(bool) {
+                            for(a=0; bool; a=a+1){
+                                return -----1111121;
+                            }
+                        }
+                        return fl;
+                    }
+                }
+                else {
+                    if(bool) {
+                        return fl*fl;
+                    }
+                }
+            while(boo(bool));
+            return fl;
+        }
+        void main() {
+            bool = true;
+            putBoolLn(boo(bool));
+            putFloat(flo());
+        }
+        float fl;
+        boolean bool;

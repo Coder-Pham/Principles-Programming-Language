@@ -1,0 +1,9 @@
+void main(){
+            int a;
+            {
+                a = 2;
+                putInt(a);
+            }
+            a = 5;
+            putInt(a);
+        }

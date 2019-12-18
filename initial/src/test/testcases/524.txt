@@ -1,0 +1,4 @@
+float ff() { return 5.0; } 
+        void main() { 
+            putFloatLn(ff()); 
+        }

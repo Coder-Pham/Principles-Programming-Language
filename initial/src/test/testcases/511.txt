@@ -1,0 +1,8 @@
+int a;
+        void cal(){
+            a = 1;
+        }
+        void main(){
+            cal();
+            putInt(a);
+        }

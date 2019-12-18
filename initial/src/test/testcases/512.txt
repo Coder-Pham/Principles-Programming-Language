@@ -1,0 +1,6 @@
+int sum(int a, int b, int c){
+            return a + b +c;
+        }
+        void main(){
+            putInt(sum(1, 2, 3));
+        }

@@ -1,0 +1,11 @@
+void main(){
+            int a;
+            for(a=0; a<6; a=a+1){
+                putIntLn(foo(a));
+            }
+        }
+        int foo(int a){
+            if(a>2)
+                return 2;
+            return 1;
+        }

@@ -1,0 +1,18 @@
+void main(){
+            int a, b;
+            a = 2;
+            if(a != 2){ 
+                {
+                    putInt(a); // 2
+                }
+            } else {
+                b = 2;
+                if(a>b)
+                    putInt(b*a); // 4
+                else
+                    if(a < b)
+                        putInt(a-b); // 0
+                    else
+                        putInt(a/b); // 1
+            } 
+        }

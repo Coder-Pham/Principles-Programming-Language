@@ -1,0 +1,6 @@
+string hello(){
+            return "hello";
+        }
+        void main() {
+            putString(hello());
+        }

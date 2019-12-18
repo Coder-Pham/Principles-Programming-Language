@@ -1,0 +1,12 @@
+void main(){
+            fl = 12; 
+            if(-1.2>3){
+                putInt(43);
+                fl = fl - 33;
+                putFloat(fl);
+            } else {
+                putFloatLn(fl);
+                putInt(12);
+            }
+        }
+        float fl;

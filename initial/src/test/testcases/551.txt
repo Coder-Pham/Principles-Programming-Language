@@ -1,0 +1,15 @@
+int foo1(){
+            int a;
+            a = 5;
+            return a;
+        }
+        float foo2(int a){
+            return foo1()+a;
+        }
+        void main(){
+            putIntLn(foo3());
+            putFloat(foo2(3));
+        }
+        boolean foo3(){
+            return true;
+        }

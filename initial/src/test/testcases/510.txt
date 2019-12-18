@@ -1,0 +1,9 @@
+int sol (){
+            return 1 + 1 * 5 / 2;
+        }
+        void main() {
+            string a;
+            sol();
+            a = "sol";
+            putString(a);
+        }

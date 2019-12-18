@@ -1,0 +1,15 @@
+int cal() {
+            int a;
+            a = 1;
+            do 
+                a = a * 3;
+                if (a > 10)
+                    break;
+                else 
+                    continue;
+            while (true);
+            return a;
+        }
+        void main(){
+            putIntLn(cal());
+        }

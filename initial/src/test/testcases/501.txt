@@ -1,1 +1,3 @@
-void main() {putInt(100);}
+void main() {
+            putFloat(5.5);
+        }

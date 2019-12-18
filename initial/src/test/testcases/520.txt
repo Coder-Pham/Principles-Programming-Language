@@ -1,0 +1,8 @@
+void main(){
+            int a;
+            a = 1;
+            if (a > 2)
+                putInt(a);
+            else
+                putInt(1);
+        }

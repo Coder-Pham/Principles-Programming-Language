@@ -1,0 +1,24 @@
+void main(){
+            int a, b;
+            {
+                {
+                    {
+                        for(a=0; a<10; a=a+1)
+                            for(b=5; b<50; b=b+10){
+                                putFloatLn(b-a);
+                                a=b;
+                                if(a > 30)
+                                    break;
+                            }
+                    }
+                }
+                {
+                    for(b=0; b<12; b=b*2){
+                        int c;
+                        c = 10;
+                        a = (c+b)/2;
+                        putIntLn(b=a);
+                    }
+                }
+            }
+        }

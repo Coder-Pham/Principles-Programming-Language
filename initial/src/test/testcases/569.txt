@@ -1,0 +1,11 @@
+void main(){
+            int a;
+            a = -5;
+            int b;
+            do
+                for(b=0; b<3; b=b+1){
+                    a = a+b;
+                    putIntLn(a);
+                }
+            while(a<5);
+        }

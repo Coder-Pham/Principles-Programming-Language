@@ -1,0 +1,6 @@
+void main(){
+            putInt(foo(10));
+        }
+        int foo(int a){
+            return a;
+        }

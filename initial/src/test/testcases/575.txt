@@ -1,0 +1,12 @@
+int i;
+        void main(){
+            i = 0;
+            putInt(foo());
+        }
+        int foo(){
+            if(i>3){
+                return i;
+            }
+            i = i + 1;
+            return foo();
+        }

@@ -1,0 +1,19 @@
+void main(){
+            {
+                int b;
+                for(b=1; b<12; b=b*2){
+                    putIntLn(b);
+                    if(b != 0){
+                        int a;
+                        {
+                            a = 5;
+                            int i;
+                            i = 3;
+                            putFloatLn(5%3);
+                            putFloatLn(-a-i);
+                        }
+                    } else 
+                        putInt(0);
+                }
+            }
+        }

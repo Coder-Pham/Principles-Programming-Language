@@ -1,0 +1,12 @@
+int cal(){
+            int a;
+            a = 1;
+            do 
+                a = 2 * a;
+                break;
+            while (true);
+            return a;
+        }
+        void main(){
+            putInt(cal());
+        }

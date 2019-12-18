@@ -1,0 +1,13 @@
+void main(){
+            putInt(foo());
+        }
+        int foo(){
+            int b;
+            b = 0;
+            do
+                b = b+1;
+                if(b==3)
+                    return b;
+            while(b<5);
+            return 1;
+        }

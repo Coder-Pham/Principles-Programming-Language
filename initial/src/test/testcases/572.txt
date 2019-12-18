@@ -1,0 +1,25 @@
+void main(){ 
+            int a,b;
+            a = 2;
+            b = 3;
+            float fl;
+            {
+                fl = 3;
+                if(a>b){
+                    {
+                        for(a=6; b<a; b=b+1){
+                            if(fl>2.2)
+                                a=b;
+                        }
+                    }
+                } else {
+                    do
+                        fl = fl * a + b / fl;
+                        if(a==b)
+                            putFloatLn(fl); 
+                        else 
+                            putFloatLn(fl = fl - -1);
+                    while(fl<12.2);
+                }
+            }
+        }

@@ -1,0 +1,16 @@
+void main(){
+            check = 5;
+            if(check) {
+                int a;
+                a = 5;
+                if(a)
+                    do
+                        for(a=0; a<4; a=a+1)
+                            putIntLn(a);
+                        putString("end");
+                        if(a > 0)
+                            break;
+                    while(true);
+            }
+        }
+        int check;

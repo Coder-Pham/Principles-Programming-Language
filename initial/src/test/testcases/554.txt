@@ -1,0 +1,6 @@
+void main(){
+            if(false)
+                putFloat(12);
+            else
+                putInt(1);
+        }

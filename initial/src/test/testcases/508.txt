@@ -1,0 +1,5 @@
+void main() {
+            boolean a;
+            a = 1 > 2;
+            putBool(a);
+        }

@@ -1,0 +1,6 @@
+void main() {
+            int a, b;
+            a = 1;
+            putInt(a = b = a + a + 1 );
+            putInt(b);
+        }

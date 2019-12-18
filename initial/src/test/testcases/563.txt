@@ -1,0 +1,22 @@
+void main(){
+            check = 12;
+            int a;
+            do{
+                do
+                    a = 2;
+                    do
+                        putIntLn(a = a*2 - 1);
+                    while(a < 5);
+                    break;
+                while(a != 100);
+                putLn();
+
+                a = 2;
+                do
+                    putIntLn(a=a*2-1);
+                while(a < 5);
+                check = check + 1;
+            }
+            while(check < 15);
+        }
+        int check;

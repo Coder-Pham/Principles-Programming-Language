@@ -1,0 +1,6 @@
+void main(){
+            putString(foo("553"));
+        }
+        string foo(string a){
+            return a;
+        }

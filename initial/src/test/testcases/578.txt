@@ -1,0 +1,21 @@
+void main(){
+            int i, n1, n2, next;
+            n2 = (n1=next=0)+1;
+            for (i = 1; i <= 25; i=i+1){
+                if(i == 1){
+                    putString("first:");
+                    putIntLn(n1);
+                    continue;
+                }
+                if(i == 2){
+                    putString("second:");
+                    putIntLn(n2);
+                    continue;
+                }
+                next = n1 + n2;
+                n1 = n2;
+                n2 = next;
+                putIntLn(next);
+            }
+            return;
+        }

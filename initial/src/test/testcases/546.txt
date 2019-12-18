@@ -1,0 +1,16 @@
+void main(){
+            {
+                int b;
+                {
+                    b = 4;
+                    int a;
+                    {
+                        a = 5;
+                        int i;
+                        i = 3;
+                        putFloatLn(5%3);
+                        putFloat(b-a-i);
+                    }
+                }
+            }
+        }

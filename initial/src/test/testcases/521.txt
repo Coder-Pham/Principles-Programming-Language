@@ -1,0 +1,16 @@
+int cal(int a){
+            do
+                if (a <= -10)
+                    break;
+                else {
+                    a = a + -2;
+                    continue;
+                }
+            while (true);
+            return a;
+        }
+        void main(){
+            int a;
+            a = 1;
+            putInt(cal(a));
+        }

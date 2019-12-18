@@ -1,0 +1,6 @@
+int cal(){
+            return 1 + 1;
+        }
+        void main() {
+            putInt(cal());
+        }

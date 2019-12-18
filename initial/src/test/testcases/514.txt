@@ -1,0 +1,5 @@
+void main(){
+            boolean result;
+            result = 1.2 > 2.4;
+            putBool(result);
+        }

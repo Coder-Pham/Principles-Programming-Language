@@ -1,0 +1,11 @@
+int a;
+        void assign(int b, int c) {
+            a = 1;
+            b = 5;
+        }
+        void main(){
+            int b;
+            b = 1;
+            assign(a, b);
+            putInt(a);
+        }

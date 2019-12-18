@@ -1,0 +1,10 @@
+
+        float fl;
+        void main(){
+            fl = 2;
+            if(fl == 2)
+                putFloatLn(fl);
+            else
+                putIntLn(21);
+            putInt(3);
+        }

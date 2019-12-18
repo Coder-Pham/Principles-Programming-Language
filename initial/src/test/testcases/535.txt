@@ -1,0 +1,6 @@
+void main(){
+            putBoolLn(1.3 > 2.4);
+            putBoolLn(1.4 < 2.4);
+            putBoolLn(1.3 >= 2.4);
+            putBoolLn(1.4 <= 2.4);
+        }

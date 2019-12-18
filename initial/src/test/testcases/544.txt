@@ -1,0 +1,11 @@
+void main(){
+            float fl;
+            int i;
+            i = 1;
+            fl = -i;
+            putFloatLn(fl);
+            int a;
+            a = 12%(i+4);
+            putFloat(a);
+        }
+        float fl;

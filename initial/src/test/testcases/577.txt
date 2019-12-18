@@ -1,0 +1,15 @@
+int fact(int x){
+            int fact, i;
+            fact = 1;
+            for(i=1; i<=x; i=i+1){
+                fact = fact * i;
+            }
+            return fact;
+        }
+        void main(){
+            for(a=2; a<15; a=a+1){
+                putIntLn(fact(a));
+            }
+            putString("stop!");
+        }
+        int a;

@@ -1,0 +1,23 @@
+boolean boo() {
+            a = 2;
+            if(a==2)
+                putStringLn(str());
+            fl = 3;
+            return flo() > fl;
+        }
+        int a;
+        int foo(){
+            a = 3;
+            return a;
+        }
+        float flo(){ 
+            putIntLn(foo());
+            return fl+1;
+        }
+        void main(){ 
+            putBool(boo()); 
+        }
+        string str() {
+            return "hello";
+        }
+        float fl;
