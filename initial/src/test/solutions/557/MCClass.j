@@ -24,10 +24,10 @@ Label3:
 Label6:
 	getstatic MCClass/fl F
 	invokestatic io/putFloatLn(F)V
+	return
 	bipush 12
 	invokestatic io/putInt(I)V
 Label7:
-	goto Label5
 Label4:
 Label8:
 	bipush 43
@@ -39,6 +39,7 @@ Label8:
 	putstatic MCClass/fl F
 	getstatic MCClass/fl F
 	invokestatic io/putFloat(F)V
+	return
 Label9:
 Label5:
 Label1:

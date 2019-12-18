@@ -11,7 +11,7 @@ Label0:
 	invokestatic io/putInt(I)V
 	goto Label3
 Label2:
-	bipush 12
+	iconst_1
 	i2f
 	invokestatic io/putFloat(F)V
 Label3:

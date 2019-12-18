@@ -1,7 +1,7 @@
 '''
- *   @author Nguyen Hua Phung
+ *   @author Pham Trong Nhan
  *   @version 1.0
- *   23/10/2015
+ *   18/12/2019
  *   This file provides a simple version of code generator
  *
 '''
@@ -489,13 +489,36 @@ class CodeGenVisitor(BaseVisitor, Utils):
                 return lhs + rhs + self.emit.emitREOP(op, retType, frame), BoolType()
         elif op in ['&&', '||']:
             # ! Try short-circuit HERE
+            labelFalse = frame.getNewLabel()
+            labelTrue = frame.getNewLabel()
+            labelEnd = frame.getNewLabel()
+
+            codegen = []
             lhs, leftType = self.visit(ast.left, ctxt)
-            rhs, rightType = self.visit(ast.right, ctxt)
-    
+            codegen.append(lhs)
+
             if op == '&&':
-                return lhs + rhs + self.emit.emitANDOP(frame), BoolType()
+                codegen.append(self.emit.emitIFFALSE(labelFalse, frame))
             else:
-                return lhs + rhs + self.emit.emitOROP(frame), BoolType()
+                codegen.append(self.emit.emitIFTRUE(labelTrue, frame))
+            rhs, rightType = self.visit(ast.right, ctxt)
+            codegen.append(rhs)
+
+            # post process if second clause is False 
+            codegen.append(self.emit.emitIFFALSE(labelFalse, frame))
+            codegen.append(self.emit.emitLABEL(labelTrue, frame))
+            codegen.append(self.emit.emitPUSHICONST(1, frame))
+            codegen.append(self.emit.emitGOTO(labelEnd, frame))
+            # post process if second clause is TRUE
+            codegen.append(self.emit.emitLABEL(labelFalse, frame))
+            codegen.append(self.emit.emitPUSHICONST(0, frame))
+            codegen.append(self.emit.emitLABEL(labelEnd, frame))
+
+            return ''.join(codegen), BoolType()
+            # if op == '&&':
+            #     return lhs + rhs + self.emit.emitANDOP(frame), BoolType()
+            # else:
+            #     return lhs + rhs + self.emit.emitOROP(frame), BoolType()
         elif op == '=':
             rhs, rightType = self.visit(ast.right, Access(frame, sym, False, True))
             lhs, leftType = self.visit(ast.left, Access(frame, sym, True, True))

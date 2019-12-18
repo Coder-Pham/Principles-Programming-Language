@@ -1,13 +1,14 @@
-void main(){
+boolean stt;
+        void main(){
             int i;
+            stt = false;
             for(i=0; i<5; i=i+1){
-                putBoolLn(boo(false, i));
+                putBoolLn(check(i));
             }
         }
-        boolean boo(boolean boo, int i){
+        boolean check(int i){
             if(i%2)
-                return boo;
+                return stt = !stt;
             else
-                return !boo;
-            return false;
+                return stt = !stt;
         }

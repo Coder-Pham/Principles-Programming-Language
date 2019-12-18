@@ -1,11 +1,15 @@
-float foo(float a, float b){
-            /* comment
-            */
-            if(a == 1 && a > 0)
-                return b;
-            return foo(a-1, a*b);
+boolean isPrime(int a){
+            int i;
+            if (a < 2)
+                return false;
+            for (i = 2; i < a; i = i + 1)
+                if (a % i == 0)
+                    return false;
+            return true;
         }
         void main(){
-            // tail call opt
-            putFloat(foo(8, 1));
+            int a;
+            for (a = 1; a <= 10; a = a + 1)
+                if (isPrime(a))
+                    putIntLn(a);
         }

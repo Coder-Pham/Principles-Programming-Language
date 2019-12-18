@@ -1,6 +1,6 @@
 void main(){
-            putBool(foo(1));
+            putFloat(foo());
         }
-        boolean foo(int a){
-            return a;
+        int foo(){
+            return true;
         }

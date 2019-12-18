@@ -19,7 +19,7 @@ Label2:
 Label3:
 	ifle Label5
 	iload_1
-	invokestatic io/putIntLn(I)V
+	invokestatic io/putInt(I)V
 Label6:
 	iload_1
 	iconst_1

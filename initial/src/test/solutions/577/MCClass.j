@@ -71,8 +71,6 @@ Label6:
 	goto Label4
 Label5:
 Label7:
-	ldc "stop!"
-	invokestatic io/putString(Ljava/lang/String;)V
 Label1:
 	return
 .limit stack 5

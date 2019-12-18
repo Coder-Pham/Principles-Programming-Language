@@ -1,13 +1,13 @@
-void main(){
+void main() {
             int f;
             f = foo1();
             putFloat(foo2(5)*3+f);
         }
-        int foo1(){
+        int foo1() {
             int a;
             a = 5;
             return a;
         }
-        float foo2(int a){
-            return foo1()+a;
+        float foo2(int a) {
+            return foo1() + a;
         }

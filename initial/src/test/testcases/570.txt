@@ -2,20 +2,19 @@ void main(){
             int a, b;
             a = 2;
             if(a != 2){ 
-                {
-                    putInt(a); // 2
-                }
+                return a;
+                putInt(a); // 2
             } else {
                 b = 2;
-                if(a<=b)
-                    for(a=2; a<=b; a=a+1){
-                        b = 10;
-                        putIntLn(b*a);
-                    }
+                if(a != b)
+                    return a; 
+                for(a=2; a<=b; a=a+1){
+                    b = 10;
+                    putIntLn(b*a);
+                }
+                if(a < b)
+                    putInt(a-b); // 0
                 else
-                    if(a < b)
-                        putInt(a-b); // 0
-                    else
-                        putInt(a/b); // 1
+                    putInt(a/b); // 1
             } 
         }

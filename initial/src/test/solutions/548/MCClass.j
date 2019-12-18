@@ -18,9 +18,13 @@ Label1:
 .var 0 is a I from Label0 to Label1
 Label0:
 	iload_0
+	iconst_1
+	iadd
+	istore_0
+	iload_0
 	ireturn
 Label1:
-.limit stack 1
+.limit stack 2
 .limit locals 1
 .end method
 

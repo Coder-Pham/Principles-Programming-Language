@@ -1,6 +1,6 @@
-void main(){
-            putString(foo("553"));
+string foo() {
+            return "_ + ab_";
         }
-        string foo(string a){
-            return a;
+        void main(){
+            putString(foo());
         }

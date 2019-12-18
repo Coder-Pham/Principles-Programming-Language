@@ -1,12 +1,11 @@
 void main(){
             int i;
-            for(i=0; i<5; i=i+1){
-                if(i>3)
-                    putBoolLn(!!!!!!boo(false));
-                else
-                    putBoolLn(!!!!boo(true));
+            for(i=0; i<5; i=i+2){
+                int a;
+                a = !i;
+                putBoolLn(!!!!func(a));
             }
         }
-        boolean boo(boolean boo){
-            return boo;
+        boolean func(boolean a){
+            return !a;
         }

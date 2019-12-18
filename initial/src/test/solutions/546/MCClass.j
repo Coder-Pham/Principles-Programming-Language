@@ -5,32 +5,29 @@
 .method public static main([Ljava/lang/String;)V
 .var 0 is args [Ljava/lang/String; from Label0 to Label1
 Label0:
+.var 1 is b I from Label0 to Label1
 Label2:
-.var 1 is b I from Label2 to Label3
-Label4:
 	iconst_4
 	istore_1
-.var 2 is a I from Label4 to Label5
-Label6:
+.var 2 is a I from Label2 to Label3
+Label4:
 	iconst_5
 	istore_2
-.var 3 is i I from Label6 to Label7
+.var 3 is i I from Label4 to Label5
 	iconst_3
 	istore_3
-	iconst_5
-	iconst_3
-	irem
-	i2f
-	invokestatic io/putFloatLn(F)V
 	iload_1
 	iload_2
 	isub
 	iload_3
 	isub
 	i2f
-	invokestatic io/putFloat(F)V
-Label7:
+	invokestatic io/putFloatLn(F)V
+	iconst_5
+	istore_1
 Label5:
+	iload_1
+	invokestatic io/putInt(I)V
 Label3:
 Label1:
 	return

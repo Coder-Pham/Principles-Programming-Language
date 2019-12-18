@@ -19,17 +19,23 @@ Label2:
 Label3:
 	ifle Label5
 Label8:
+.var 2 is a I from Label8 to Label9
 	iload_1
-	iconst_3
-	if_icmple Label10
+	ifgt Label10
 	iconst_1
 	goto Label11
 Label10:
 	iconst_0
 Label11:
+	istore_2
+	iload_2
+	invokestatic MCClass/func(Z)Z
 	ifgt Label12
 	iconst_1
-	invokestatic MCClass/boo(Z)Z
+	goto Label13
+Label12:
+	iconst_0
+Label13:
 	ifgt Label14
 	iconst_1
 	goto Label15
@@ -48,59 +54,11 @@ Label17:
 Label18:
 	iconst_0
 Label19:
-	ifgt Label20
-	iconst_1
-	goto Label21
-Label20:
-	iconst_0
-Label21:
 	invokestatic io/putBoolLn(Z)V
-	goto Label13
-Label12:
-	iconst_0
-	invokestatic MCClass/boo(Z)Z
-	ifgt Label22
-	iconst_1
-	goto Label23
-Label22:
-	iconst_0
-Label23:
-	ifgt Label24
-	iconst_1
-	goto Label25
-Label24:
-	iconst_0
-Label25:
-	ifgt Label26
-	iconst_1
-	goto Label27
-Label26:
-	iconst_0
-Label27:
-	ifgt Label28
-	iconst_1
-	goto Label29
-Label28:
-	iconst_0
-Label29:
-	ifgt Label30
-	iconst_1
-	goto Label31
-Label30:
-	iconst_0
-Label31:
-	ifgt Label32
-	iconst_1
-	goto Label33
-Label32:
-	iconst_0
-Label33:
-	invokestatic io/putBoolLn(Z)V
-Label13:
 Label9:
 Label6:
 	iload_1
-	iconst_1
+	iconst_2
 	iadd
 	istore_1
 	goto Label4
@@ -108,17 +66,23 @@ Label5:
 Label7:
 Label1:
 	return
-.limit stack 39
-.limit locals 2
+.limit stack 21
+.limit locals 3
 .end method
 
-.method public static boo(Z)Z
-.var 0 is boo Z from Label0 to Label1
+.method public static func(Z)Z
+.var 0 is a Z from Label0 to Label1
 Label0:
 	iload_0
+	ifgt Label2
+	iconst_1
+	goto Label3
+Label2:
+	iconst_0
+Label3:
 	ireturn
 Label1:
-.limit stack 1
+.limit stack 4
 .limit locals 1
 .end method
 

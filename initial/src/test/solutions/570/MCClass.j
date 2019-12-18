@@ -23,77 +23,77 @@ Label6:
 	istore_2
 	iload_1
 	iload_2
-	if_icmpgt Label8
+	if_icmpeq Label8
 	iconst_1
 	goto Label9
 Label8:
 	iconst_0
 Label9:
 	ifgt Label10
+	goto Label11
+Label10:
+	return
+Label11:
+	iconst_2
+	istore_1
+Label14:
 	iload_1
 	iload_2
-	if_icmpge Label12
+	if_icmpgt Label12
 	iconst_1
 	goto Label13
 Label12:
 	iconst_0
 Label13:
-	ifgt Label14
-	iload_1
-	iload_2
-	idiv
-	invokestatic io/putInt(I)V
-	goto Label15
-Label14:
-	iload_1
-	iload_2
-	isub
-	invokestatic io/putInt(I)V
-Label15:
-	goto Label11
-Label10:
-	iconst_2
-	istore_1
+	ifle Label15
 Label18:
-	iload_1
-	iload_2
-	if_icmpgt Label16
-	iconst_1
-	goto Label17
-Label16:
-	iconst_0
-Label17:
-	ifle Label19
-Label22:
 	bipush 10
 	istore_2
 	iload_2
 	iload_1
 	imul
 	invokestatic io/putIntLn(I)V
-Label23:
-Label20:
+Label19:
+Label16:
 	iload_1
 	iconst_1
 	iadd
 	istore_1
-	goto Label18
-Label19:
+	goto Label14
+Label15:
+Label17:
+	iload_1
+	iload_2
+	if_icmpge Label20
+	iconst_1
+	goto Label21
+Label20:
+	iconst_0
 Label21:
-Label11:
+	ifgt Label22
+	iload_1
+	iload_2
+	idiv
+	invokestatic io/putInt(I)V
+	goto Label23
+Label22:
+	iload_1
+	iload_2
+	isub
+	invokestatic io/putInt(I)V
+Label23:
 Label7:
 	goto Label5
 Label4:
 Label24:
-Label26:
+	return
 	iload_1
 	invokestatic io/putInt(I)V
-Label27:
 Label25:
 Label5:
 Label1:
 	return
-.limit stack 14
+.limit stack 15
 .limit locals 3
 .end method
 

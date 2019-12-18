@@ -1,23 +1,8 @@
-boolean boo() {
-            a = 2;
-            if(a==2)
-                putStringLn(str());
-            fl = 3;
-            return flo() > fl;
+void main(){
+            putInt(fibonaci(10));
         }
-        int a;
-        int foo(){
-            a = 3;
-            return a;
+        int fibonaci(int a){
+            if (a == 1 || a == 0)
+                return 1;
+            return fibonaci(a-1) + fibonaci(a-2);
         }
-        float flo(){ 
-            putIntLn(foo());
-            return fl+1;
-        }
-        void main(){ 
-            putBool(boo()); 
-        }
-        string str() {
-            return "hello";
-        }
-        float fl;

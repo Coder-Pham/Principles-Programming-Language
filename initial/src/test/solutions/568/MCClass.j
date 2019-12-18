@@ -30,31 +30,18 @@ Label2:
 Label3:
 	ifle Label5
 	iload_0
-	iconst_3
-	if_icmpne Label8
-	iconst_1
-	goto Label9
-Label8:
-	iconst_0
-Label9:
-	ifgt Label10
-	goto Label11
-Label10:
-	iload_0
 	ireturn
-Label11:
 Label6:
 	iload_0
 	iconst_1
 	iadd
 	istore_0
-	goto Label4
 Label5:
 Label7:
 	iconst_1
 	ireturn
 Label1:
-.limit stack 7
+.limit stack 5
 .limit locals 1
 .end method
 

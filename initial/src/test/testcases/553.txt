@@ -1,4 +1,4 @@
 void main(){
             if(true)
-                putFloat(12);
+                putString("I'm here");
         }

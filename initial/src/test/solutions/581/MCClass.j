@@ -5,16 +5,18 @@
 .method public static main([Ljava/lang/String;)V
 .var 0 is args [Ljava/lang/String; from Label0 to Label1
 Label0:
-	iconst_1
-	ifgt Label2
-	goto Label3
 Label2:
-	ldc "I'm here"
-	invokestatic io/putString(Ljava/lang/String;)V
+	iconst_1
+	invokestatic io/putInt(I)V
+Label4:
+	iconst_0
+	ifle Label3
+	goto Label2
 Label3:
+Label5:
 Label1:
 	return
-.limit stack 2
+.limit stack 3
 .limit locals 1
 .end method
 

@@ -1,12 +1,3 @@
 void main(){
-            putFloat(fl=2.1);
-            putLn();
-            putLn();
-            putLn();
-            putLn();
-            putLn();
-            putBool(fl>2);
-            putLn();
-            putLn();
+            putBool((1 > 0.5) || (1 < 0.5));
         }
-        float fl;

@@ -9,32 +9,31 @@ Label0:
 .var 2 is b I from Label0 to Label1
 Label2:
 Label4:
-Label6:
 	iconst_0
 	istore_1
-Label10:
+Label8:
 	iload_1
 	bipush 10
-	if_icmpge Label8
+	if_icmpge Label6
 	iconst_1
-	goto Label9
-Label8:
+	goto Label7
+Label6:
 	iconst_0
-Label9:
-	ifle Label11
+Label7:
+	ifle Label9
 	iconst_5
 	istore_2
-Label16:
+Label14:
 	iload_2
 	bipush 50
-	if_icmpge Label14
+	if_icmpge Label12
 	iconst_1
-	goto Label15
-Label14:
+	goto Label13
+Label12:
 	iconst_0
-Label15:
-	ifle Label17
-Label20:
+Label13:
+	ifle Label15
+Label18:
 	iload_2
 	iload_1
 	isub
@@ -44,51 +43,50 @@ Label20:
 	istore_1
 	iload_1
 	bipush 30
-	if_icmple Label22
+	if_icmple Label20
 	iconst_1
+	goto Label21
+Label20:
+	iconst_0
+Label21:
+	ifgt Label22
 	goto Label23
 Label22:
-	iconst_0
+	goto Label17
 Label23:
-	ifgt Label24
-	goto Label25
-Label24:
-	goto Label19
-Label25:
-Label21:
-Label18:
+Label19:
+Label16:
 	iload_2
 	bipush 10
 	iadd
 	istore_2
-	goto Label16
+	goto Label14
+Label15:
 Label17:
-Label19:
-Label12:
+Label10:
 	iload_1
 	iconst_1
 	iadd
 	istore_1
-	goto Label10
+	goto Label8
+Label9:
 Label11:
-Label13:
-Label7:
 Label5:
-Label26:
+Label24:
 	iconst_0
 	istore_2
-Label30:
+Label28:
 	iload_2
 	bipush 12
-	if_icmpge Label28
+	if_icmpge Label26
 	iconst_1
-	goto Label29
-Label28:
+	goto Label27
+Label26:
 	iconst_0
-Label29:
-	ifle Label31
-Label34:
-.var 3 is c I from Label34 to Label35
+Label27:
+	ifle Label29
+Label32:
+.var 3 is c I from Label32 to Label33
 	bipush 10
 	istore_3
 	iload_3
@@ -101,16 +99,16 @@ Label34:
 	istore_2
 	iload_2
 	invokestatic io/putIntLn(I)V
-Label35:
-Label32:
+Label33:
+Label30:
 	iload_2
 	iconst_2
 	imul
 	istore_2
-	goto Label30
+	goto Label28
+Label29:
 Label31:
-Label33:
-Label27:
+Label25:
 Label3:
 Label1:
 	return

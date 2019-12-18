@@ -1,19 +1,17 @@
 void main(){
+            int b;
             {
-                int b;
-                {
-                    b = 4;
-                    if(b != 0){
-                        int a;
-                        {
-                            a = 5;
-                            int i;
-                            i = 3;
-                            putFloatLn(5%3);
-                            putFloat(b-a-i);
-                        }
-                    } else 
-                        putInt(0);
-                }
+                b = 4;
+                if(b != 0){
+                    int a;
+                    {
+                        a = 5;
+                        int i;
+                        i = 3;
+                        putFloatLn(5%3);
+                        putFloat(b-a-i);
+                    }
+                } else 
+                    putInt(0);
             }
         }

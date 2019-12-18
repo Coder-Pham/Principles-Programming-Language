@@ -21,7 +21,7 @@ Label5:
 	ifle Label7
 Label10:
 	iload_1
-	invokestatic io/putIntLn(I)V
+	invokestatic io/putInt(I)V
 	iload_1
 	iconst_0
 	if_icmpeq Label12
@@ -47,13 +47,13 @@ Label18:
 	iconst_3
 	irem
 	i2f
-	invokestatic io/putFloatLn(F)V
+	invokestatic io/putFloat(F)V
 	iload_2
 	ineg
 	iload_3
 	isub
 	i2f
-	invokestatic io/putFloatLn(F)V
+	invokestatic io/putFloat(F)V
 Label19:
 Label17:
 Label15:

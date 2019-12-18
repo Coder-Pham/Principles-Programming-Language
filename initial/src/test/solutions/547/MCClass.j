@@ -5,7 +5,7 @@
 .method public static main([Ljava/lang/String;)V
 .var 0 is args [Ljava/lang/String; from Label0 to Label1
 Label0:
-	invokestatic MCClass/foo()I
+	invokestatic MCClass/foo()Z
 	invokestatic io/putInt(I)V
 Label1:
 	return
@@ -13,12 +13,12 @@ Label1:
 .limit locals 1
 .end method
 
-.method public static foo()I
+.method public static foo()Z
 Label0:
-	bipush 12
+	iconst_1
 	ireturn
 Label1:
-.limit stack 1
+.limit stack 2
 .limit locals 0
 .end method
 

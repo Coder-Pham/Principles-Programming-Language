@@ -39,10 +39,8 @@ Label12:
 	iconst_0
 Label13:
 	ifgt Label14
-	iload_1
-	iload_2
-	idiv
-	invokestatic io/putInt(I)V
+	ldc "HERE"
+	invokestatic io/putString(Ljava/lang/String;)V
 	goto Label15
 Label14:
 	iload_1
@@ -61,10 +59,8 @@ Label7:
 	goto Label5
 Label4:
 Label16:
-Label18:
 	iload_1
 	invokestatic io/putInt(I)V
-Label19:
 Label17:
 Label5:
 Label1:

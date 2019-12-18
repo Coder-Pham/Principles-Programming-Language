@@ -21,7 +21,7 @@ Label4:
 	invokestatic io/putFloatLn(F)V
 Label5:
 	iconst_3
-	invokestatic io/putInt(I)V
+	invokestatic io/putBool(Z)V
 Label1:
 	return
 .limit stack 3

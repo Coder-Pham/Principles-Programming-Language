@@ -49,13 +49,12 @@ Label2:
 	iconst_0
 Label3:
 	ifgt Label4
-	goto Label5
+	iconst_1
+	ireturn
 Label4:
 	iconst_2
 	ireturn
 Label5:
-	iconst_1
-	ireturn
 Label1:
 .limit stack 3
 .limit locals 1

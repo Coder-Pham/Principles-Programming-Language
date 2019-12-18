@@ -2,5 +2,5 @@ void main(){
             putInt(foo(10));
         }
         int foo(int a){
-            return a;
+            return a = a + 1;
         }

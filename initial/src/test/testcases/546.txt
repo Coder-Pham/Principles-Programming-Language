@@ -1,16 +1,15 @@
 void main(){
+            int b;
             {
-                int b;
+                b = 4;
+                int a;
                 {
-                    b = 4;
-                    int a;
-                    {
-                        a = 5;
-                        int i;
-                        i = 3;
-                        putFloatLn(5%3);
-                        putFloat(b-a-i);
-                    }
+                    a = 5;
+                    int i;
+                    i = 3;
+                    putFloatLn(b-a-i);
+                    b = 5;
                 }
+                putInt(b);
             }
         }

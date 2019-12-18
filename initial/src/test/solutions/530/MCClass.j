@@ -6,17 +6,24 @@
 .var 0 is args [Ljava/lang/String; from Label0 to Label1
 Label0:
 	iconst_2
+	ifle Label2
 	ldc 1.3
 	iconst_5
 	i2f
 	fcmpl
-	ifle Label2
+	ifle Label5
 	iconst_1
-	goto Label3
+	goto Label6
+Label5:
+	iconst_0
+Label6:
+	ifle Label2
+Label3:
+	iconst_1
+	goto Label4
 Label2:
 	iconst_0
-Label3:
-	iand
+Label4:
 	invokestatic io/putBool(Z)V
 Label1:
 	return

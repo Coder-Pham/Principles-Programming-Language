@@ -1,21 +1,40 @@
 .source MCClass.java
 .class public MCClass
 .super java.lang.Object
+.field static a I
 
 .method public static main([Ljava/lang/String;)V
 .var 0 is args [Ljava/lang/String; from Label0 to Label1
 Label0:
+.var 1 is i I from Label0 to Label1
 	iconst_1
-	ifgt Label2
+	istore_1
+Label4:
+	iload_1
+	iconst_4
+	if_icmpge Label2
+	iconst_1
 	goto Label3
 Label2:
-	ldc "I'm here"
-	invokestatic io/putString(Ljava/lang/String;)V
+	iconst_0
 Label3:
+	ifle Label5
+	iconst_2
+	putstatic MCClass/a I
+Label6:
+	iload_1
+	iconst_1
+	iadd
+	istore_1
+	goto Label4
+Label5:
+Label7:
+	getstatic MCClass/a I
+	invokestatic io/putInt(I)V
 Label1:
 	return
-.limit stack 2
-.limit locals 1
+.limit stack 6
+.limit locals 2
 .end method
 
 .method public <init>()V

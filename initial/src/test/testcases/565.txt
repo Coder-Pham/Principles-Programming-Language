@@ -1,16 +1,10 @@
 void main(){
             check = 5;
-            if(check) {
-                int a;
-                a = 5;
-                if(a)
-                    do
-                        for(a=0; a<4; a=a+1)
-                            putIntLn(a);
-                        putString("end");
-                        if(a > 0)
-                            break;
-                    while(true);
-            }
+            if (check >= 5) 
+                do
+                    for (true; check < 20; check = check + 2)
+                        check = check - 1;
+                while (check < 10);
+            putInt(check);
         }
         int check;

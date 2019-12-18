@@ -9,23 +9,20 @@ Label0:
 	iconst_5
 	putstatic MCClass/check I
 	getstatic MCClass/check I
-	ifgt Label2
+	iconst_5
+	if_icmplt Label2
+	iconst_1
 	goto Label3
 Label2:
-Label4:
-.var 1 is a I from Label4 to Label5
-	iconst_5
-	istore_1
-	iload_1
-	ifgt Label6
-	goto Label7
-Label6:
-Label8:
 	iconst_0
-	istore_1
+Label3:
+	ifgt Label4
+	goto Label5
+Label4:
+Label8:
 Label14:
-	iload_1
-	iconst_4
+	getstatic MCClass/check I
+	bipush 20
 	if_icmpge Label12
 	iconst_1
 	goto Label13
@@ -33,44 +30,38 @@ Label12:
 	iconst_0
 Label13:
 	ifle Label15
-	iload_1
-	invokestatic io/putIntLn(I)V
-Label16:
-	iload_1
+	getstatic MCClass/check I
 	iconst_1
+	isub
+	putstatic MCClass/check I
+Label16:
+	getstatic MCClass/check I
+	iconst_2
 	iadd
-	istore_1
+	putstatic MCClass/check I
 	goto Label14
 Label15:
 Label17:
-	ldc "end"
-	invokestatic io/putString(Ljava/lang/String;)V
-	iload_1
-	iconst_0
-	if_icmple Label18
-	iconst_1
-	goto Label19
-Label18:
-	iconst_0
-Label19:
-	ifgt Label20
-	goto Label21
-Label20:
-	goto Label11
-Label21:
 Label10:
+	getstatic MCClass/check I
+	bipush 10
+	if_icmpge Label6
 	iconst_1
+	goto Label7
+Label6:
+	iconst_0
+Label7:
 	ifle Label9
 	goto Label8
 Label9:
 Label11:
-Label7:
 Label5:
-Label3:
+	getstatic MCClass/check I
+	invokestatic io/putInt(I)V
 Label1:
 	return
-.limit stack 11
-.limit locals 2
+.limit stack 13
+.limit locals 1
 .end method
 
 .method public <init>()V

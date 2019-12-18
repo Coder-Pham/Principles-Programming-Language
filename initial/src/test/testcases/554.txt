@@ -1,6 +1,6 @@
 void main(){
             if(false)
-                putFloat(12);
+                putFloat(1);
             else
                 putInt(1);
         }

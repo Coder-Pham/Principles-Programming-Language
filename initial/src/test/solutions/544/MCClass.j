@@ -1,35 +1,34 @@
 .source MCClass.java
 .class public MCClass
 .super java.lang.Object
-.field static fl F
+.field static b I
+.field static a F
 
 .method public static main([Ljava/lang/String;)V
 .var 0 is args [Ljava/lang/String; from Label0 to Label1
 Label0:
-.var 1 is fl F from Label0 to Label1
-.var 2 is i I from Label0 to Label1
-	iconst_1
-	istore_2
-	iload_2
-	ineg
+.var 1 is a F from Label0 to Label1
+	sipush 1010
+	putstatic MCClass/b I
+	getstatic MCClass/b I
 	i2f
 	fstore_1
 	fload_1
 	invokestatic io/putFloatLn(F)V
-.var 3 is a I from Label0 to Label1
+.var 2 is c I from Label0 to Label1
 	bipush 12
-	iload_2
+	getstatic MCClass/b I
 	iconst_4
 	iadd
 	irem
-	istore_3
-	iload_3
+	istore_2
+	iload_2
 	i2f
 	invokestatic io/putFloat(F)V
 Label1:
 	return
 .limit stack 5
-.limit locals 4
+.limit locals 3
 .end method
 
 .method public <init>()V

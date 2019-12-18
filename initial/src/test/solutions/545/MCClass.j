@@ -1,36 +1,42 @@
 .source MCClass.java
 .class public MCClass
 .super java.lang.Object
-.field static fl F
 
 .method public static main([Ljava/lang/String;)V
 .var 0 is args [Ljava/lang/String; from Label0 to Label1
 Label0:
-	ldc 2.1
-	putstatic MCClass/fl F
-	getstatic MCClass/fl F
-	invokestatic io/putFloat(F)V
-	invokestatic io/putLn()V
-	invokestatic io/putLn()V
-	invokestatic io/putLn()V
-	invokestatic io/putLn()V
-	invokestatic io/putLn()V
-	getstatic MCClass/fl F
-	iconst_2
-	i2f
-	fcmpl
-	ifle Label2
 	iconst_1
-	goto Label3
+	i2f
+	ldc 0.5
+	fcmpl
+	ifle Label5
+	iconst_1
+	goto Label6
+Label5:
+	iconst_0
+Label6:
+	ifgt Label3
+	iconst_1
+	i2f
+	ldc 0.5
+	fcmpl
+	ifgt Label7
+	iconst_1
+	goto Label8
+Label7:
+	iconst_0
+Label8:
+	ifle Label2
+Label3:
+	iconst_1
+	goto Label4
 Label2:
 	iconst_0
-Label3:
+Label4:
 	invokestatic io/putBool(Z)V
-	invokestatic io/putLn()V
-	invokestatic io/putLn()V
 Label1:
 	return
-.limit stack 3
+.limit stack 6
 .limit locals 1
 .end method
 
